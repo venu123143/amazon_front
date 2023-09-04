@@ -1,0 +1,253 @@
+:root {
+    --color-131921: #131921;
+    --color-3b4149: #3b4149;
+    --color-febd69: #febd69;
+    --color-232f3e: #232f3e;
+    --color-bf4800: #bf4800;
+}
+
+/* backgroundcolor */
+.header-top-strip {
+    background-color: var(--color-131921);
+    border-bottom: 1px solid var(--color-3b4149);
+}
+
+.header-upper {
+    background-color: var(--color-131921);
+}
+
+.group {
+    background-color: var(--color-febd69)
+}
+
+.header-upper-links img {
+    width: 35px;
+    height: 35px;
+}
+
+.header-bottom {
+    background-color: var(--color-232f3e);
+}
+
+.header-bottom .menu-links a {
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: 0.3;
+    text-transform: uppercase;
+}
+
+/* header part end */
+
+/* Footer part start */
+
+footer {
+    background-color: var(--color-232f3e);
+}
+
+footer:not(:first-child) {
+    border-top: 1px solid rgb(255, 255, 255, 0.1);
+}
+
+/* Footer part end */
+
+/* Home page start */
+.grid-wrapper img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.grid-wrapper>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-wrapper>div>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.grid-wrapper {
+    margin: 40px 12px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
+}
+
+.grid-wrapper .wide {
+    grid-column: span 2;
+}
+
+.grid-wrapper .tall {
+    grid-row: span 2;
+}
+
+@media screen and (min-width:640px) {
+    .grid-wrapper .big {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .main-banner-content h4 {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 50px;
+        color: var(--color-bf4800);
+        margin: 0 0 12px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+
+    .main-banner-content h5 {
+        font-size: 3.3rem;
+        line-height: 30px;
+        letter-spacing: -2px;
+        font-weight: 500;
+        text-transform: none;
+    }
+
+    .main-banner-content p {
+        font-size: 18px;
+        line-height: 60px;
+        letter-spacing: 0.4;
+        color: var(--color-131921)
+    }
+}
+
+
+.button {
+    background-color: var(--color-232f3e);
+}
+
+.button:hover {
+    background-color: var(--color-febd69);
+    color: #131921;
+}
+
+.small-banner-content h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 50px;
+    color: var(--color-bf4800);
+    margin: 0 0 12px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.small-banner-content h5 {
+    font-size: 1.5rem;
+    line-height: 24px;
+    letter-spacing: -2px;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.small-banner-content p {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.4;
+    color: var(--color-131921);
+}
+
+.button {
+    background-color: var(--color-232f3e);
+}
+
+.button:hover {
+    background-color: var(--color-febd69);
+    color: #131921;
+}
+
+/* Home page end */
+
+/* product card start */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #777777;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    right: 110%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* product card end */
+
+/* our store - filters (colors)*/
+.colors {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.colors li {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+
+.colors li:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.active {
+    border: 1.5px solid black;
+}
+
+/* our store - filters (colors) end */
+
+/* sorting and filtering */
+.filter-sort-grid {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.griditem-active {
+    background-color: var(--color-232f3e);
+    color: white;
+}
+
+.griditem-color {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+/* sorting and filtering end */
+
