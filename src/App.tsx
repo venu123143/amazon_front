@@ -1,4 +1,6 @@
 import "./css/App.css"
+import 'react-toastify/dist/ReactToastify.css';
+
 // import React from 'react'
 import { ToastContainer } from "react-toastify"
 import { Routes, Route } from "react-router-dom"
@@ -14,6 +16,8 @@ import Wishlist from "./pages/Wishlist"
 import RegisterPage from "./components/Login/RegisterPage"
 import LoginWithOtp from "./components/Login/LoginWithOtp"
 import BlogPage from "./pages/SingleBlogPage"
+import SingleProductPage from "./pages/SingleProductPage"
+import Cart from "./pages/Cart"
 
 const App = () => {
   return (
@@ -26,8 +30,10 @@ const App = () => {
           <Route path='/products' element={<Products />} />
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/blog/:id' element={<BlogPage />} />
-          <Route path='/contact' element={<Contact />} /> 
+          <Route path='/product/:id' element={<SingleProductPage />} />
+          <Route path='/contact' element={<Contact />} />
           <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/cart' element={<Cart />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />

@@ -50,7 +50,7 @@ const SpecialProdCard = () => {
                         </div>
                         <div className="">
                             <Carousel swipeable={true} draggable={true} responsive={responsive}
-                                containerClass="carousel-container" removeArrowOnDeviceType={["mobile"]}
+                                containerClass="carousel-container z-0" removeArrowOnDeviceType={["mobile"]}
                             >
                                 {
                                     carousel.map((item, index) => (

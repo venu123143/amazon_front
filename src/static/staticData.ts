@@ -40,6 +40,15 @@ import boatWatch from "../assets/icons/boatWatch.webp"
 import boat161 from "../assets/icons/boat161.webp"
 import headPhones from "../assets/icons/headPhones.webp"
 import soundbars from "../assets/icons/soundbars.webp"
+import watch2 from "../assets/icons/BoatWatch2.webp"
+import speakers from "../assets/icons/BoatPartySpeakers.webp"
+import Boatearpods from "../assets/icons/boatEarPods.webp"
+import detail1 from "../assets/icons/detailBoatImg.webp"
+import detail2 from "../assets/icons/detailBoatImg2.webp"
+import detail3 from "../assets/icons/detailBoatImg3.webp"
+// import soundbars from "../assets/icons/.webp"
+
+
 
 import { LiaShippingFastSolid } from "react-icons/lia"
 import { AiOutlineGift } from "react-icons/ai"
@@ -497,3 +506,51 @@ export const compareProducts = [
         battery: "4500mah", os: "android 13"
     },
 ]
+
+export const productDetails = [
+    {
+        images: [watch2, speakers, Boatearpods, soundbars, headPhones, boat161],
+        title: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        rating: 4.3,
+        price: 69990,
+        colors: ["red", "blue", "green", "yellow", "purple"],
+        detailImg: [{ color: 'yellow', img: detail1, heading: "AIRDOPES 161", desc: "Charge for 10 Minutes, ENJOY 180 Minutes" },
+        { color: 'black', img: detail2, heading: "boAt Immersive Sound", desc: 'Get captivated by boAt immersive sound powered by 10mm drivers no matter what you are playing. The bass is tuned for a thumping listening experience that transports you to another world.' },
+        { color: 'red', img: detail3, heading: "IPX5 WATER & SWEAT RESISTANCE", desc: 'Ace your sport. You don’t have to worry about your Airdopes as you groove to your favourite workout tracks.' }]
+    }
+]
+
+export const cartData = [
+    {
+        id: 1,
+        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        image: speakers,
+        price: 16999,
+        cartQuantity: 5,
+    },
+    {
+        id: 2,
+        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        image: Boatearpods,
+        price: 16999,
+        cartQuantity: 5,
+    }, {
+        id: 3,
+        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        image: boat161,
+        price: 16999,
+        cartQuantity: 5,
+    },
+    {
+        id: 4,
+        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
+        image: headPhones,
+        price: 16999,
+        cartQuantity: 5,
+    },
+
+]   
