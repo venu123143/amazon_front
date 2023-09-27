@@ -24,13 +24,12 @@ const Contact = () => {
                                     placeholder="enter your PhoneNo" required />
                             </div>
                             <div className="mb-6 w-full">
-                                <textarea name="" id="" cols={40} rows={4} placeholder="comments " className="rounded-lg  w-full sm:max-w-[50%] 1100px:max-w-full  bg-gray-50 border border-gray-300 text-gray-900" ></textarea>
+                                <textarea name="" id="" cols={40} rows={4} placeholder="comments " className="rounded-lg p-2.5  w-full sm:max-w-[50%] 1100px:max-w-full  bg-gray-50 border border-gray-300 text-gray-900" ></textarea>
                             </div>
                             <button className="button my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                                 Submit
                             </button>
                         </form>
-
                     </div>
                     <div>
                         <h3 className="font-bold text-2xl">Get In Touch</h3>

@@ -17,6 +17,8 @@ const BrandsAndBlogs = () => {
           ))}
         </div>
       </section>
+      <h3 className="font-[550] text-[1.5rem] ml-5  hover:underline w-fit">Most Readed Blogs</h3>
+
       <section className=" py-5 rounded-md sm:block justify-between px-[10px] m-[20px] bg-[#ffffff] ">
         <div className="py-2 grid 400px:grid-cols-1 sm:grid-cols-2 sm:m-auto  place-items-center gap-5 lg:grid-cols-4  lg:flex justify-center items-center">
           {blogs.map((each, index) => (

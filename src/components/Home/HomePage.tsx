@@ -13,7 +13,7 @@ import Offers from "./Offers.tsx"
 const HomePage = () => {
   return (
     <>
-      <div className=" bg-[#FFFFF7]">
+      <div className="bg-[#FFFFF7]">
         <Carousel />
         <Home />
         <FeatureCollection />

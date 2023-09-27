@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
-import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../redux/reducers/cartReducer';
+import { useEffect } from 'react';
+import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../../redux/reducers/cartReducer';
 import { BsArrowLeftShort } from 'react-icons/bs';
 const Cart = () => {
     const cart = useSelector((state: any) => state.cart);
@@ -26,7 +26,7 @@ const Cart = () => {
             <div className='cart-container   bg-[#fffff7]'>
                 <h2>Shopping Cart</h2>
                 <div className="continue-shopping">
-                    <Link to="/products" className="p-3 py-2 text-white rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
+                    <Link to="/products" className="p-3 py-2 text-white tracking-wider rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
                         <BsArrowLeftShort size={28} className="inline" />
                         <span>continue shopping</span>
                     </Link>
@@ -73,7 +73,7 @@ const Cart = () => {
                                 ))}
                             </div>
                             <div className="cart-summery relative">
-                                <button className="button my-[10px] text-white text-[1.4rem] px-[2rem] py-[6px] rounded-md hover:bg-gradient-to-tr from-pink-600 to-purple-400 hover:bg-red-600 hover:text-white">
+                                <button className="button my-[10px] text-white text-[1.2rem] tracking-wider px-[2rem] py-[6px] rounded-md ">
                                     clear cart
                                 </button>
                                 <div className="cart-checkout">
@@ -82,9 +82,9 @@ const Cart = () => {
                                         <span>${cart.cartTotalAmount}</span>
                                     </div>
                                     <p>taxes and shipping calculated at checkout</p>
-                                    <button className="button">
-                                        Check Out
-                                    </button>
+                                    <Link to="/checkout" className="button group flex items-center justify-center">
+                                        <span className='text-white group-hover:text-black text-[1rem] font-[400]'>Checkout</span>
+                                    </Link>
 
                                 </div>
                             </div>

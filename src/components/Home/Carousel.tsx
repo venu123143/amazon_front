@@ -7,30 +7,44 @@ import "slick-carousel/slick/slick-theme.css";
 const SampleNextArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
-        <div className={`${className}  absolute right-0 top-[50%] p-[20px] bg-transparent  `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '30vh', alignItems: 'center', justifyContent: 'center', borderRadius: '5px'  }} onClick={onClick} />
+        <div className={`${className}  absolute right-0 top-[50%] p-[20px] bg-transparent  `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '30vh', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
     )
 }
 const SamplePrevArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
-        <div className={`${className}  absolute left-0 top-[50%] p-[20px] bg-transparent `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '30vh', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
+        <div className={`${className}  absolute left-0 top-[50%] p-[20px]`} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '30vh', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
     )
 }
 
 const Carousel = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slideToShow: 1,
-        slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
-
-    }
+    const responsive = [
+        {
+            breakpoint: 1330,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slideToShow: 1,
+                slidesToScroll: 1,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
+        {
+            breakpoint: 640,
+            settings: {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slideToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
     return (
         <div className="w-full">
-            <Slider className="relative cursor-pointer" {...settings}>
+            <Slider responsive={responsive} className="relative cursor-pointer" >
                 <div>
                     <img className=" w-full h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/OnePlus/Flagship/115G/19Aug/D66357764_WLD_OnePlus_Salami_NewLaunch_DesktopTallHero_3000x1200._CB598553099_.jpg" alt="img1" />
                 </div>

@@ -15,6 +15,7 @@ const FeatureCollection = () => {
   return (
     <>
       <section className="rounded-md m-[1rem] bg-[#F5F5DC]">
+
         <div className="mx-[4%] py-2 hidden lg:flex items-center justify-between">
           {features && features.map((each: any) => (
             <div key={each.id} className="flex justify-evenly items-center gap-2">
@@ -29,7 +30,9 @@ const FeatureCollection = () => {
           ))}
         </div>
       </section>
+      <h3 className="font-[550] text-[1.5rem] ml-5 hover:underline w-fit">Top Categories</h3>
       <section className="rounded-md shadow-lg px-[10px] m-[20px] bg-[#ffffff] ">
+
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 ">
           {categories.map((item: any, index) => (
             <Link to="/" key={index}>

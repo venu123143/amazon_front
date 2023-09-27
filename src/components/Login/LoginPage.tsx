@@ -1,21 +1,43 @@
 // import React from 'react'
-import { useState } from "react"
+import { useState, CSSProperties } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsArrowLeftShort } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
 import { Link } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+    
 const LoginPage = () => {
   const [visible, setVisible] = useState(false)
   const [forgotpassword, setForgotPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+    width: 380,
+    borderRadius:"30px"
+  };
   return (
     <section className="bg-[#FFFFF7] w-full">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to home</button>
       </Link>
+      <div>
+
+      </div>
+
       <div className="flex justify-center items-center h-screen 400px:mx-5 py-5">
         <div className=" w-full flex justify-center">
           <div className="w-full bg-white rounded-lg shadow-lg border  dark:border md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <BarLoader
+              color="#361AE3"
+              loading={loading}
+              cssOverride={override}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               {forgotpassword === true ? (
                 <>
@@ -44,15 +66,14 @@ const LoginPage = () => {
                   </h1>
                   <form className="space-y-4 md:space-y-6" action="#">
                     <div>
-                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email  <span className="text-red-500 text-lg">*</span></label>
                       <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Enter your email" required />
-
                     </div>
                     <div className="relative">
-                      <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password  <span className="text-red-500 text-lg">*</span></label>
                       <input type={`${visible === true ? "text" : "password"}`} name="password" id="password" placeholder="Enter your password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                      <div onClick={() => setVisible(!visible)} className="absolute top-9 right-3 cursor-pointer">
+                      <div onClick={() => setVisible(!visible)} className="absolute top-11 right-3 cursor-pointer">
                         {visible === true ? <AiOutlineEyeInvisible size={25} /> : <AiOutlineEye size={25} />}
                       </div>
                     </div>

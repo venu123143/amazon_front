@@ -1,12 +1,22 @@
 // import React from 'react'
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, CSSProperties } from "react"
 import { BsArrowLeftShort } from "react-icons/bs"
 import { Link } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+
 const LoginWithOtp = () => {
     const [sendOtp, setSendOtp] = useState(false)
     const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
     const codesRef = useRef<any>([]);
+    const [loading, setLoading] = useState(false)
 
+    const override: CSSProperties = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "red",
+        width: 380,
+        borderRadius: "30px"
+    };
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
         const newOtp: string[] = [...otp]
         newOtp[index] = e.target.value
@@ -40,6 +50,13 @@ const LoginWithOtp = () => {
             <div className="flex justify-center items-center h-screen 400px:mx-5 py-5">
                 <div className=" w-full  flex justify-center">
                     <div className="w-full bg-white rounded-lg shadow-lg border  dark:border md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                        <BarLoader
+                            color="#361AE3"
+                            loading={loading}
+                            cssOverride={override}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             {
                                 sendOtp === true ? (

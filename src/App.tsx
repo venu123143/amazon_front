@@ -1,9 +1,11 @@
 import "./css/App.css"
 import 'react-toastify/dist/ReactToastify.css';
 
-// import React from 'react'
+// toast and routes.
 import { ToastContainer } from "react-toastify"
 import { Routes, Route } from "react-router-dom"
+
+// pages
 import LoginPage from "./components/Login/LoginPage"
 import Layout from "./components/Layout/Layout"
 import HomePage from "./components/Home/HomePage"
@@ -17,7 +19,9 @@ import RegisterPage from "./components/Login/RegisterPage"
 import LoginWithOtp from "./components/Login/LoginWithOtp"
 import BlogPage from "./pages/SingleBlogPage"
 import SingleProductPage from "./pages/SingleProductPage"
-import Cart from "./pages/Cart"
+import Cart from "./components/cart/Cart"
+import Checkout from "./components/cart/Checkout";
+import ResetPassword from "./components/Login/ResetPassword";
 
 const App = () => {
   return (
@@ -34,10 +38,12 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />
         <Route path="/sign-up" element={<RegisterPage />} />
+        <Route path="/reset" element={<ResetPassword />} />
         <Route path='/compare' element={<Compare />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>

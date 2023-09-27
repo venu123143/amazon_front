@@ -25,6 +25,7 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false)
   const [categories, setCategories] = useState(false)
   const [login, setLogin] = useState(false)
+
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
       setActive(true)

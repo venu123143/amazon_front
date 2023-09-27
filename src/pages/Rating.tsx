@@ -10,7 +10,7 @@ export const ratingStar = Array.from({ length: 5 }, (prop, index) => {
             {stars >= index + 1 ? (
                 <AiFillStar className="text-[#ffd700]" />
             ) : stars >= number ? (
-                <BsStarHalf size={21} className="text-[#ffd700]" />
+                <BsStarHalf className="text-[#ffd700]" />
             ) : (
                 <AiOutlineStar className="icon" />
             )}
