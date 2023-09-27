@@ -22,6 +22,8 @@ import SingleProductPage from "./pages/SingleProductPage"
 import Cart from "./components/cart/Cart"
 import Checkout from "./components/cart/Checkout";
 import ResetPassword from "./components/Login/ResetPassword";
+import Cancel from "./pages/Cancel";
+import Sucess from "./pages/Sucess";
 
 const App = () => {
   return (
@@ -45,6 +47,8 @@ const App = () => {
         <Route path="/sign-up" element={<RegisterPage />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path='/compare' element={<Compare />} />
+        <Route path='/sucess' element={<Sucess />} />
+        <Route path='/cancel' element={<Cancel />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>
     </>

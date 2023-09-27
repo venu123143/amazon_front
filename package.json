@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/stripe-js": "^2.1.6",
     "axios": "^1.4.0",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
