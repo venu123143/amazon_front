@@ -1,16 +1,22 @@
-import { Link } from "react-router-dom";
+import { useEffect, useCallback } from "react"
+import { Link, useNavigate } from "react-router-dom";
 import Address from "./Address";
 import { BsArrowLeftShort } from "react-icons/bs";
 import iphone from "../../assets/icons/iphoneBlue.jpg";
 import earpods from "../../assets/icons/boatWatch.webp";
+import Logo from "../../assets/icons/vgold.png"
+
+import useRazorpay, { RazorpayOptions } from "react-razorpay";
 
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import { RaziropayKey } from "../../static/staticData";
 const Checkout = () => {
-  const { cartItems } = useSelector((state: any) => state.cart);
-  console.log(cartItems);
+  const [Razorpay, isLoaded] = useRazorpay();
+  const navigate = useNavigate();
+  const { cartItems, cartTotalAmount } = useSelector((state: any) => state.cart);
+  console.log(cartTotalAmount);
 
   const handleCheckout = async () => {
     console.log("clicked button");
@@ -26,11 +32,59 @@ const Checkout = () => {
     });
 
     if (checkout && checkout.error) {
-      console.log(checkout.error,"error occured");
+      console.log(checkout.error, "error occured");
     }
 
   };
 
+  const handlePaymentSucess = async () => {
+    navigate('/sucess')
+  }
+  const handlePaymentFailure = async (response: any) => {
+    console.log(response);
+    navigate('/cancel')
+  }
+  const handlePayment = useCallback(async () => {
+    const amount = cartTotalAmount * 100
+    const res = await axios.post(
+      "http://localhost:5000/api/product/create-raziropay-session",
+      { cartItems, cartTotalAmount });
+
+    const options: RazorpayOptions = {
+      key: RaziropayKey,
+      amount: amount.toString(),
+      currency: "INR",
+      name: "Amazon clone transation",
+      description: "Test Transaction 1",
+      image: Logo,
+      order_id: res.data?.orderId,
+      handler: handlePaymentSucess,
+      prefill: {
+        name: "Dummy Name",
+        email: "RaziropayKey.Dummy@example.com",
+        contact: "9000090000",
+      },
+      notes: {
+        address: "Hitech city Hyderabad.",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const rzp1 = new Razorpay(options);
+
+    rzp1.on("payment.failed", function (response: any) {
+      handlePaymentFailure(response)
+    });
+
+    rzp1.open();
+  }, [Razorpay])
+  useEffect(() => {
+    if (isLoaded) {
+      handlePayment();
+    }
+  }, [isLoaded, handlePayment])
   return (
     <div className="bg-[#F0FFFF] relative w-full">
       <Link
@@ -47,11 +101,7 @@ const Checkout = () => {
           <div className="gap-5">
             <form className="flex flex-col justify-center">
               <Address title="Add Name" name="name" id="name" type="text" />
-              <Address
-                title="Phone Number"
-                name="phone"
-                id="phone"
-                type="tel"
+              <Address title="Phone Number" name="phone" id="phone" type="tel"
               />
               <Address
                 title="Address"
@@ -67,15 +117,15 @@ const Checkout = () => {
                 type="text"
               />
               <div className="flex justify-between items-end h-auto ">
-                <button className="px-3 py-2  bg-[#361AE3] text-white hover:scale-110 transition-all shadow-lg rounded-md">
+                <button type="submit" className="px-3 py-2  bg-[#361AE3] text-white hover:scale-110 transition-all shadow-lg rounded-md">
                   save address
                 </button>
-                <button
-                  onClick={handleCheckout}
-                  className="bg-red-600 px-3 py-2 sm:block hidden rounded-md text-white shadow-md hover:scale-110 transition-all"
+                <div
+                  onClick={handlePayment}
+                  className="bg-red-600 px-3 py-2 cursor-pointer sm:block hidden rounded-md text-white shadow-md hover:scale-110 transition-all"
                 >
                   Proceed Payment
-                </button>
+                </div>
               </div>
             </form>
           </div>
@@ -115,11 +165,11 @@ const Checkout = () => {
           <div className="p-4 space-y-3 border-b">
             <div className="flex justify-between text-gray-600">
               <span>Subtotal</span>
-              <span className="font-semibold text-black">$ 846.98</span>
+              <span className="font-semibold text-black">$ {cartTotalAmount}</span>
             </div>
             <div className="flex justify-between text-gray-600">
               <span>GST (5%)</span>
-              <span className="font-semibold text-black">$ 300</span>
+              <span className="font-semibold text-black">$ 300 -300</span>
             </div>
             <div className="flex justify-between text-gray-600">
               <span>Shipping</span>
@@ -128,7 +178,7 @@ const Checkout = () => {
           </div>
           <div className="font-semibold text-xl px-8 flex justify-between py-8">
             <span>Total</span>
-            <span>$ 846.98</span>
+            <span>$ {cartTotalAmount}</span>
           </div>
           <div className="sm:px-8 flex justify-between">
             <input
