@@ -252,7 +252,7 @@ footer:not(:first-child) {
 /* sorting and filtering end */
 
 /* cart css start */
- .cart-container {
+.cart-container {
     padding: 1rem 2rem;
 }
 
@@ -416,7 +416,7 @@ footer:not(:first-child) {
     height: 40px;
     border-radius: 5px;
     margin-top: 2rem;
-   
+
     border: none;
     outline: none;
     cursor: pointer;
@@ -439,3 +439,14 @@ footer:not(:first-child) {
 }
 
 /* cart css end */
+
+
+.slick-arrow .slick-prev {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    padding: 20px;
+}
+.slick-arrow .slick-prev:hover{
+    background-color: black;
+}

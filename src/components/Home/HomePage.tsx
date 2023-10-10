@@ -46,11 +46,11 @@ const HomePage = () => {
         <SpecialCart />
         <PopularProduct />
         <BrandsAndBlogs />
-        <div>
+        {/* <div>
           <input multiple onChange={handlechange} type="file" name="fileinput" id="" />
           <button onClick={handleSendBtn} className="px-3 py-2 border shadow-md bg-gray-200 rounded-md hover:shadow-lg">sendImage</button>
           <img src={value} alt="awsImage" />
-        </div>
+        </div> */}
       </div>
     </>
   )
