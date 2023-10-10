@@ -2,8 +2,7 @@ import { useEffect, useCallback } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import Address from "./Address";
 import { BsArrowLeftShort } from "react-icons/bs";
-import iphone from "../../assets/icons/iphoneBlue.jpg";
-import earpods from "../../assets/icons/boatWatch.webp";
+
 import Logo from "../../assets/icons/vgold.png"
 
 import useRazorpay, { RazorpayOptions } from "react-razorpay";

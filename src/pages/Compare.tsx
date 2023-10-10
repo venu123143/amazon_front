@@ -1,6 +1,5 @@
 
 import { RxCross2 } from "react-icons/rx"
-import { IoIosAddCircleOutline } from "react-icons/io"
 import { compareProducts } from "../static/staticData"
 const Compare = () => {
     return (
@@ -81,7 +80,7 @@ const Compare = () => {
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     SIM Type
                                 </th>
-                                {compareProducts.map((item, index) => (
+                                {compareProducts.map((_, index) => (
                                     <td key={index} className="px-6 py-4">
                                         dual sim
                                     </td>
@@ -130,7 +129,7 @@ const Compare = () => {
                                     Processor
 
                                 </th>
-                                {compareProducts.map((item, index) => (
+                                {compareProducts.map((_, index) => (
                                     <td key={index} className="px-6 py-4">
                                         Octa Core 2.2 GHz
                                     </td>

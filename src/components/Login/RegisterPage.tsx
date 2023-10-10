@@ -7,7 +7,9 @@ import { BarLoader } from "react-spinners"
 
 const SignUpPage = () => {
   const [visible, setVisible] = useState(false)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
+  const loading = false;
+
 
   const override: CSSProperties = {
     display: "block",
@@ -62,7 +64,7 @@ const SignUpPage = () => {
                     </div>
                   </div>
 
-                  
+
                   <div className="flex justify-evenly">
                     <button className="button my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                       Register

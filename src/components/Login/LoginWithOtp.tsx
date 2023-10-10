@@ -8,7 +8,9 @@ const LoginWithOtp = () => {
     const [sendOtp, setSendOtp] = useState(false)
     const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
     const codesRef = useRef<any>([]);
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
+    const loading = false;
+
 
     const override: CSSProperties = {
         display: "block",

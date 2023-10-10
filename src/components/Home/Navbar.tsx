@@ -32,6 +32,7 @@ const Navbar = () => {
       setDropdown(false)
     } else {
       setActive(false)
+      setLogin(false)
     }
   })
 

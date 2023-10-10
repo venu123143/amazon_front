@@ -1,4 +1,4 @@
-import { offers, popularProducts } from "../../static/staticData"
+import { popularProducts } from "../../static/staticData"
 import ProductCard from "../Cards/ProductCard"
 import 'react-multi-carousel/lib/styles.css';
 

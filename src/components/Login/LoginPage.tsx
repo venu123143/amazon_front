@@ -5,18 +5,19 @@ import { BsArrowLeftShort } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
 import { Link } from "react-router-dom"
 import { BarLoader } from "react-spinners"
-    
+
 const LoginPage = () => {
   const [visible, setVisible] = useState(false)
   const [forgotpassword, setForgotPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
+  const loading = false;
 
   const override: CSSProperties = {
     display: "block",
     margin: "0 auto",
     borderColor: "red",
     width: 380,
-    borderRadius:"30px"
+    borderRadius: "30px"
   };
   return (
     <section className="bg-[#FFFFF7] w-full">

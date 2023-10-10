@@ -6,7 +6,9 @@ import { BarLoader } from "react-spinners"
 
 const ResetPassword = () => {
     const [visible, setVisible] = useState(false)
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
+  const loading = false;
+
     const [error, setError] = useState(false)
 
     const override: CSSProperties = {

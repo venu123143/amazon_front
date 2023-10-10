@@ -1,7 +1,6 @@
 import { useState } from "react"
 const Address = ({ title, name, id, type }: any) => {
     const [save, setSave] = useState(false)
-    const [value, setValue] = useState({})
     return (
         <div>
             <div className="relative z-0 w-full mb-6 group bg-transparent">

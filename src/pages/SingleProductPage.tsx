@@ -19,7 +19,7 @@ const SingleProductPage = () => {
     const [image, setImage] = useState(productDetails[0].images[0])
     const [isLiked, setIsLiked] = useState(false)
 
-    const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
+    // const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
 
     const handleRadioChange = (e: any) => {
         console.log(e.target.value);
