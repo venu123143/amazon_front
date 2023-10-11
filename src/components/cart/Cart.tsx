@@ -73,7 +73,7 @@ const Cart = () => {
                                 ))}
                             </div>
                             <div className="cart-summery relative">
-                                <button onClick={clearAllCart} className="button my-[10px] text-white text-[1.2rem] tracking-wider px-[2rem] py-[6px] rounded-md ">
+                                <button onClick={clearAllCart} className="button my-[10px] text-white  text-[1rem] sm:text-[1.2rem] tracking-wider px-2 py-[6px] rounded-md ">
                                     clear cart
                                 </button>
                                 <div className="cart-checkout">

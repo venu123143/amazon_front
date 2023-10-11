@@ -13,19 +13,17 @@ import { LiaRupeeSignSolid } from "react-icons/lia"
 import { popularProducts } from "../../static/staticData"
 import ProductCard from "../Cards/ProductCard"
 import LongCard from "../Cards/LongCard"
-
 const Products = () => {
     const [grid, setGrid] = useState(3)
-    const [dropdown, setDropdown] = useState(false)
 
     $(document).on('click', '.griditem div', function () {
         $(this).removeClass('griditem-color').addClass('griditem-active').siblings().removeClass('griditem-active').addClass('griditem-color')
     })
 
     return (
-        <div className={` sm:px-5 bg-[#FFFFF7]`} >
-            <BredCrumb title="Our Store" dropdown={dropdown} setDropdown={setDropdown} />
-            <div className={``}>
+        <div className="bg-[#FFFFF7]">
+            <BredCrumb title="Our Store" />
+            <div className="sm:px-5">
                 <div className="w-full flex justify-center ">
                     <div className={`w-3/12 mr-5 hidden md:block`}>
 
@@ -284,7 +282,7 @@ const Products = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={` md:w-9/12 w-auto  md:h-[250vh] md:overflow-y-scroll md:no-scrollbar`}>
+                    <div className="md:w-9/12 w-auto  md:h-[250vh] md:overflow-y-scroll md:no-scrollbar">
                         <div className={`bg-white hidden md:block rounded-lg md:py-[5px] md:px-[10px] mb-3 shadow-lg  `}>
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-10">

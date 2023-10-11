@@ -15,7 +15,7 @@ const SamplePrevArrow = (props: any) => {
     const { className, style, onClick, currentSlide } = props;
     const isFirstSlide = currentSlide === 0;
     return (
-        <div className={`${className}  absolute left-0 top-[50%] p-[20px] bg-black ${isFirstSlide ? 'hidden' : ''} `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
+        <div className={`${className}  absolute left-0 top-[50%] p-[20px] bg-black hover:bg-black  ${isFirstSlide ? 'hidden' : ''} `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
     )
 }
 
@@ -73,7 +73,7 @@ const PopularProduct = () => {
             breakpoint: 875,
             settings: {
                 dots: false,
-                infinite: true,
+                infinite: false,
                 speed: 1000, 
                 slidesToShow: 2,
                 slidesToScroll: 2,
@@ -84,7 +84,7 @@ const PopularProduct = () => {
         {
             breakpoint: 640,
             settings: {
-                infinite: true,
+                infinite: false,
                 speed: 1000, 
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -97,14 +97,12 @@ const PopularProduct = () => {
         <>
             <div className="rounded-md sm:block justify-between sm:m-[20px] select-none">
                 <h3 className="font-[550] text-[1.5rem] hover:underline w-fit m-auto sm:m-px">Popular Products</h3>
-
                 <Slider responsive={responsive} >
                     {
                         popularProducts.map((item, index) => (
                             <ProductCard key={index} img={item.image} price={item.price} title={item.title} />
                         ))
                     }
-
                 </Slider>
 
             </div >
