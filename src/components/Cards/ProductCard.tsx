@@ -6,7 +6,7 @@ import { LiaRupeeSignSolid } from "react-icons/lia"
 import { BsHandbag, BsCart3 } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
 import { ratingStar } from "../../pages/Rating"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const ProductCard: React.FC<any> = ({ title, img, price, isHidden }) => {
     const [like, setLike] = useState(false)
