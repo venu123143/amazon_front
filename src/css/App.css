@@ -441,7 +441,7 @@ footer:not(:first-child) {
 /* cart css end */
 
 
-.slick-arrow .slick-prev {
+/* .slick-arrow .slick-prev {
     position: absolute;
     left: 0;
     top: 50%;
@@ -449,4 +449,8 @@ footer:not(:first-child) {
 }
 .slick-arrow .slick-prev:hover{
     background-color: black;
+} */
+
+.specialcard{
+    gap: 5px;
 }

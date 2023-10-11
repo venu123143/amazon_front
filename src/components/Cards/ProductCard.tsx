@@ -6,13 +6,14 @@ import { LiaRupeeSignSolid } from "react-icons/lia"
 import { BsHandbag, BsCart3 } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
 import { ratingStar } from "../../pages/Rating"
+import { Link } from "react-router-dom"
 
 const ProductCard: React.FC<any> = ({ title, img, price }) => {
     const [like, setLike] = useState(false)
 
     return (
         <>
-            <div className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group  flex w-screen sm:block rounded-lg overflow-hidden cursor-pointer bg-[#ffffff] shadow-lg">
+            <Link to="/product/id" className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group  flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
                 <div className="relative flex items-center justify-center w-[60%] sm:w-auto">
                     <img src={img} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
                     <div onClick={() => setLike(!like)} className=" tooltip sm:absolute hidden sm:block sm:top-4 sm:right-4 cursor-pointer hover:bg-[#c4bfbf] rounded-full p-2 " >
@@ -43,7 +44,7 @@ const ProductCard: React.FC<any> = ({ title, img, price }) => {
                         {ratingStar}
                         <p className="ml-[10px]">304 reviews</p>
                     </div>
-                    
+
                     <div>
                         <span className="absolute top-[120px] text-[#1c1b1b] font-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{price}</span>
                         <span className="absolute top-[120px] left-24 line-through italic text-[#1c1b1b] font-[1rem] font-Rubik">99990</span>
@@ -59,7 +60,7 @@ const ProductCard: React.FC<any> = ({ title, img, price }) => {
                         <BsCart3 className="inline " />
                     </button>
                 </div>
-            </div>
+            </Link>
         </>
     )
 }

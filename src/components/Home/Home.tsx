@@ -8,7 +8,7 @@ import catBanner2 from "../../assets/images/catbanner-02.jpg"
 import catBanner3 from "../../assets/images/catbanner-03.jpg"
 export const Home = () => {
     return (
-        <>
+        <div className="max-w-[1300px] m-auto">
             <section className="grid-wrapper rounded-md my-[1rem] shadow-lg">
                 <div className="big relative">
                     <img src={mainBanner} alt="main banner" />
@@ -53,7 +53,7 @@ export const Home = () => {
                 </div>
 
             </section>
-        </>
+        </div>
     )
 }
 

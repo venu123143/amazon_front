@@ -1,47 +1,81 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import watch from "../../assets/images/watch.jpg"
 
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-// import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai"
 import { carousel } from "../../static/staticData";
 
 import { ratingStar } from "../../pages/Rating"
+import Slider from "react-slick";
+
+const SampleNextArrow = (props: any) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={`${className}  480px:visible invisible absolute right-0 top-[50%] px-3 bg-black  hover:bg-black opacity-50`}
+            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
+            onClick={onClick} />
+    )
+}
+
+const SamplePrevArrow = (props: any) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={`${className} 480px:visible invisible absolute  left-0 top-[50%] px-3 bg-black hover:bg-black opacity-50`}
+            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
+            onClick={onClick} />
+    )
+}
 
 
 const SpecialProdCard = () => {
     const [click, setClick] = useState(watch)
     const [like, setLike] = useState(false)
-
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            slidesToSlide: 2,
-            items: 2
+    const responsive = [
+        {
+            breakpoint: 1850,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
         },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 2,
-            slidesToSlide: 2,
+        {
+            breakpoint: 640,
+            settings: {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
         },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
+        {
+            breakpoint: 400,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />,
+            }
         }
-    };
-    const Connection = (e: any) => {
-        setClick(e.target.src);
+    ];
+    const Connection = (item: any) => {
+        setClick(item);
     }
     return (
         <>
-            <section className="w-full h-[300px] p-[10px] cursor-pointer bg-white rounded-lg shadow-lg  ">
+            <section className="w-full h-[300px] p-[10px] rounded-lg shadow-lg">
                 <div className="flex w-full h-full items-center">
                     <div className="w-1/2 h-full relative">
                         <span className="absolute left-0 top-0 bg-orange-500 rounded-full px-[5px]">-33%</span>
@@ -49,18 +83,17 @@ const SpecialProdCard = () => {
                             <img src={click} alt="img" className=" max-h-[80%]" />
                         </div>
                         <div className="">
-                            <Carousel swipeable={true} draggable={true} responsive={responsive}
-                                containerClass="carousel-container z-0" removeArrowOnDeviceType={["mobile"]}
-                            >
+                            <Slider responsive={responsive}>
                                 {
                                     carousel.map((item, index) => (
-                                        <div key={index} className="flex items-center justify-center border border-[#777777] bg-white mr-2 p-2 overflow-hidden">
-                                            <img src={item} onClick={Connection} alt="imgCarousel" className="h-[70px] w-auto" />
+                                        <div key={index} onClick={() => Connection(item)} className="border overflow-hidden focus:border-black">
+                                            <img src={item} alt="imgCarousel" className="h-[70px] m-auto" />
                                         </div>
                                     ))
                                 }
 
-                            </Carousel>
+
+                            </Slider>
                         </div>
                     </div>
                     <div className="w-1/2 h-full  relative">
