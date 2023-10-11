@@ -34,6 +34,18 @@ const SpecialProdCard = () => {
     const [like, setLike] = useState(false)
     const responsive = [
         {
+            breakpoint: 3050,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 2,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
+        {
             breakpoint: 1850,
             settings: {
                 dots: false,

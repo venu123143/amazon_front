@@ -1,6 +1,6 @@
 
 // import catBanner4 from "../../assets/images/catbanner-04.jpg"
-
+// import { CSSProperties } from "react"
 import FeatureCollection from "./Features"
 import Carousel from "./Carousel"
 import Home from "./Home"
@@ -9,6 +9,7 @@ import TopProducts from "./TopProducts"
 import SpecialCart from "./SpecialCart"
 import PopularProduct from "./PopularProduct"
 import Offers from "./Offers.tsx"
+// import { SyncLoader } from "react-spinners"
 
 const HomePage = () => {
   // const [value, setValue] = useState<any>([])
@@ -27,10 +28,21 @@ const HomePage = () => {
   //     }
   //   }
   // }
+  // const isLoading = true
+  // const override: CSSProperties = {
+  //   display: "block",
+  //   margin: "0 auto",
+  //   borderColor: "red",
+  //   width: 380,
+  //   position: 'absolute',
+  //   top: "50%",
+  //   left: "50%",
+  //   transform: 'translateX(-50%, -50%)'
 
+  // };
   return (
     <>
-      <div className="bg-[#FFFFF7]">
+      <div className="bg-[#FFFFF7] ">
         <Carousel />
         <Home />
         <FeatureCollection />
@@ -39,6 +51,16 @@ const HomePage = () => {
         <SpecialCart />
         <PopularProduct />
         <BrandsAndBlogs />
+        {/* <div className={`${isLoading === true ? "block bg-black opacity-50 absolute top-0 left-0 w-full h-screen" : "hidden"}`}>
+          <SyncLoader
+            color="#361AE3"
+            loading={isLoading}
+            cssOverride={override}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+
+        </div> */}
         {/* <div>
           <input multiple onChange={handlechange} type="file" name="fileinput" id="" />
           <button onClick={handleSendBtn} className="px-3 py-2 border shadow-md bg-gray-200 rounded-md hover:shadow-lg">sendImage</button>

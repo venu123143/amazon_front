@@ -6,7 +6,7 @@ import { AiOutlineInstagram, AiOutlineLinkedin, AiOutlineTwitter, AiOutlineGithu
 const Footer = () => {
   return (
     <>
-      <footer className="py-4 ">
+      <footer className="py-4  ">
         <div className="w-full sm:justify-around sm:flex sm:items-center">
           <div className="sm:w-1/3 w-full mb-[10px]">
             <div className="footer-top-data flex items-center justify-center">
@@ -16,9 +16,9 @@ const Footer = () => {
           </div>
           <div className="sm:w-1/2 w-4/5 m-auto ">
             <div className="relative">
-              <input type="search" id="search-dropdown" className="block outline-none border-none p-2.5 px-4 w-full z-20 text-md rounded-lg"
+              <input type="search" id="search-dropdown" className="block outline-none border-none p-2.5 z-0 px-4 w-full text-md rounded-lg"
                 placeholder="Email Here..." required />
-              <span className="absolute right-2 top-1.5 p-1 px-4 bg-[#232f3e] cursor-pointer text-white font-light rounded-md hover:opacity-80">
+              <span className="absolute z-0 right-2 top-1.5 p-1 px-4 bg-[#232f3e] cursor-pointer text-white font-light rounded-md hover:opacity-80">
                 Subscribe
               </span>
             </div>

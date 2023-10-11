@@ -25,6 +25,20 @@ const SamplePrevArrow = (props: any) => {
 const Carousel = () => {
     const responsive = [
         {
+            breakpoint: 2350,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 2000,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
+        {
             breakpoint: 1850,
             settings: {
                 dots: false,

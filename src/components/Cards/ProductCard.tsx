@@ -6,16 +6,19 @@ import { LiaRupeeSignSolid } from "react-icons/lia"
 import { BsHandbag, BsCart3 } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
 import { ratingStar } from "../../pages/Rating"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-const ProductCard: React.FC<any> = ({ title, img, price }) => {
+const ProductCard: React.FC<any> = ({ title, img, price, isHidden }) => {
     const [like, setLike] = useState(false)
-
+    const navigate = useNavigate()
+    const handleProduct = () => {
+        navigate("/product/id")
+    }
     return (
-        <>
-            <Link to="/product/id" className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group  flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
+        <div className={`w-full ${isHidden === true ? "block sm:hidden" : "false"}`}>
+            <div className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group first-letter:  flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
                 <div className="relative flex items-center justify-center w-[60%] sm:w-auto">
-                    <img src={img} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
+                    <img onClick={handleProduct} src={img} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
                     <div onClick={() => setLike(!like)} className=" tooltip sm:absolute hidden sm:block sm:top-4 sm:right-4 cursor-pointer hover:bg-[#c4bfbf] rounded-full p-2 " >
                         {like ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
                         <span className="tooltiptext">Wishlist</span>
@@ -39,7 +42,7 @@ const ProductCard: React.FC<any> = ({ title, img, price }) => {
                     <div onClick={() => setLike(!like)} className="absolute block  sm:hidden top-4 right-4 cursor-pointer" >
                         {like ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
                     </div>
-                    <h6 className="absolute top-10  font-[500] text-[#1c1b1b] h-[50px] overflow-hidden">{title} </h6>
+                    <h6 onClick={handleProduct} className="absolute top-10  font-[500] text-[#1c1b1b] h-[50px] overflow-hidden">{title} </h6>
                     <div className="absolute bottom-0 sm:bottom-auto top-20 flex my-[10px] items-center ">
                         {ratingStar}
                         <p className="ml-[10px]">304 reviews</p>
@@ -60,8 +63,8 @@ const ProductCard: React.FC<any> = ({ title, img, price }) => {
                         <BsCart3 className="inline " />
                     </button>
                 </div>
-            </Link>
-        </>
+            </div>
+        </div>
     )
 }
 

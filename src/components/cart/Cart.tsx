@@ -54,7 +54,7 @@ const Cart = () => {
                                 {cart.cartItems?.map((cartItem: any) => (
                                     <div key={cartItem.id} className="cart-item">
                                         <div className="cart-product">
-                                            <img src={cartItem.image} alt={cartItem.name} />
+                                            <img src={cartItem.image} alt={cartItem.name} className='hidden sm:block' />
                                             <div className='flex flex-col justify-center items-baseline'>
                                                 <h3 className='line-clamp-1 mt-10'>{cartItem.name}</h3>
                                                 <button onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
@@ -62,9 +62,9 @@ const Cart = () => {
                                         </div>
                                         <div className="cart-product-price">${cartItem.price}</div>
                                         <div className="cart-product-quantity">
-                                            <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
+                                            <button className='' onClick={() => handleDecreaseCart(cartItem)}>-</button>
                                             <div className="count">{cartItem.cartQuantity}</div>
-                                            <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
+                                            <button className='' onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                         </div>
                                         <div className="cart-product-total-price">
                                             ${cartItem.price * cartItem.cartQuantity}

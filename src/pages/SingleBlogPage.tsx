@@ -12,7 +12,7 @@ const BlogPage = () => {
         <div className="">
           <h3 className="font-extrabold text-[2rem] mt-10 text-center tracking-wide line-clamp-2">A Beautiful day in India.</h3>
           <p className="italic font-medium text-[#000000] font-serief text-start mb-3">An article By Venu gopal on 03-09-23</p>
-          <img src={taj} alt="" className="max-w-[80%] max-h-[550px] bg-blue-200 w-full m-auto shadow-sm rounded-md" />
+          <img src={taj} alt="" className="sm:max-w-[80%] sm:max-h-[550px] bg-blue-200 w-full m-auto shadow-sm rounded-md" />
           <p className="text-justify my-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit illo quam ut minima totam similique commodi sapiente
             ea excepturi nostrum sed, accusantium dolor eveniet corrupti saepe officia magnam obcaecati tempora consectetur iure

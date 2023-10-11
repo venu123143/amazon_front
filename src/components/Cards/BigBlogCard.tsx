@@ -4,6 +4,7 @@ const BigBlogCard: React.FC<any> = ({ img, title, para }) => {
     return (
         <>
             <section className="max-w-[400px] h-[500px] rounded-md overflow-hidden shadow-lg ">
+
                 <div className="">
                     <img src={img} alt="img" className="h-[300px] w-full" />
                 </div>

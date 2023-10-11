@@ -6,10 +6,12 @@ import { BsBook } from "react-icons/bs"
 import { AiOutlineAppstore } from "react-icons/ai"
 import { MdOutlineFlipCameraAndroid } from "react-icons/md"
 import { Link } from "react-router-dom"
+import ProductCard from "../components/Cards/ProductCard"
 
 const Wishlist = () => {
     return (
         <div className="bg-[#FFFFF7] w-full">
+            <h3 className="font-[550] text-[1.5rem] pt-2 hover:underline w-fit sm:hidden m-auto">My wishlist</h3>
             <section className="rounded-md mx-5 py-5">
                 <div className="md:flex block">
                     <div className="md:w-3/12 w-full mr-5 ">
@@ -40,7 +42,10 @@ const Wishlist = () => {
                     <div className="md:w-9/12 w-full grid gap-5">
                         {
                             popularProducts.map((item, index) => (
-                                <LongCard key={index} img={item.image} price={item.price} delete="true" title={item.title} />
+                                <div key={index}>
+                                    <ProductCard isHidden={true} img={item.image} price={item.price} title={item.title} />
+                                    <LongCard isHidden={true} img={item.image} price={item.price} delete="true" title={item.title} />
+                                </div>
 
                             ))
                         }

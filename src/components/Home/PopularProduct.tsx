@@ -8,7 +8,7 @@ const SampleNextArrow = (props: any) => {
     const { className, style, onClick, currentSlide, slideCount } = props;
     const isLastSlide = currentSlide === slideCount - 1;
     return (
-        <div className={`${className}  absolute right-0 top-[50%] p-[20px] bg-black  ${isLastSlide ? 'hidden' : ''}  `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
+        <div className={`${className}  absolute right-0 top-[50%] p-[20px] bg-black hover:bg-black  ${isLastSlide ? 'hidden' : ''}  `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
     )
 }
 const SamplePrevArrow = (props: any) => {
@@ -22,11 +22,25 @@ const SamplePrevArrow = (props: any) => {
 const PopularProduct = () => {
     const responsive = [
         {
+            breakpoint: 2000,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 2000, 
+                slidesToShow: 6,
+                slidesToScroll: 4,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
+        {
             breakpoint: 1850,
             settings: {
+                dots: false,
+                infinite: true,
+                speed: 1500, 
                 slidesToShow: 5,
                 slidesToScroll: 2,
-                infinite: false,
                 nextArrow: <SampleNextArrow />,
                 prevArrow: <SamplePrevArrow />
             }
@@ -34,9 +48,11 @@ const PopularProduct = () => {
         {
             breakpoint: 1350,
             settings: {
+                dots: false,
+                infinite: true,
+                speed: 1000, 
                 slidesToShow: 4,
                 slidesToScroll: 2,
-                infinite: false,
                 nextArrow: <SampleNextArrow />,
                 prevArrow: <SamplePrevArrow />
             }
@@ -44,9 +60,11 @@ const PopularProduct = () => {
         {
             breakpoint: 1150,
             settings: {
+                dots: false,
+                infinite: true,
+                speed: 1000, 
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: false,
                 nextArrow: <SampleNextArrow />,
                 prevArrow: <SamplePrevArrow />
             }
@@ -54,9 +72,11 @@ const PopularProduct = () => {
         {
             breakpoint: 875,
             settings: {
+                dots: false,
+                infinite: true,
+                speed: 1000, 
                 slidesToShow: 2,
                 slidesToScroll: 2,
-                infinite: false,
                 nextArrow: <SampleNextArrow />,
                 prevArrow: <SamplePrevArrow />
             }
@@ -64,9 +84,10 @@ const PopularProduct = () => {
         {
             breakpoint: 640,
             settings: {
+                infinite: true,
+                speed: 1000, 
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                infinite: true,
                 dots: true,
                 arrows: false
             }
