@@ -15,8 +15,8 @@ const ProductCard: React.FC<any> = ({ title, img, price, isHidden }) => {
         navigate("/product/id")
     }
     return (
-        <div className={`${isHidden === true ? "block sm:hidden" : "false"}`}>
-            <div className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group first-letter:  flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
+        <div className={`${isHidden === true ? "inline sm:hidden" : "null"}`}>
+            <div className="sm:w-[270px] sm:h-[400px]  h-[250px]  max-h-full relative group flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
                 <div className="relative flex items-center justify-center w-[60%] sm:w-auto">
                     <img onClick={handleProduct} src={img} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
                     <div onClick={() => setLike(!like)} className=" tooltip sm:absolute hidden sm:block sm:top-4 sm:right-4 cursor-pointer hover:bg-[#c4bfbf] rounded-full p-2 " >

@@ -68,6 +68,7 @@ const Navbar = () => {
             </div>
           </div>
         </header>
+
         <header className={`${active === true ? "shadow-sm fixed top-0 left-0 w-full z-10 transition-all ease-in-out " : null} w-full header-upper py-3`}>
           <div className="h-[100%] flex justify-between items-center">
             {screen ? <LiaTimesSolid onClick={screenFuncTrue} className="text-white ml-4 text-[3rem] first-letter:block sm:hidden" /> :

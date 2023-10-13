@@ -24,7 +24,7 @@ const Cart = () => {
     return (
         <>
             <div className='cart-container   bg-[#fffff7]'>
-                <h2>Shopping Cart</h2>
+                <h2 className=''>Shopping Cart</h2>
                 <div className="continue-shopping">
                     <Link to="/products" className="p-3 py-2 text-white tracking-wider rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
                         <BsArrowLeftShort size={28} className="inline" />
@@ -76,7 +76,7 @@ const Cart = () => {
                                 <button onClick={clearAllCart} className="button my-[10px] text-white  text-[1rem] sm:text-[1.2rem] tracking-wider px-2 py-[6px] rounded-md ">
                                     clear cart
                                 </button>
-                                <div className="cart-checkout">
+                                <div className="cart-checkout bg-gray-400">
                                     <div className="subtotal">
                                         <span>subtotal</span>
                                         <span>${cart.cartTotalAmount}</span>
@@ -97,3 +97,7 @@ const Cart = () => {
 }
 
 export default Cart
+
+
+
+
