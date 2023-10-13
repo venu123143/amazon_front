@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
 import { LiaTimesSolid } from "react-icons/lia"
-import { BsSearch } from "react-icons/bs"
+import { BsSearch, BsSun } from "react-icons/bs"
 import { IoMdArrowDropdown, IoMdKeypad } from "react-icons/io"
 import { PiDotsThreeVerticalBold } from "react-icons/pi"
-
+import { FiChevronDown } from "react-icons/fi"
+import { CiDark } from "react-icons/ci"
+import { HiMiniComputerDesktop } from "react-icons/hi2"
 // images
 import Logo from "../../assets/icons/vgold.png"
 import Compare from "../../assets/images/compare.svg"
@@ -17,6 +19,7 @@ import Cart from "../../assets/images/cart.svg"
 import { toggleScroll } from "../../redux/reducers/userReducer"
 
 const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { screen } = useSelector((state: any) => state.functions)
   const dispatch = useDispatch()
@@ -30,9 +33,12 @@ const Navbar = () => {
     if (window.scrollY > 40) {
       setActive(true)
       setDropdown(false)
+      setIsDropdownOpen(false)
     } else {
       setActive(false)
       setLogin(false)
+      setIsDropdownOpen(false)
+
     }
   })
 
@@ -43,6 +49,8 @@ const Navbar = () => {
   const options = () => {
     setDropdown(!dropdown)
     setCategories(false)
+    setIsDropdownOpen(false)
+
   }
 
   const screenFuncTrue = () => {
@@ -52,6 +60,13 @@ const Navbar = () => {
     dispatch(toggleScroll(true))
   }
   // console.log(screen);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  console.log(isDropdownOpen);
+
+
 
   return (
     <>
@@ -169,20 +184,28 @@ const Navbar = () => {
                       <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
                     </li>
                     <li className="relative">
-                      <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Dropdown <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                      </svg></button>
+                      <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        <span>Theme</span>
+                        <FiChevronDown className="inline font-Rubik" />
+                      </button>
                       {/* <!-- Dropdown menu --> */}
                       {
                         dropdown && (
                           <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                             <div className="py-1" role="none">
-                              <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">Account settings</Link>
-                              <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">Support</Link>
-                              <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">License</Link>
-                              <form method="POST" action="#" role="none">
-                                <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-3">Sign out</button>
-                              </form>
+                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
+                                <BsSun size={20} className="inline mr-3" />
+                                <span>Light</span>
+                              </div>
+                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                                <CiDark size={20} className="inline mr-3" />
+                                <span>Dark</span>
+                              </div>
+                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
+                                <HiMiniComputerDesktop size={20} className="inline mr-3" />
+                                <span>System</span>
+                              </div>
+
                             </div>
                           </div>
                         )
@@ -225,23 +248,28 @@ const Navbar = () => {
             </button>
           </div>
         </header>
-        <header className="header-bottom py-3">
-          <div className="flex justify-evenly items-center">
+        <header className="header-bottom py-3    ">
+          <div className="flex justify-evenly  items-center">
             <div className="relative inline-block text-left">
               <div className="flex items-center ">
 
-                <button onClick={options} className="sm:inline-flex w-full hidden justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                <button onClick={options} className="bg-white sm:inline-flex w-full hidden justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
                   <IoMdKeypad size={22} />
                   Options
                   <IoMdArrowDropdown size={22} />
                 </button>
+
               </div>
               {
                 dropdown && (
-                  <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                  <div className="absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                     <div className="py-1" role="none">
                       <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">Account settings</Link>
-                      <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">Support</Link>
+                      <button onClick={toggleDropdown} className="text-gray-700 w-full flex justify-between  items-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                        <span>Theme</span>
+                        <FiChevronDown className="inline font-Rubik" />
+                      </button>
+
                       <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">License</Link>
                       <form method="POST" action="#" role="none">
                         <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-3">Sign out</button>
@@ -250,6 +278,7 @@ const Navbar = () => {
                   </div>
                 )
               }
+
             </div>
             <PiDotsThreeVerticalBold className="text-white hidden sm:block" size={30} />
             <div className="flex items-center text-white uppercase">
@@ -259,6 +288,27 @@ const Navbar = () => {
               <NavLink className="mr-[10px] border-none" to="/contact"><span>contact</span></NavLink>
             </div>
           </div>
+          {
+            isDropdownOpen && (
+              <div className="absolute left-1/4 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:block hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                <div className="py-1" role="none">
+                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
+                    <BsSun size={20} className="inline mr-3" />
+                    <span>Light</span>
+                  </div>
+                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                    <CiDark size={20} className="inline mr-3" />
+                    <span>Dark</span>
+                  </div>
+                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
+                    <HiMiniComputerDesktop size={20} className="inline mr-3" />
+                    <span>System</span>
+                  </div>
+
+                </div>
+              </div>
+            )
+          }
         </header >
       </div>
     </>

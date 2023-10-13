@@ -9,6 +9,7 @@ import TopProducts from "./TopProducts"
 import SpecialCart from "./SpecialCart"
 import PopularProduct from "./PopularProduct"
 import Offers from "./Offers.tsx"
+
 // import { SyncLoader } from "react-spinners"
 
 const HomePage = () => {
