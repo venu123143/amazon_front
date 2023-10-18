@@ -6,8 +6,8 @@ const SampleNextArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
         <div
-            className={`${className} absolute right-0 top-[50%] p-[20px] hover:bg-black `}
-            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '70%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
+            className={`${className} 480px:visible invisible absolute right-0 top-[50%] p-[20px] bg-black hover:bg-black opacity-50`}
+            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
             onClick={onClick} />
     )
 }
@@ -16,14 +16,28 @@ const SamplePrevArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
         <div
-            className={`${className} absolute left-0 top-[50%] p-[20px] hover:bg-black `}
-            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '70%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
+            className={`${className} 480px:visible invisible absolute  left-0 top-[50%] p-[20px] bg-black hover:bg-black opacity-50`}
+            style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }}
             onClick={onClick} />
     )
 }
 
 const Carousel = () => {
     const responsive = [
+        {
+            breakpoint: 2350,
+            settings: {
+                dots: false,
+                infinite: true,
+                speed: 2000,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
         {
             breakpoint: 1850,
             settings: {
@@ -53,7 +67,7 @@ const Carousel = () => {
             }
         },
         {
-            breakpoint: 430,
+            breakpoint: 400,
             settings: {
                 dots: false,
                 infinite: true,

@@ -282,7 +282,7 @@ const Products = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="md:w-9/12 w-auto  md:h-[250vh] md:overflow-y-scroll md:no-scrollbar">
+                    <div className="md:w-9/12  w-auto  md:h-[250vh] md:overflow-y-scroll md:no-scrollbar">
                         <div className={`bg-white hidden md:block rounded-lg md:py-[5px] md:px-[10px] mb-3 shadow-lg  `}>
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-10">
@@ -317,9 +317,9 @@ const Products = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="pb-5 products">
+                        <div className="sm:pb-5 products">
 
-                            <div className={` ${grid === 3 ? "grid lg:grid-cols-2 gap-5 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center  gap-5 grid-cols-1" : "grid gap-5 place-items-center grid-cols-1"} `}>
+                            <div className={` ${grid === 3 ? "grid lg:grid-cols-2 sm:gap-5 border border-b-2 sm:border-none 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center border border-b-2 sm:border-none sm:gap-5 grid-cols-1" : "grid sm:gap-5 place-items-center border border-b-2 sm:border-none grid-cols-1"} `}>
                                 {(grid === 1 || grid === 2 || grid === 3) && popularProducts.map((item, index) => (
                                     <ProductCard key={index} img={item.image} price={item.price} title={item.title} />
                                     // <LongCard key={index} img={item.image} price={item.price} title={item.title} />
@@ -336,7 +336,7 @@ const Products = () => {
 
                         </div>
 
-                        <nav className=" my-[20px]">
+                        <nav className="my-[20px]">
                             <ul className="flex border bg-white rounded-lg justify-between -space-x-px text-sm ">
                                 <li>
                                     <a href="#" className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>

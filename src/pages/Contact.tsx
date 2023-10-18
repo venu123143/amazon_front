@@ -3,7 +3,7 @@ import { BsTelephone } from "react-icons/bs"
 const Contact = () => {
     return (
         <section className="bg-[#FFFFF7]">
-            <section className="px-10 py-5">
+            <section className="px-4 sm:px-10 py-5">
                 <div className="">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d33062.247954153885!2d78.39092952095174!3d17.471714424058703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb900ed933ff81%3A0xb79715aed0874331!2sAhex%20Technologies%20Private%20Limited!5e0!3m2!1sen!2sin!4v1693671119432!5m2!1sen!2sin" width="600" height="450" className="border-0 w-full" allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>

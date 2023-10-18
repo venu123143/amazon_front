@@ -24,7 +24,7 @@ const Cart = () => {
     return (
         <>
             <div className='cart-container   bg-[#fffff7]'>
-                <h2>Shopping Cart</h2>
+                <h2 className=''>Shopping Cart</h2>
                 <div className="continue-shopping">
                     <Link to="/products" className="p-3 py-2 text-white tracking-wider rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
                         <BsArrowLeftShort size={28} className="inline" />
@@ -54,7 +54,7 @@ const Cart = () => {
                                 {cart.cartItems?.map((cartItem: any) => (
                                     <div key={cartItem.id} className="cart-item">
                                         <div className="cart-product">
-                                            <img src={cartItem.image} alt={cartItem.name} />
+                                            <img src={cartItem.image} alt={cartItem.name} className='hidden sm:block' />
                                             <div className='flex flex-col justify-center items-baseline'>
                                                 <h3 className='line-clamp-1 mt-10'>{cartItem.name}</h3>
                                                 <button onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
@@ -62,9 +62,9 @@ const Cart = () => {
                                         </div>
                                         <div className="cart-product-price">${cartItem.price}</div>
                                         <div className="cart-product-quantity">
-                                            <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
+                                            <button className='' onClick={() => handleDecreaseCart(cartItem)}>-</button>
                                             <div className="count">{cartItem.cartQuantity}</div>
-                                            <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
+                                            <button className='' onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                         </div>
                                         <div className="cart-product-total-price">
                                             ${cartItem.price * cartItem.cartQuantity}
@@ -73,10 +73,10 @@ const Cart = () => {
                                 ))}
                             </div>
                             <div className="cart-summery relative">
-                                <button onClick={clearAllCart} className="button my-[10px] text-white text-[1.2rem] tracking-wider px-[2rem] py-[6px] rounded-md ">
+                                <button onClick={clearAllCart} className="button my-[10px] text-white  text-[1rem] sm:text-[1.2rem] tracking-wider px-2 py-[6px] rounded-md ">
                                     clear cart
                                 </button>
-                                <div className="cart-checkout">
+                                <div className="cart-checkout bg-gray-400">
                                     <div className="subtotal">
                                         <span>subtotal</span>
                                         <span>${cart.cartTotalAmount}</span>
@@ -97,3 +97,7 @@ const Cart = () => {
 }
 
 export default Cart
+
+
+
+

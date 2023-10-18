@@ -4,15 +4,14 @@ import { BsHandbag } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
 import { ratingStar } from "../../pages/Rating"
 import { LiaRupeeSignSolid } from "react-icons/lia"
-const LongCard: React.FC<any> = ({ img, price, title }: any) => {
+const LongCard: React.FC<any> = ({ img, price, title, isHidden }: any) => {
     const [like, setLike] = useState(false)
     return (
         <>
-            <div className="w-full">
+            <div className={`w-full ${isHidden === true ? "hidden sm:block" : "false"}`}>
                 <div className="group bg-white w-full h-[250px] flex px-2 rounded-lg border text-gray-700 shadow transition hover:shadow-lg">
                     <div className="w-[25%] relative flex justify-center items-center">
                         <span className="absolute left-3 top-3 text-black bg-yellow-500 rounded-full px-[5px]">-33%</span>
-
                         <img src={img} className=" h-[80%] group-hover:h-[100%] transition-all ease-out duration-300 cursor-pointer group-hover:scaloe-125" alt="" />
                     </div>
 

@@ -389,11 +389,6 @@ footer:not(:first-child) {
     color: white;
 }
 
-.cart-checkout {
-    width: 278px;
-    max-width: 100%;
-}
-
 .cart-checkout .subtotal {
     display: flex;
     justify-content: space-between;
@@ -416,7 +411,6 @@ footer:not(:first-child) {
     height: 40px;
     border-radius: 5px;
     margin-top: 2rem;
-
     border: none;
     outline: none;
     cursor: pointer;
@@ -441,7 +435,7 @@ footer:not(:first-child) {
 /* cart css end */
 
 
-.slick-arrow .slick-prev {
+/* .slick-arrow .slick-prev {
     position: absolute;
     left: 0;
     top: 50%;
@@ -449,4 +443,8 @@ footer:not(:first-child) {
 }
 .slick-arrow .slick-prev:hover{
     background-color: black;
+} */
+
+.specialcard{
+    gap: 5px;
 }

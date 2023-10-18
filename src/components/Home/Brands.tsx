@@ -5,9 +5,11 @@ import { blogs } from "../../static/staticData";
 
 const BrandsAndBlogs = () => {
   return (
-    <div id="blogs">
+    <div id="blogs " className="mt-5"> 
+      <h3 className="font-[550] text-[1.5rem] ml-5  hover:underline w-fit">Our Top Brands</h3>
+
       <section className="rounded-md sm:block justify-between shadow-lg px-[10px] m-[20px] bg-[#ffffff] ">
-        <div className="py-3 grid grid-cols-2 sm:grid-cols-4  lg:flex items-center justify-between">
+        <div className="py-3 grid grid-cols-2 sm:grid-cols-4  lg:flex items-center justify-around">
           {brands.map((item: any, index) => (
             <div key={index} className="flex justify-evenly rounded-md hover:bg-[#CCFFFF] cursor-pointer">
               <Link to="/" key={index}>

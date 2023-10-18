@@ -24,6 +24,8 @@ const Blogs = () => {
             </div>
           </div>
           <div className="1100px:w-9/12 my-5">
+            <h3 className="font-[550] text-[1.5rem] hover:underline w-fit md:hidden m-auto"> Blogs</h3>
+
             <div className="grid 800px:grid-cols-2 grid-cols-1 gap-5 place-items-center">
               {blogs.map((each, index) => (
                 <BigBlogCard key={index} img={each.img} para={each.para} title={each.title} />
