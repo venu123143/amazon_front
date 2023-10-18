@@ -40,3 +40,9 @@ a {
     }
   }
 }
+
+@layer base{
+  :root{
+    
+  }
+}

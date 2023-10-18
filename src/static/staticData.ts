@@ -55,6 +55,11 @@ import { AiOutlineGift } from "react-icons/ai"
 import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
+
+export const base_url = "http://localhost:5000/api"
+
+
+
 export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopal.v@ahex.co.in"]
 export const information = ["Privacy Policy", "Refund Policy", "Shipping Policy", "Terms of Service", "Blogs"]
 export const account = ["Search ", "About Us", "Faq", "Contact", "Size Chart"]
@@ -553,6 +558,6 @@ export const cartData = [
         cartQuantity: 1,
     },
 
-]   
+]
 
 export const RaziropayKey = "rzp_test_5H2f34UHN19PKM"

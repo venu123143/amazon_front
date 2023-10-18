@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../../redux/reducers/cartReducer';
+import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../../redux/reducers/product/cartSlice';
 import { BsArrowLeftShort } from 'react-icons/bs';
 const Cart = () => {
     const cart = useSelector((state: any) => state.cart);

@@ -14,11 +14,12 @@ import Compare from "../../assets/images/compare.svg"
 import Wishlist from "../../assets/images/wishlist.svg"
 import User from "../../assets/images/user.svg"
 import Cart from "../../assets/images/cart.svg"
-import { toggleScroll } from "../../redux/reducers/userReducer"
+import { toggleScroll } from "../../redux/reducers/users/userSlice"
+import { RootState } from "../../redux/store"
 
 const Navbar = () => {
 
-  const { screen } = useSelector((state: any) => state.functions)
+  const { screen } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
