@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import userService from "./userService";
 
 const getUserFromLocalStorage = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null
+const themes = localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
 
 export interface UserState {
     _id?: string | null;
@@ -23,6 +24,7 @@ interface AppState {
     isLoading: boolean;
     isSuccess: boolean;
     message: string;
+    theme: string | null;
 }
 
 const initialState: AppState = {
@@ -32,6 +34,7 @@ const initialState: AppState = {
     isLoading: false,
     isSuccess: false,
     message: "",
+    theme: themes,
 };
 
 export const registerUser = createAsyncThunk('userSlice/registerUser', async (userData: UserState, thunkAPI) => {
@@ -66,8 +69,11 @@ const slice = createSlice({
     name: 'userSlice',
     initialState,
     reducers: {
-        toggleScroll: (state: any, action) => {
+        toggleScroll: (state, action: PayloadAction<any>) => {
             state.screen = action.payload
+        },
+        setTheme: (state, action: PayloadAction<any>) => {
+            state.theme = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -134,5 +140,5 @@ const slice = createSlice({
 })
 
 
-export const { toggleScroll } = slice.actions
+export const { toggleScroll, setTheme } = slice.actions
 export default slice.reducer

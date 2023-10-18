@@ -62,7 +62,7 @@ const SignUpPage = () => {
   });
 
   return (
-    <section className="bg-[#FFFFF7] dark:bg-black w-full">
+    <section className=" bg-skin-background w-full">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to home</button>
@@ -143,10 +143,10 @@ const SignUpPage = () => {
                     ) : null}
                   </div>
                   <div className="flex justify-evenly">
-                    <button type="submit" className="button dark:bg-[#f97316] shadow-lg my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                    <button type="submit" className="bg-skin-light hover:bg-skin-main text-skin-base hover:text-skin-light shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                       Register
                     </button>
-                    <Link to="/login" className="bg-[#febd69] hover:bg-[#232f3e] dark:hover:bg-[#f97316] shadow-lg hover:text-white text-black my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                    <Link to="/login" className="bg-skin-main hover:bg-skin-light text-base hover:text-skin-text-background  shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                       Login
                     </Link>
                   </div>

@@ -50,7 +50,7 @@ const LoginPage = () => {
     },
   });
   return (
-    <section className="bg-[#FFFFF7] dark:bg-black w-full">
+    <section className="bg-skin-background w-full">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] dark:hover:text-white flex items-center hover:text-black">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to home</button>
@@ -82,8 +82,8 @@ const LoginPage = () => {
                       placeholder="Enter your email" required />
 
                     <div className="text-center">
-                      <button className="button dark:bg-[#f97316] shadow-lg my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
-                        Submit
+                      <button type="submit" className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                        submit
                       </button> <br />
                       <button onClick={() => setForgotPassword(false)} className="hover:underline text-black dark:text-white  my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                         Cancel
@@ -128,10 +128,10 @@ const LoginPage = () => {
                       </Link>
                     </div>
                     <div className="flex justify-evenly">
-                      <button type="submit" className="button dark:bg-[#f97316] shadow-lg my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                      <button type="submit" className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                         Login
                       </button>
-                      <Link to="/sign-up" className="bg-[#febd69] hover:bg-[#232f3e] hover:text-white text-black my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                      <Link to="/sign-up" className="bg-skin-main text-skin-textBase hover:bg-skin-light hover:text-skin-background my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                         Sign up
                       </Link>
                     </div>
