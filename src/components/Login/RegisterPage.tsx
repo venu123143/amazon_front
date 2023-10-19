@@ -2,7 +2,7 @@
 import { useState, CSSProperties } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsArrowLeftShort } from "react-icons/bs"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { AppDispatch, RootState } from "../../redux/store"
 import { useDispatch, useSelector } from "react-redux"
