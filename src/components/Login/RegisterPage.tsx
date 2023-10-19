@@ -32,7 +32,7 @@ let signupSchema = object({
 });
 const SignUpPage = () => {
   const dispatch: AppDispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { isLoading } = useSelector((state: RootState) => state.user)
   const [visible, setVisible] = useState(false)
   const [visibleC, setVisibleC] = useState(false)
