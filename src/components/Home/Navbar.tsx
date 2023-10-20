@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
@@ -16,18 +16,21 @@ import Compare from "../../assets/images/compare.svg"
 import Wishlist from "../../assets/images/wishlist.svg"
 import User from "../../assets/images/user.svg"
 import Cart from "../../assets/images/cart.svg"
-import { toggleScroll } from "../../redux/reducers/userReducer"
+import { setTheme, toggleScroll } from "../../redux/reducers/users/userSlice"
+import { RootState } from "../../redux/store"
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const { screen } = useSelector((state: any) => state.functions)
+  const element = document.documentElement
+  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
+  const { screen, theme } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const [categories, setCategories] = useState(false)
   const [login, setLogin] = useState(false)
+
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
@@ -41,6 +44,14 @@ const Navbar = () => {
 
     }
   })
+  function onWindowMatch() {
+    if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark")
+    }
+  }
+  onWindowMatch()
 
   const category = () => {
     setCategories(!categories)
@@ -64,8 +75,33 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  console.log(isDropdownOpen);
+  useEffect(() => {
+    switch (theme) {
+      case "dark":
+        element.classList.add("dark")
+        localStorage.setItem("theme", "dark")
+        break;
+      case "light":
+        element.classList.remove("dark")
+        localStorage.setItem("theme", "light")
+        break;
+      default:
+        localStorage.removeItem("theme")
+        onWindowMatch()
+        break;
+    }
+  }, [theme])
 
+  darkQuery.addEventListener("change", (e) => {
+    if (!("theme" in localStorage)) {
+      if (e.matches) {
+        element.classList.add("dark")
+      } else {
+        element.classList.remove("dark")
+
+      }
+    }
+  })
 
 
   return (
@@ -193,15 +229,24 @@ const Navbar = () => {
                         dropdown && (
                           <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                             <div className="py-1" role="none">
-                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
+                              <div onClick={() => {
+                                dispatch(setTheme("light"))
+                                setDropdown(false)
+                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
                                 <BsSun size={20} className="inline mr-3" />
                                 <span>Light</span>
                               </div>
-                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                              <div onClick={() => {
+                                dispatch(setTheme("dark"))
+                                setDropdown(false)
+                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
                                 <CiDark size={20} className="inline mr-3" />
                                 <span>Dark</span>
                               </div>
-                              <div className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
+                              <div onClick={() => {
+                                dispatch(setTheme("system"))
+                                setDropdown(false)
+                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
                                 <HiMiniComputerDesktop size={20} className="inline mr-3" />
                                 <span>System</span>
                               </div>
@@ -292,15 +337,24 @@ const Navbar = () => {
             isDropdownOpen && (
               <div className="absolute left-1/4 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:block hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                 <div className="py-1" role="none">
-                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
+                  <div onClick={() => {
+                    dispatch(setTheme("light"))
+                    setIsDropdownOpen(false)
+                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
                     <BsSun size={20} className="inline mr-3" />
                     <span>Light</span>
                   </div>
-                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                  <div onClick={() => {
+                    dispatch(setTheme("dark"))
+                    setIsDropdownOpen(false)
+                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
                     <CiDark size={20} className="inline mr-3" />
                     <span>Dark</span>
                   </div>
-                  <div className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
+                  <div onClick={() => {
+                    dispatch(setTheme("system"))
+                    setIsDropdownOpen(false)
+                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
                     <HiMiniComputerDesktop size={20} className="inline mr-3" />
                     <span>System</span>
                   </div>

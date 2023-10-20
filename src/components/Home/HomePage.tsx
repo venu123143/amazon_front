@@ -14,6 +14,7 @@ import Offers from "./Offers.tsx"
 // import { SyncLoader } from "react-spinners"
 
 const HomePage = () => {
+<<<<<<< HEAD
   // const [value, setValue] = useState<any>([])
   // var formData = new FormData()
   // const handleSendBtn = async () => {
@@ -45,9 +46,11 @@ const HomePage = () => {
 
 
 
+=======
+>>>>>>> e191f322fad93a448291e80bf10bdcab795ad8c0
   return (
     <>
-      <div className="bg-[#FFFFF7] ">
+      <div className="bg-[#FFFFF7] dark:bg-black">
         <Carousel />
         <Home />
         <FeatureCollection />
@@ -56,21 +59,6 @@ const HomePage = () => {
         <SpecialCart />
         <PopularProduct />
         <BrandsAndBlogs />
-        {/* <div className={`${isLoading === true ? "block bg-black opacity-50 absolute top-0 left-0 w-full h-screen" : "hidden"}`}>
-          <SyncLoader
-            color="#361AE3"
-            loading={isLoading}
-            cssOverride={override}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-
-        </div> */}
-        {/* <div>
-          <input multiple onChange={handlechange} type="file" name="fileinput" id="" />
-          <button onClick={handleSendBtn} className="px-3 py-2 border shadow-md bg-gray-200 rounded-md hover:shadow-lg">sendImage</button>
-          <img src={value} alt="awsImage" />
-        </div> */}
       </div>
     </>
   )

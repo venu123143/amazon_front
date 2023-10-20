@@ -1,29 +1,46 @@
 
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { AiOutlineHeart, AiFillHeart, AiOutlineEye } from "react-icons/ai"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import { BsHandbag, BsCart3 } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
-import { ratingStar } from "../../pages/Rating"
+import RatingStar from "../../pages/Rating"
 import { useNavigate } from "react-router-dom"
 
-const ProductCard: React.FC<any> = ({ title, img, price, isHidden }) => {
+import { GetFromWishlist, IProductState } from "../../redux/reducers/product/productSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../redux/store"
+import { addToWishlist } from "../../redux/reducers/product/productSlice"
+
+const ProductCard: React.FC<{ data: IProductState; isHidden?: any }> = ({ data, isHidden }) => {
     const [like, setLike] = useState(false)
+    const dispatch: AppDispatch = useDispatch()
+    const { wishlist } = useSelector((state: RootState) => state.product)
+    
     const navigate = useNavigate()
-    const handleProduct = () => {
-        navigate("/product/id")
-    }
+    const handleProduct = useCallback(() => {
+        navigate("/product/id");
+    }, [navigate]);
+
+    useEffect(() => {
+        dispatch(GetFromWishlist())
+    }, [])
+
+    const ToWishlist = useCallback((id: string) => {
+        dispatch(addToWishlist(id));
+    }, [dispatch]);
     return (
         <div className={`${isHidden === true ? "inline sm:hidden" : "null"}`}>
             <div className="sm:w-[270px]  sm:h-[400px]  h-[250px]  max-h-full relative group flex w-screen sm:block rounded-lg overflow-hidden md:cursor-pointer bg-[#ffffff] shadow-lg">
                 <div className="relative flex items-center justify-center w-[60%] sm:w-auto">
-                    <img onClick={handleProduct} src={img} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
-                    <div onClick={() => setLike(!like)} className="tooltip sm:absolute hidden sm:block sm:top-4 sm:right-4 cursor-pointer hover:bg-[#c4bfbf] rounded-full p-2 " >
-                        {like ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
+                    <img onClick={handleProduct} src={data?.images![0]?.url} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />
+                    <div onClick={() => ToWishlist(data?._id as string)} className="tooltip sm:absolute hidden sm:block sm:top-4 sm:right-4 cursor-pointer hover:bg-[#c4bfbf] rounded-full p-2 " >
+                        {wishlist?.find((id) => id === data?._id)
+                            ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
                         <span className="tooltiptext">Wishlist</span>
                     </div>
-                    <span className="absolute left-5 top-5 bg-yellow-500 rounded-full px-[5px]">-33%</span>
+                    <span className="absolute left-5 top-5 bg-yellow-500 rounded-full px-[5px]">-{30}%</span>
                     <div className="tooltip absolute sm:right-4 sm:top-12 hidden sm:block first-letter transition-all ease-linear sm:translate-x-14 sm:group-hover:translate-x-0 hover:bg-[#c4bfbf] rounded-full p-2">
                         <AiOutlineEye size={25} />
                         <span className="tooltiptext">Eye</span>
@@ -38,19 +55,19 @@ const ProductCard: React.FC<any> = ({ title, img, price, isHidden }) => {
                     </div>
                 </div>
                 <div className="w-full h-full p-[15px] relative ">
-                    <span className="absolute  text-[#bf4800] text-[.91rem]">Brand Name</span>
+                    <span className="absolute  text-[#bf4800] text-[.91rem]">{data?.brand.title}</span>
                     <div onClick={() => setLike(!like)} className="absolute block  sm:hidden top-4 right-4 cursor-pointer" >
                         {like ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
                     </div>
-                    <h6 onClick={handleProduct} className="absolute top-10  font-[500] text-[#1c1b1b] h-[50px] overflow-hidden">{title} </h6>
+                    <h6 onClick={handleProduct} className="absolute top-10  font-[500] text-[#1c1b1b] h-[50px] overflow-hidden">{data?.title} </h6>
                     <div className="absolute bottom-0 sm:bottom-auto top-20 flex my-[10px] items-center ">
-                        {ratingStar}
-                        <p className="ml-[10px]">304 reviews</p>
+                        <RatingStar stars={data?.totalRating} />
+                        <p className="ml-[10px]">{data?.totalRating} reviews</p>
                     </div>
 
                     <div>
-                        <span className="absolute top-[120px] text-[#1c1b1b] font-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{price}</span>
-                        <span className="absolute top-[120px] left-24 line-through italic text-[#1c1b1b] font-[1rem] font-Rubik">99990</span>
+                        <span className="absolute top-[120px] text-[#1c1b1b] font-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{data?.price}</span>
+                        <span className="absolute top-[120px] left-24 line-through italic text-[#1c1b1b] font-[1rem] font-Rubik">{data?.price + 0.3 * data?.price}</span>
                     </div>
                     <button className="absolute block tooltip sm:hidden bottom-5 left-5 bg-[#000000]  hover:opacity-80 px-[15px] py-[5px]  rounded-md shadow-lg text-white">
                         <span className="hidden  480px:inline">Compare</span>

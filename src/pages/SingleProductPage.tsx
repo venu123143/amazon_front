@@ -2,7 +2,7 @@ import { useState } from "react"
 import { AiFillHeart, AiFillThunderbolt, AiOutlineHome, AiOutlineHeart, AiOutlineMinus } from "react-icons/ai"
 import { HiOutlineChevronRight } from "react-icons/hi"
 import ReviewCard from "../components/Cards/ReviewCard"
-import { ratingStar } from "./Rating"
+import RatingStar from "./Rating"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import { FaCircle } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
@@ -60,7 +60,9 @@ const SingleProductPage = () => {
                                             {each.title}
                                         </p>
                                         <div className="flex items-center text-[1.5rem]">
-                                            {ratingStar} <span className="font-[500] mx-3">({each.rating})</span> <span className="text-[#777777] text-[1.2rem]">(305 reviews)</span>
+                                            <RatingStar stars={3.9} />
+                                            <span className="font-[500] mx-3">({each.rating})</span>
+                                            <span className="text-[#777777] text-[1.2rem]">(305 reviews)</span>
                                         </div>
                                         <div className="block md:flex items-center">
                                             <span className="text-[1.4rem] font-[450] mr-5 leading-loose"><LiaRupeeSignSolid size={25} className="inline" />{each.price}</span>

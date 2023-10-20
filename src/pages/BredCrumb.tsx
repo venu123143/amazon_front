@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { BsChevronDown } from "react-icons/bs"
 import { useState } from "react"
 import { RxCross2 } from "react-icons/rx"
-import { ratingStar } from "./Rating"
+import RatingStar from "./Rating"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import img from "../assets/images/headphone.jpg"
 
@@ -311,7 +311,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                                     <div className="w-9/12 mb-3">
                                         <h6 className="font-[600] text-[#1c1b1b] h-[50px] m-0 font-Rubik overflow-hidden">
                                             Head phone with yellow color and good sound quality </h6>
-                                        <div className="flex">{ratingStar}</div>
+                                        <div className="flex"><RatingStar stars={3.9} /></div>
                                         <span className=" text-[#1c1b1b] font-[500] text-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />1000</span>
                                     </div>
                                 </div>
@@ -322,7 +322,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                                     <div className="w-9/12 mb-3">
                                         <h6 className="font-[600] text-[#1c1b1b] h-[50px] m-0 font-Rubik overflow-hidden">
                                             Head phone with yellow color and good sound quality </h6>
-                                        <div className="flex">{ratingStar}</div>
+                                        <div className="flex"><RatingStar stars={3.9} /></div>
                                         <span className=" text-[#1c1b1b] font-[500] text-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />1000</span>
                                     </div>
                                 </div>

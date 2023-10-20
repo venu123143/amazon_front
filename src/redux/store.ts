@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit"
-import functionSlice from "./reducers/userReducer"
-import cartReducer from "./reducers/cartReducer"
-const store = configureStore({
+import userSlice from "./reducers/users/userSlice"
+import cartReducer from "./reducers/cart/cartSlice"
+import productReducer from "./reducers/product/productSlice"
+const Store = configureStore({
     reducer: {
-        functions: functionSlice,
+        user: userSlice,
         cart: cartReducer,
+        product: productReducer,
     },
-    // middleware: (getDefaultMiddleware)=>{
-    //     return getDefaultMiddleware().concat(producsApi.middleware)
-    // }
 })
 
-export default store
+
+export type RootState = ReturnType<typeof Store.getState>
+export type AppDispatch = typeof Store.dispatch
+export default Store

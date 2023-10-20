@@ -1,5 +1,15 @@
+// function withOpacity(variableName) {
+//   return ({ opacityValue }) => {
+//     if (opacityValue !== undefined) {
+//       return `rgba(var(${variableName}),${opacityValue})`
+//     }
+//     return `rgb(var(${variableName}))`
+//   }
+// }
+
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -24,11 +34,40 @@ export default {
       },
       scale: {
         '-100': '-1',
-      }
+      },
+      textColor: {
+        skin: {
+
+        }
+      },
+      textColor: {
+        skin: {
+          base: `var(--text-color-base)`,
+          textLight: `var(--text-color-text-light)`,
+          textBase: `var(--text-color-text-base)`,
+          background: `var(--text-color-background)`,
+          backgroundLight: `var(--text-color-background-light)`,
+          backgroundHover: `var(--text-color-background-hover)`,
+          main: `var(--text-color-main)`,
+          light: `var(--text-color-light)`,
+        }
+      },
+      backgroundColor: {
+        skin: {
+          base: `var(--color-base)`,
+          textLight: `var(--color-text-light)`,
+          textBase: `var(--color-text-base)`,
+          background: `var(--color-background)`,
+          backgroundLight: `var(--color-background-light)`,
+          backgroundHover: `var(--color-background-hover)`,
+          main: `var(--color-main)`,
+          light: `var(--color-light)`,
+        }
+      },
     },
   },
   plugins: [
-  
+
   ],
 }
 

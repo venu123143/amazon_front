@@ -5,7 +5,7 @@ import watch from "../../assets/images/watch.jpg"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { carousel } from "../../static/staticData";
 
-import { ratingStar } from "../../pages/Rating"
+import RatingStar from "../../pages/Rating"
 import Slider from "react-slick";
 
 const SampleNextArrow = (props: any) => {
@@ -117,7 +117,7 @@ const SpecialProdCard = () => {
                         <h6 className="mt-[40px] text-[.81rem] font-[550] text-[#1c1b1b] w-full h-[60px] overflow-hidden">Boat watch  series with lether stip inside and phone message.</h6>
                         <div className="block xl:flex justify-between my-[5px] items-center">
                             <div className="flex">
-                                {ratingStar}
+                                <RatingStar stars={3.9} />
                             </div>
                             <p className="">304 reviews</p>
                         </div>
