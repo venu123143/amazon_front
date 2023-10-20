@@ -1,6 +1,7 @@
 
 // import catBanner4 from "../../assets/images/catbanner-04.jpg"
 // import { CSSProperties } from "react"
+
 import FeatureCollection from "./Features"
 import Carousel from "./Carousel"
 import Home from "./Home"
@@ -8,7 +9,7 @@ import BrandsAndBlogs from "./Brands"
 import TopProducts from "./TopProducts"
 import SpecialCart from "./SpecialCart"
 import PopularProduct from "./PopularProduct"
-import Offers from "./Offers.tsx"
+import Offers from "./Offers.tsx" 
 
 // import { SyncLoader } from "react-spinners"
 
@@ -41,6 +42,9 @@ const HomePage = () => {
   //   transform: 'translateX(-50%, -50%)'
 
   // };
+
+
+
   return (
     <>
       <div className="bg-[#FFFFF7] ">
