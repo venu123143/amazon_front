@@ -19,7 +19,8 @@ import LongCard from "../Cards/LongCard"
 const Products = () => {
     const [grid, setGrid] = useState(3)
     const dispatch: AppDispatch = useDispatch()
-    const { products } = useSelector((state: RootState) => state.product)
+    const { products, wishlist } = useSelector((state: RootState) => state.product)
+    console.log(wishlist);
 
     useEffect(() => {
         getProducts()

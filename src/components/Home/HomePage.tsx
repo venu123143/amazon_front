@@ -14,7 +14,6 @@ import Offers from "./Offers.tsx"
 // import { SyncLoader } from "react-spinners"
 
 const HomePage = () => {
-<<<<<<< HEAD
   // const [value, setValue] = useState<any>([])
   // var formData = new FormData()
   // const handleSendBtn = async () => {
@@ -46,8 +45,6 @@ const HomePage = () => {
 
 
 
-=======
->>>>>>> e191f322fad93a448291e80bf10bdcab795ad8c0
   return (
     <>
       <div className="bg-[#FFFFF7] dark:bg-black">

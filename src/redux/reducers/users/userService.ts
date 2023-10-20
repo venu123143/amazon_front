@@ -5,8 +5,6 @@ import { UserState } from "./userSlice";
 
 const register = async (userData: UserState): Promise<any> => {
     const res = await axios.post(`${base_url}/users/register`, userData)
-    console.log(res.data);
-
     return res.data
 }
 

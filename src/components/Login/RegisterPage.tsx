@@ -104,7 +104,7 @@ const SignUpPage = () => {
                   <div>
                     <input
                       onChange={formik.handleChange("email")} onBlur={formik.handleBlur("email")} value={formik.values.email} name="email"
-                      type="tel" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Enter your Email" />
 
                     {formik.touched.email && formik.errors.email ? (

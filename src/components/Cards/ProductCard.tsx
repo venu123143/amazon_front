@@ -55,7 +55,7 @@ const ProductCard: React.FC<{ data: IProductState; isHidden?: any }> = ({ data, 
                     </div>
                 </div>
                 <div className="w-full h-full p-[15px] relative ">
-                    <span className="absolute  text-[#bf4800] text-[.91rem]">{data?.brand.title}</span>
+                    <span className="absolute  text-[#bf4800] text-[.91rem]">{data?.brand?.title}</span>
                     <div onClick={() => setLike(!like)} className="absolute block  sm:hidden top-4 right-4 cursor-pointer" >
                         {like ? <AiFillHeart className="text-red-500" size={25} /> : <AiOutlineHeart size={25} />}
                     </div>
