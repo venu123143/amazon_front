@@ -1,20 +1,33 @@
-import $ from "jquery"
-import BredCrumb from "../../pages/BredCrumb"
-import { useState } from "react"
+import $, { data } from "jquery"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { RxCross2 } from "react-icons/rx"
-import img from "../../assets/icons/headPhones.webp"
-import { ratingStar } from "../../pages/Rating"
 import { AiOutlineMenu } from "react-icons/ai"
 import { HiOutlineBars4 } from "react-icons/hi2"
 import { BsThreeDotsVertical } from "react-icons/bs"
-
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { LiaRupeeSignSolid } from "react-icons/lia"
-import { popularProducts } from "../../static/staticData"
+
+import { AppDispatch, RootState } from "../../redux/store"
+import { getAllProducts } from "../../redux/reducers/product/productSlice"
+
+import BredCrumb from "../../pages/BredCrumb"
+import img from "../../assets/icons/headPhones.webp"
 import ProductCard from "../Cards/ProductCard"
 import LongCard from "../Cards/LongCard"
+
 const Products = () => {
     const [grid, setGrid] = useState(3)
+    const dispatch: AppDispatch = useDispatch()
+    const { products } = useSelector((state: RootState) => state.product)
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    const getProducts = () => {
+        dispatch(getAllProducts())
+    }
 
     $(document).on('click', '.griditem div', function () {
         $(this).removeClass('griditem-color').addClass('griditem-active').siblings().removeClass('griditem-active').addClass('griditem-color')
@@ -264,7 +277,7 @@ const Products = () => {
                                     <div className="w-9/12 mb-3">
                                         <h6 className="font-[600] text-[#1c1b1b] h-[50px] m-0 font-Rubik overflow-hidden">
                                             Head phone with yellow color and good sound quality </h6>
-                                        <div className="flex">{ratingStar}</div>
+                                        <div className="flex"></div>
                                         <span className=" text-[#1c1b1b] font-[500] text-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />1000</span>
                                     </div>
                                 </div>
@@ -275,7 +288,7 @@ const Products = () => {
                                     <div className="w-9/12 mb-3">
                                         <h6 className="font-[600] text-[#1c1b1b] h-[50px] m-0 font-Rubik overflow-hidden">
                                             Head phone with yellow color and good sound quality </h6>
-                                        <div className="flex">{ratingStar}</div>
+                                        <div className="flex"></div>
                                         <span className=" text-[#1c1b1b] font-[500] text-[1rem] font-Rubik"><LiaRupeeSignSolid className="inline text-[1.2rem]" />1000</span>
                                     </div>
                                 </div>
@@ -320,13 +333,12 @@ const Products = () => {
                         <div className="sm:pb-5 products">
 
                             <div className={` ${grid === 3 ? "grid lg:grid-cols-2 sm:gap-5 border border-b-2 sm:border-none 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center border border-b-2 sm:border-none sm:gap-5 grid-cols-1" : "grid sm:gap-5 place-items-center border border-b-2 sm:border-none grid-cols-1"} `}>
-                                {(grid === 1 || grid === 2 || grid === 3) && popularProducts.map((item, index) => (
-                                    <ProductCard key={index} img={item.image} price={item.price} title={item.title} />
-                                    // <LongCard key={index} img={item.image} price={item.price} title={item.title} />
+                                {(grid === 1 || grid === 2 || grid === 3) && products?.map((item, index) => (
+                                    <ProductCard key={index} data={item} />
                                 ))}
                                 {
-                                    grid === 4 && popularProducts.map((item, index) => (
-                                        <LongCard key={index} img={item.image} price={item.price} title={item.title} />
+                                    grid === 4 && products?.map((item, index) => (
+                                        <LongCard key={index} data={item} />
 
                                     ))
                                 }

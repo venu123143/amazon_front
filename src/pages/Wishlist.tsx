@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import LongCard from "../components/Cards/LongCard"
 import { popularProducts } from "../static/staticData"
 import { BsCartCheck } from "react-icons/bs"
@@ -7,8 +9,19 @@ import { AiOutlineAppstore } from "react-icons/ai"
 import { MdOutlineFlipCameraAndroid } from "react-icons/md"
 import { Link } from "react-router-dom"
 import ProductCard from "../components/Cards/ProductCard"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../redux/store"
+import { GetFromWishlist } from "../redux/reducers/product/productSlice"
 
 const Wishlist = () => {
+    const dispatch: AppDispatch = useDispatch()
+    const { wishlist } = useSelector((state: RootState) => state.product)
+    console.log(wishlist);
+
+    useEffect(() => {
+        dispatch(GetFromWishlist())
+    }, [])
+
     return (
         <div className="bg-[#FFFFF7]">
             <h3 className="font-[550] text-[1.5rem] pt-2 hover:underline w-fit sm:hidden m-auto">My wishlist</h3>
@@ -40,15 +53,15 @@ const Wishlist = () => {
                         </div>
                     </div>
                     <div className="md:w-9/12 grid gap-5">
-                        {
-                            popularProducts.map((item, index) => (
+                        {/* {
+                            wishlist?.map((item, index) => (
                                 <div className="" key={index}>
-                                    <ProductCard isHidden={true} img={item.image} price={item.price} title={item.title} />
-                                    <LongCard isHidden={true} img={item.image} price={item.price} delete="true" title={item.title} />
+                                    <ProductCard isHidden={true} data={item} />
+                                    <LongCard isHidden={true} data={item} />
                                 </div>
 
                             ))
-                        }
+                        } */}
 
                     </div>
                 </div>

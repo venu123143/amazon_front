@@ -1,5 +1,5 @@
 import { AiOutlineUser } from "react-icons/ai"
-import { ratingStar } from "../../pages/Rating"
+import RatingStar from "../../pages/Rating"
 import { useState } from "react"
 
 const ReviewCard = () => {
@@ -14,7 +14,7 @@ const ReviewCard = () => {
                     <h3 className="text-[1rem] font-semibold capitalize">user name</h3>
                 </div>
                 <div className="flex items-center mt-2 text-[1.2rem]">
-                    {ratingStar}
+                    <RatingStar stars={4.3} />
                     (4.3)
                 </div>
                 <p className=" text-[.91rem] italic  font-extralight">Reviewed in India on 1 January 2022</p>

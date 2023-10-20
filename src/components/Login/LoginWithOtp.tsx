@@ -44,14 +44,14 @@ const LoginWithOtp = () => {
     }, [otp]);
 
     return (
-        <section className="bg-[#FFFFF7] w-full relative">
-            <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black">
+        <section className="bg-skin-background w-full relative">
+            <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
                 <BsArrowLeftShort size={28} className="inline" />
                 <button>back to home</button>
             </Link>
             <div className="flex justify-center items-center h-screen 400px:mx-5 py-5">
                 <div className=" w-full  flex justify-center">
-                    <div className="w-full bg-white rounded-lg shadow-lg border  dark:border md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full bg-white rounded-lg shadow-lg border mx-2 400px:mx-0 md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <BarLoader
                             color="#361AE3"
                             loading={loading}
@@ -83,7 +83,7 @@ const LoginWithOtp = () => {
                                             <button className="button my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                                                 Submit
                                             </button> <br />
-                                            <button onClick={() => setSendOtp(false)} className="hover:underline text-black my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                                            <button onClick={() => setSendOtp(false)} className="hover:underline text-skin-base my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                                                 Cancel
                                             </button>
                                         </div>
@@ -101,9 +101,10 @@ const LoginWithOtp = () => {
 
 
                                             <div className="flex justify-evenly">
-                                                <button onClick={() => setSendOtp(true)} className="button my-[10px] text-white text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
-                                                    Get OTP
+                                                <button type="submit" onClick={() => setSendOtp(true)} className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                                                    Get Otp
                                                 </button>
+
 
                                             </div>
                                         </form>

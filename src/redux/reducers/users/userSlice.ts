@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { toast } from "react-toastify";
 import userService from "./userService";
 
-const getUserFromLocalStorage = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null
+const getUserFromLocalStorage = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token') as string) : null
 const themes = localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
 
 export interface UserState {

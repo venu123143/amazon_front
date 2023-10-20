@@ -103,7 +103,6 @@ const Navbar = () => {
     }
   })
 
-  console.log(theme);
 
   return (
     <>

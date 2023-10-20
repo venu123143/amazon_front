@@ -69,7 +69,7 @@ const SignUpPage = () => {
       </Link>
       <div className="flex justify-center items-center min-h-screen 400px:mx-5 py-5">
         <div className=" w-full  flex justify-center">
-          <div className="w-full bg-white rounded-lg shadow-lg border  dark:border md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full bg-white rounded-lg shadow-lg border  dark:border mx-2 400px:mx-0 md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <BarLoader
               color="#361AE3"
               loading={isLoading}
@@ -77,7 +77,7 @@ const SignUpPage = () => {
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div className="p-4 space-y-4 md:space-y-6 sm:p-8">
               <>
                 <h1 className="text-xl font-bold leading-tight text-center tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Register
@@ -143,10 +143,10 @@ const SignUpPage = () => {
                     ) : null}
                   </div>
                   <div className="flex justify-evenly">
-                    <button type="submit" className="bg-skin-light hover:bg-skin-main text-skin-base hover:text-skin-light shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                    <button type="submit" className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                       Register
                     </button>
-                    <Link to="/login" className="bg-skin-main hover:bg-skin-light text-base hover:text-skin-text-background  shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                    <Link to="/login" className="bg-skin-main hover:bg-skin-light text-base hover:text-skin-base shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                       Login
                     </Link>
                   </div>

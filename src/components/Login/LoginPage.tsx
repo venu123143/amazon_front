@@ -50,6 +50,7 @@ const LoginPage = () => {
     },
   });
   return (
+    // bg-skin-background
     <section className="bg-skin-background w-full">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] dark:hover:text-white flex items-center hover:text-black">
         <BsArrowLeftShort size={28} className="inline" />
@@ -61,7 +62,7 @@ const LoginPage = () => {
 
       <div className="flex justify-center items-center h-screen 400px:mx-5 py-5">
         <div className=" w-full flex justify-center">
-          <div className="w-full bg-white rounded-lg shadow-lg border  dark:border md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full bg-white rounded-lg shadow-lg border  dark:border mx-2 sm:mx-0 md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <BarLoader
               color="#361AE3"
               loading={isLoading}
