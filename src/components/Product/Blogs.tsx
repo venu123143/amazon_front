@@ -1,13 +1,26 @@
-import { blogs } from "../../static/staticData";
+
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+// import { blogs } from "../../static/staticData";
 import BigBlogCard from "../Cards/BigBlogCard";
+import { AppDispatch, RootState } from "../../redux/store";
+import { getAllBlogs } from "../../redux/reducers/blogs/blogSlice";
 
 const Blogs = () => {
+  const dispatch: AppDispatch = useDispatch()
+  const { blogs } = useSelector((state: RootState) => state.blog)
+
+  useEffect(() => {
+    dispatch(getAllBlogs())
+  }, [])
+
+
   return (
-    <section className="bg-[#FFFFF7]">
+    <section className="bg-skin-background">
       <div className="sm:px-5">
         <div className="w-full flex justify-center ">
           <div className={`w-3/12 my-5 hidden 1100px:block`}>
-            <div className="bg-white rounded-lg  py-[10px] px-[15px] mb-3 shadow-lg">
+            <div className="bg-white rounded-lg sticky top-30  py-[10px] px-[15px] mb-3 shadow-lg">
               <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
               <div className="h-[150px] overflow-y-scroll no-scrollbar">
                 <ul className="pl-0 list-none text-[#777777] cursor-pointer capitalize text-[16px] ">
@@ -28,7 +41,7 @@ const Blogs = () => {
 
             <div className="grid 800px:grid-cols-2 grid-cols-1 gap-5 place-items-center">
               {blogs.map((each, index) => (
-                <BigBlogCard key={index} img={each.img} para={each.para} title={each.title} />
+                <BigBlogCard key={index} blog={each} />
               ))}
             </div>
           </div>

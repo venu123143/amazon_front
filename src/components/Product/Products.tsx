@@ -1,4 +1,4 @@
-import $, { data } from "jquery"
+import $ from "jquery"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RxCross2 } from "react-icons/rx"
@@ -7,8 +7,8 @@ import { HiOutlineBars4 } from "react-icons/hi2"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { LiaRupeeSignSolid } from "react-icons/lia"
-
 import { AppDispatch, RootState } from "../../redux/store"
+import { getAllWishlist } from "../../redux/reducers/product/productSlice"
 import { getAllProducts } from "../../redux/reducers/product/productSlice"
 
 import BredCrumb from "../../pages/BredCrumb"
@@ -20,29 +20,27 @@ const Products = () => {
     const [grid, setGrid] = useState(3)
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist } = useSelector((state: RootState) => state.product)
-    console.log(wishlist);
-
-    useEffect(() => {
-        getProducts()
-    }, [])
 
     const getProducts = () => {
         dispatch(getAllProducts())
     }
+    useEffect(() => {
+        getProducts()
+        dispatch(getAllWishlist())
+    }, [])
 
     $(document).on('click', '.griditem div', function () {
         $(this).removeClass('griditem-color').addClass('griditem-active').siblings().removeClass('griditem-active').addClass('griditem-color')
     })
-
     return (
-        <div className="bg-[#FFFFF7]">
+        <div className="bg-skin-background">
             <BredCrumb title="Our Store" />
             <div className="sm:px-5">
                 <div className="w-full flex justify-center ">
                     <div className={`w-3/12 mr-5 hidden md:block`}>
 
                         <div className="bg-white rounded-lg py-[10px] px-[15px] mb-3 shadow-lg">
-                            <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
+                            <h3 className="text-black  text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
                             <div className="h-[150px] overflow-y-scroll no-scrollbar">
                                 <ul className="pl-0 list-none text-[#777777] cursor-pointer capitalize text-[16px] ">
                                     <li className="hover:text-black my-2">Watch</li>
@@ -297,7 +295,7 @@ const Products = () => {
                         </div>
                     </div>
                     <div className="md:w-9/12  w-auto  md:h-[250vh] md:overflow-y-scroll md:no-scrollbar">
-                        <div className={`bg-white hidden md:block rounded-lg md:py-[5px] md:px-[10px] mb-3 shadow-lg  `}>
+                        <div className={`bg-skin-main hidden md:block rounded-lg md:py-[5px] md:px-[10px] mb-3 shadow-lg  `}>
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-10">
                                     <p className="mb-0">Sort By:</p>
@@ -335,18 +333,14 @@ const Products = () => {
 
                             <div className={` ${grid === 3 ? "grid lg:grid-cols-2 sm:gap-5 border border-b-2 sm:border-none 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center border border-b-2 sm:border-none sm:gap-5 grid-cols-1" : "grid sm:gap-5 place-items-center border border-b-2 sm:border-none grid-cols-1"} `}>
                                 {(grid === 1 || grid === 2 || grid === 3) && products?.map((item, index) => (
-                                    <ProductCard key={index} data={item} />
+                                    <ProductCard key={index} data={item} wishlist={wishlist} />
                                 ))}
                                 {
                                     grid === 4 && products?.map((item, index) => (
-                                        <LongCard key={index} data={item} />
-
+                                        <LongCard key={index} data={item} wishlist={wishlist} />
                                     ))
                                 }
-
                             </div>
-
-
                         </div>
 
                         <nav className="my-[20px]">

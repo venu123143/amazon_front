@@ -23,13 +23,12 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const element = document.documentElement
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
-  const { screen, theme } = useSelector((state: RootState) => state.user)
+  const { screen, theme, user } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const [categories, setCategories] = useState(false)
-  const [login, setLogin] = useState(false)
 
 
   window.addEventListener('scroll', () => {
@@ -39,7 +38,6 @@ const Navbar = () => {
       setIsDropdownOpen(false)
     } else {
       setActive(false)
-      setLogin(false)
       setIsDropdownOpen(false)
 
     }
@@ -103,6 +101,9 @@ const Navbar = () => {
     }
   })
 
+  const handleLogout = () => {
+
+  }
 
   return (
     <>
@@ -182,7 +183,7 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div className="group bg-transparent" >
-                  {login ? (
+                  {user ? (
                     <>
                       <Link to="/logout" className="flex items-center text-white">
                         <AiOutlineLogout size={35} className="transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
@@ -191,10 +192,10 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="flex items-center text-white">
+                      <div onClick={handleLogout} className="flex items-center text-white">
                         <img src={User} alt="user" className="ml-[5px] transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block "> login <br /> My Account</p>
-                      </Link>
+                      </div>
                     </>
                   )
                   }

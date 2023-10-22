@@ -144,10 +144,10 @@ const SignUpPage = () => {
                   </div>
                   <div className="flex justify-evenly">
                     <button type="submit" className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
-                      Register
+                      Register Here
                     </button>
-                    <Link to="/login" className="bg-skin-main hover:bg-skin-light text-base hover:text-skin-base shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
-                      Login
+                    <Link to="/login" className="bg-skin-main text-skin-textBase hover:bg-skin-light hover:text-skin-background my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                      Go to login
                     </Link>
                   </div>
                 </form>

@@ -1,8 +1,9 @@
-import { popularProducts } from "../../static/staticData"
 import ProductCard from "../Cards/ProductCard"
 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const SampleNextArrow = (props: any) => {
     const { className, style, onClick, currentSlide, slideCount } = props;
@@ -20,13 +21,14 @@ const SamplePrevArrow = (props: any) => {
 }
 
 const PopularProduct = () => {
+    const { products } = useSelector((state: RootState) => state.product)
     const responsive = [
         {
             breakpoint: 2000,
             settings: {
                 dots: false,
                 infinite: true,
-                speed: 2000, 
+                speed: 2000,
                 slidesToShow: 6,
                 slidesToScroll: 4,
                 nextArrow: <SampleNextArrow />,
@@ -38,7 +40,7 @@ const PopularProduct = () => {
             settings: {
                 dots: false,
                 infinite: true,
-                speed: 1500, 
+                speed: 1500,
                 slidesToShow: 5,
                 slidesToScroll: 2,
                 nextArrow: <SampleNextArrow />,
@@ -50,7 +52,7 @@ const PopularProduct = () => {
             settings: {
                 dots: false,
                 infinite: true,
-                speed: 1000, 
+                speed: 1000,
                 slidesToShow: 4,
                 slidesToScroll: 2,
                 nextArrow: <SampleNextArrow />,
@@ -62,7 +64,7 @@ const PopularProduct = () => {
             settings: {
                 dots: false,
                 infinite: true,
-                speed: 1000, 
+                speed: 1000,
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 nextArrow: <SampleNextArrow />,
@@ -74,7 +76,7 @@ const PopularProduct = () => {
             settings: {
                 dots: false,
                 infinite: false,
-                speed: 1000, 
+                speed: 1000,
                 slidesToShow: 2,
                 slidesToScroll: 2,
                 nextArrow: <SampleNextArrow />,
@@ -85,7 +87,7 @@ const PopularProduct = () => {
             breakpoint: 640,
             settings: {
                 infinite: false,
-                speed: 1000, 
+                speed: 1000,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 dots: true,
@@ -99,8 +101,8 @@ const PopularProduct = () => {
                 <h3 className="font-[550] text-[1.5rem] hover:underline w-fit m-auto sm:m-px">Popular Products</h3>
                 <Slider responsive={responsive} >
                     {
-                        popularProducts.map((item, index) => (
-                            <ProductCard key={index} img={item.image} price={item.price} title={item.title} />
+                        products.map((item, index) => (
+                            <ProductCard key={index} data={item} />
                         ))
                     }
                 </Slider>

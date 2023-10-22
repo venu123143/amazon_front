@@ -1,7 +1,6 @@
 
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import productService from "./productService"
-import { toast } from "react-toastify";
 
 
 export interface IProductState {
@@ -14,11 +13,11 @@ export interface IProductState {
     brand: any;
     tags: string[];
     quantity: number;
-    sold?: number;
+    sold: number;
     images?: Array<any>;
     color: any[];
     seller?: any;
-    ratings?: number;
+    ratings?: any[];
     totalRating?: number;
     createdAt?: Date;
     updatedAt?: Date;
@@ -27,8 +26,17 @@ export interface IProductState {
 
 export const getAllProducts = createAsyncThunk('productSlice/getAllProducts', async (_, thunkAPI) => {
     try {
-        const users = await productService.getProducts()
-        return users
+        const prod = await productService.getProducts()
+        return prod
+    } catch (error: any) {
+        console.log(error);
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
+export const getSingleProduct = createAsyncThunk('productSlice/getSingleProduct', async (id: string, thunkAPI) => {
+    try {
+        const prod = await productService.getProduct(id)
+        return prod
     } catch (error: any) {
         console.log(error);
         return thunkAPI.rejectWithValue(error?.response?.data)
@@ -39,14 +47,18 @@ export const addToWishlist = createAsyncThunk('productSlice/addToWishlist', asyn
         const wishlist = await productService.Wishlist(prodId)
         return wishlist
     } catch (error: any) {
+        console.log(error);
+
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const GetFromWishlist = createAsyncThunk('productSlice/GetFromWishlist', async (_, thunkAPI) => {
+export const getAllWishlist = createAsyncThunk('productSlice/getAllWishlist', async (_, thunkAPI) => {
     try {
         const wishlist = await productService.GetWishlist()
         return wishlist
     } catch (error: any) {
+        console.log(error);
+
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
@@ -54,28 +66,36 @@ export const GetFromWishlist = createAsyncThunk('productSlice/GetFromWishlist', 
 
 interface ProductState {
     products: IProductState[];
-    wishlist: any[];
+    wishlist: IProductState[];
+    singleProduct: IProductState | null;
     isError: boolean;
     isLoading: boolean;
     isSuccess: boolean;
     message: string;
     modal: boolean;
+    handleWishlist: boolean;
 }
 
 const initialState: ProductState = {
     products: [],
     wishlist: [],
+    singleProduct: null,
     isError: false,
     isLoading: false,
     isSuccess: false,
     message: "",
-    modal: false
+    modal: false,
+    handleWishlist: false
 }
 
 const productSlice = createSlice({
     name: 'productSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setWishlist: (state, action) => {
+            state.handleWishlist = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getAllProducts.pending, (state) => {
             state.isLoading = true
@@ -88,6 +108,20 @@ const productSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
+            state.message = action.payload?.message
+        })
+        builder.addCase(getSingleProduct.pending, (state) => {
+            state.isLoading = true
+        }).addCase(getSingleProduct.fulfilled, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            state.singleProduct = action.payload
+        }).addCase(getSingleProduct.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = true
+            state.message = action.payload?.message
         })
         builder.addCase(addToWishlist.pending, (state) => {
             state.isLoading = true
@@ -96,31 +130,29 @@ const productSlice = createSlice({
             state.isSuccess = true
             state.isError = false
             state.wishlist = action.payload?.wishlist
-
         }).addCase(addToWishlist.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
-
         })
-        builder.addCase(GetFromWishlist.pending, (state) => {
+        builder.addCase(getAllWishlist.pending, (state) => {
             state.isLoading = true
-        }).addCase(GetFromWishlist.fulfilled, (state, action: PayloadAction<any>) => {
+        }).addCase(getAllWishlist.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
-            // state.wishlist = action.payload?.wishlist
-
-        }).addCase(GetFromWishlist.rejected, (state, action: PayloadAction<any>) => {
+            state.wishlist = action.payload?.wishlist
+        }).addCase(getAllWishlist.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
         })
+
     }
 })
 
 
-
+export const { setWishlist } = productSlice.actions
 export default productSlice.reducer

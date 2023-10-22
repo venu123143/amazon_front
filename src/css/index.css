@@ -43,7 +43,7 @@ a {
 
 @layer base {
   :root {
-    --text-color-base: #fff;
+    --text-color-base: #000;
     --text-color-text-light: #777777;
     --text-color-text-base: #000 ;
     --text-color-background: #FFFFF7;
@@ -63,7 +63,7 @@ a {
   }
 
   .dark {
-    --text-color-base: #ffffff;
+    --text-color-base: #fff;
     --text-color-text-light: #777777;
     --text-color-text-base: #1c1b1b;
     --text-color-background: #FFFFF7;

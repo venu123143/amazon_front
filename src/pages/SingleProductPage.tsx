@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { AiFillHeart, AiFillThunderbolt, AiOutlineHome, AiOutlineHeart, AiOutlineMinus } from "react-icons/ai"
 import { HiOutlineChevronRight } from "react-icons/hi"
 import ReviewCard from "../components/Cards/ReviewCard"
@@ -8,22 +8,39 @@ import { FaCircle } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 import { RxCross2 } from 'react-icons/rx';
 
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { productDetails } from "../static/staticData"
 import PopularProduct from "../components/Home/PopularProduct"
 import CreateReview from "../components/Product/CreateReview"
+import { AppDispatch, RootState } from "../redux/store"
+import { useDispatch, useSelector } from "react-redux"
+import { getSingleProduct } from "../redux/reducers/product/productSlice"
 
 const SingleProductPage = () => {
+    const dispatch: AppDispatch = useDispatch()
+    const { singleProduct } = useSelector((state: RootState) => state.product)
+    console.log(singleProduct);
+    const pageId = useParams()
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
+
+
+    useEffect(() => {
+        dispatch(getSingleProduct(pageId?.id as string))
+    }, [])
+
+
     const [count, setCount] = useState(1)
     const [addtoCart, setAddToCart] = useState(false)
     const [image, setImage] = useState(productDetails[0].images[0])
     const [isLiked, setIsLiked] = useState(false)
 
-    // const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
-
     const handleRadioChange = (e: any) => {
         console.log(e.target.value);
     };
+
+
     return (
         <div className="bg-[#fffff7] w-full">
             <section className="sm:mx-5 ">
