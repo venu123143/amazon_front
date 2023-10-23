@@ -320,9 +320,9 @@ footer:not(:first-child) {
     color: red;
 }
 
-.cart-item .cart-product button:hover {
+/* .cart-item .cart-product button:hover {
     color: black;
-}
+} */
 
 .cart-product-quantity {
     display: flex;

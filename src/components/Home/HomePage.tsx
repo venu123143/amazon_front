@@ -47,7 +47,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="bg-[#FFFFF7] dark:bg-black">
+      <div className="bg-skin-background">
         <Carousel />
         <Home />
         <FeatureCollection />

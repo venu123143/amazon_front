@@ -1,14 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../../redux/reducers/cart/cartSlice';
 import { BsArrowLeftShort } from 'react-icons/bs';
+import { AppDispatch, RootState } from '../../redux/store';
 const Cart = () => {
-    const cart = useSelector((state: any) => state.cart);
-    const dispatch = useDispatch()
+    const dispatch: AppDispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const { cartItems, cartTotalAmount } = useSelector((state: RootState) => state.cart);
+    const { user } = useSelector((state: RootState) => state.user)
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [user])
+
     useEffect(() => {
         dispatch(cartTotal())
-    }, [cart, dispatch])
+    }, [cartItems, dispatch])
     const handleRemoveFromcart = (cartItem: any) => {
         dispatch(removeFromCart(cartItem))
     }
@@ -21,6 +31,8 @@ const Cart = () => {
     const clearAllCart = () => {
         dispatch(clearCart())
     }
+    console.log(cartItems);
+
     return (
         <>
             <div className='cart-container   bg-[#fffff7]'>
@@ -32,7 +44,7 @@ const Cart = () => {
                     </Link>
                 </div>
                 {
-                    cart.cartItems.length === 0 ? (
+                    cartItems.length === 0 ? (
                         <div className="cart-empty">
                             <p>your cart is currently empty</p>
                             <div className="start-shopping min-h-screen">
@@ -51,16 +63,16 @@ const Cart = () => {
                                 <h3 className="total font-[450]">total</h3>
                             </div>
                             <div className="cart-items">
-                                {cart.cartItems?.map((cartItem: any) => (
-                                    <div key={cartItem.id} className="cart-item">
+                                {cartItems?.map((cartItem: any) => (
+                                    <div key={cartItem._id} className="cart-item">
                                         <div className="cart-product">
-                                            <img src={cartItem.image} alt={cartItem.name} className='hidden sm:block' />
+                                            <img src={cartItem.images[0].url} alt={cartItem?.title} className='hidden sm:block' />
                                             <div className='flex flex-col justify-center items-baseline'>
-                                                <h3 className='line-clamp-1 mt-10'>{cartItem.name}</h3>
+                                                <h3 className='line-clamp-1 mt-10'>{cartItem?.title}</h3>
                                                 <button onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
                                             </div>
                                         </div>
-                                        <div className="cart-product-price">${cartItem.price}</div>
+                                        <div className="cart-product-price">${cartItem?.price}</div>
                                         <div className="cart-product-quantity">
                                             <button className='' onClick={() => handleDecreaseCart(cartItem)}>-</button>
                                             <div className="count">{cartItem.cartQuantity}</div>
@@ -76,10 +88,10 @@ const Cart = () => {
                                 <button onClick={clearAllCart} className="button my-[10px] text-white  text-[1rem] sm:text-[1.2rem] tracking-wider px-2 py-[6px] rounded-md ">
                                     clear cart
                                 </button>
-                                <div className="cart-checkout bg-gray-400">
+                                <div className="cart-checkout ">
                                     <div className="subtotal">
                                         <span>subtotal</span>
-                                        <span>${cart.cartTotalAmount}</span>
+                                        <span>${cartTotalAmount}</span>
                                     </div>
                                     <p>taxes and shipping calculated at checkout</p>
                                     <Link to="/checkout" className="button group flex items-center justify-center">

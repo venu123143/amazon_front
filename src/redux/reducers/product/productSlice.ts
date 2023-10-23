@@ -14,7 +14,7 @@ export interface IProductState {
     tags: string[];
     quantity: number;
     sold: number;
-    images?: Array<any>;
+    images: Array<any>;
     color: any[];
     seller?: any;
     ratings?: any[];

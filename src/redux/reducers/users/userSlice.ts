@@ -55,7 +55,7 @@ export const login = createAsyncThunk('authSlice/admin-login', async (user: User
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const logout = createAsyncThunk('authSlice/admin-logout', async (_, thunkAPI) => {
+export const logout = createAsyncThunk('authSlice/logoutUser', async (_, thunkAPI) => {
     try {
         const res = await userService.logout()
         return res
@@ -95,8 +95,7 @@ const slice = createSlice({
         })
         builder.addCase(login.pending, (state) => {
             state.isLoading = true
-        })
-        builder.addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
+        }).addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = true
             state.user = action.payload.user
@@ -104,8 +103,7 @@ const slice = createSlice({
             toast.success(state.message, {
                 position: 'top-right'
             })
-        })
-        builder.addCase(login.rejected, (state, action: PayloadAction<any>) => {
+        }).addCase(login.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isError = true
             state.isSuccess = false
@@ -123,7 +121,7 @@ const slice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.user = null
-            state.message = action.payload.message
+            state.message = action.payload?.message
             toast.success(state.message, {
                 position: 'top-right'
             })

@@ -26,10 +26,6 @@ import red from "../assets/icons/iphoneRed.jpg"
 import white from "../assets/icons/iphoneWhite.jpg"
 
 // blogs
-import city from "../assets/icons/city.jpg"
-import waterfall from "../assets/icons/waterfall.jpg"
-import street from "../assets/icons/streetImage.png"
-import tajmahal from "../assets/icons/tajmahal.jpg"
 
 // special card iphone
 import iphoneblue from "../assets/icons/iphoneBlue.jpg"
@@ -40,13 +36,8 @@ import boatWatch from "../assets/icons/boatWatch.webp"
 import boat161 from "../assets/icons/boat161.webp"
 import headPhones from "../assets/icons/headPhones.webp"
 import soundbars from "../assets/icons/soundbars.webp"
-import watch2 from "../assets/icons/BoatWatch2.webp"
 import speakers from "../assets/icons/BoatPartySpeakers.webp"
 import Boatearpods from "../assets/icons/boatEarPods.webp"
-import detail1 from "../assets/icons/detailBoatImg.webp"
-import detail2 from "../assets/icons/detailBoatImg2.webp"
-import detail3 from "../assets/icons/detailBoatImg3.webp"
-// import soundbars from "../assets/icons/.webp"
 
 
 
@@ -59,6 +50,37 @@ import { MdPayment } from "react-icons/md"
 // export const base_url = "http://localhost:5000/api"
 
 export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+
+export const colorObj: any = {
+    BLUE: "text-[#0000FF]",
+    RED: "text-[#FF0000]",
+    GREEN: "text-[#008000]",
+    WHITE: "text-[#fff]",
+    YELLOW: "text-[#FFFF00]",
+    PURPLE: "text-[#800080]",
+    VIOLET: "text-[#7F00FF]",
+    GRAY: "text-[#B2BEB5]",
+    BLACK: "text-[#000]",
+    LIGHTGREEN: "text-[#00FF00]",
+    CREAM: "text-[#FFFDD0]",
+    AQUA: "text-[#00FFFF]"
+};
+
+export const borderObj: any = {
+    BLUE: "checked:border-[#0000FF]",
+    RED: "checked:border-[#FF0000]",
+    GREEN: "checked:border-[#008000]",
+    WHITE: "checked:border-[#fff]",
+    YELLOW: "checked:border-[#FFFF00]",
+    PURPLE: "checked:border-[#800080]",
+    VIOLET: "checked:border-[#7F00FF]",
+    GRAY: "checked:border-[#B2BEB5]",
+    BLACK: "checked:border-[#000]",
+    LIGHTGREEN: "checked:border-[#00FF00]",
+    CREAM: "checked:border-[#FFFDD0]",
+    AQUA: "checked:border-[#00FFFF]"
+};
+
 
 export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopal.v@ahex.co.in"]
 export const information = ["Privacy Policy", "Refund Policy", "Shipping Policy", "Terms of Service", "Blogs"]
@@ -187,289 +209,9 @@ export const topProducts = [
     },
 
 ]
-export const popularProducts = [
-    {
-        title: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "yellow",
-        image: yellow,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 79999,
-        color: "blue",
-        image: blue,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 89999,
-        color: "red",
-        image: red,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "yellow",
-        image: yellow,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 79999,
-        color: "blue",
-        image: blue,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 89999,
-        color: "red",
-        image: red,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "yellow",
-        image: yellow,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 79999,
-        color: "blue",
-        image: blue,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 89999,
-        color: "red",
-        image: red,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 70999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-
-]
 
 
-export const blogs = [
-    {
-        title: "A Beautiful day in the morning",
-        para: "Few structures anywhere on the planet can be considered as romantic as the Taj Mahal in Agra.",
-        img: street
-    },
-    {
-        title: "Taj Mohal beautiful structure",
-        para: "Few structures anywhere on the planet can be considered as romantic as the Taj Mahal in Agra.",
-        img: tajmahal
-    },
-    {
-        title: "A Beautiful day in the America",
-        para: "Few structures anywhere on the planet can be considered as romantic as the Taj Mahal in Agra.",
-        img: city
-    },
-    {
-        title: "A Wounderfull Nayagara waterfall",
-        para: "Few structures anywhere on the planet can be considered as romantic as the Taj Mahal in Agra.",
-        img: waterfall
-    },
-]
+
 
 export const carousel = [watch, iphoneblue, iphonered, earpods, speaker, phone, camera]
 
@@ -512,18 +254,7 @@ export const compareProducts = [
     },
 ]
 
-export const productDetails = [
-    {
-        images: [watch2, speakers, Boatearpods, soundbars, headPhones, boat161],
-        title: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        rating: 4.3,
-        price: 69990,
-        colors: ["red", "blue", "green", "yellow", "purple"],
-        detailImg: [{ color: 'yellow', img: detail1, heading: "AIRDOPES 161", desc: "Charge for 10 Minutes, ENJOY 180 Minutes" },
-        { color: 'black', img: detail2, heading: "boAt Immersive Sound", desc: 'Get captivated by boAt immersive sound powered by 10mm drivers no matter what you are playing. The bass is tuned for a thumping listening experience that transports you to another world.' },
-        { color: 'red', img: detail3, heading: "IPX5 WATER & SWEAT RESISTANCE", desc: 'Ace your sport. You don’t have to worry about your Airdopes as you groove to your favourite workout tracks.' }]
-    }
-]
+
 
 export const cartData = [
     {

@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { cartData } from "../../../static/staticData"
 
 const initialState = {
-    cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems") as string) : cartData,
+    cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems") as string) : [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
     cartQuantity: 0
@@ -14,13 +13,14 @@ const cartSlice = createSlice({
     //generate action creator and handle state for that perticual action creator.
     reducers: {
         addToCart(state, action) {
-            const itemIndex = state.cartItems.findIndex((item: any) => item.id === action.payload.id);
+            const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id);
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1;
             } else {
                 const tempProduct = { ...action.payload, cartQuantity: 1 }
                 state.cartItems.push(tempProduct)
-                toast.success(`${action.payload.name} to cart`, {
+                state.cartQuantity = state.cartQuantity + 1
+                toast.success(`An item added to cart`, {
                     position: 'bottom-left'
                 })
             }
@@ -28,28 +28,31 @@ const cartSlice = createSlice({
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
         },
         removeFromCart(state, action) {
-            const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem.id !== action.payload.id)
+            const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem._id !== action.payload._id)
             state.cartItems = nextCartItems
+            state.cartQuantity = state.cartQuantity - 1
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            toast.success(`${action.payload.name} removed from cart`, {
+            toast.error(`An item removed from cart`, {
                 position: 'bottom-left'
             })
         },
         descreaseCart(state, action) {
-            const itemIndex = state.cartItems.findIndex((item: any) => item.id === action.payload.id)
+            const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id)
             if (state.cartItems[itemIndex].cartQuantity > 1) {
                 state.cartItems[itemIndex].cartQuantity -= 1
 
             } else if (state.cartItems[itemIndex].cartQuantity === 1) {
-                const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem.id !== action.payload.id)
+                const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem?._id !== action.payload?._id)
                 state.cartItems = nextCartItems
+                state.cartQuantity = state.cartQuantity - 1
             }
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
         },
         clearCart(state) {
             state.cartItems = []
+            state.cartQuantity = 0
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            toast.error(`your cart is cleared`, {
+            toast.error(`your cart is Empty Now`, {
                 position: 'bottom-left'
             })
         },

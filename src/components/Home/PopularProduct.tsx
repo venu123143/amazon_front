@@ -1,9 +1,10 @@
 import ProductCard from "../Cards/ProductCard"
-
+import { useEffect } from "react"
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { getAllProducts, getAllWishlist } from "../../redux/reducers/product/productSlice";
 
 const SampleNextArrow = (props: any) => {
     const { className, style, onClick, currentSlide, slideCount } = props;
@@ -21,7 +22,13 @@ const SamplePrevArrow = (props: any) => {
 }
 
 const PopularProduct = () => {
-    const { products } = useSelector((state: RootState) => state.product)
+    const dispatch: AppDispatch = useDispatch()
+    const { products, wishlist } = useSelector((state: RootState) => state.product)
+    useEffect(() => {
+        dispatch(getAllProducts())
+        dispatch(getAllWishlist())
+    }, [])
+
     const responsive = [
         {
             breakpoint: 2000,
@@ -101,9 +108,13 @@ const PopularProduct = () => {
                 <h3 className="font-[550] text-[1.5rem] hover:underline w-fit m-auto sm:m-px">Popular Products</h3>
                 <Slider responsive={responsive} >
                     {
-                        products.map((item, index) => (
-                            <ProductCard key={index} data={item} />
-                        ))
+                        products.map((item, index) => {
+                            if (index < 10) {
+                                return (
+                                    <ProductCard key={index} data={item} wishlist={wishlist} />
+                                )
+                            }
+                        })
                     }
                 </Slider>
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
@@ -16,15 +16,18 @@ import Compare from "../../assets/images/compare.svg"
 import Wishlist from "../../assets/images/wishlist.svg"
 import User from "../../assets/images/user.svg"
 import Cart from "../../assets/images/cart.svg"
-import { setTheme, toggleScroll } from "../../redux/reducers/users/userSlice"
-import { RootState } from "../../redux/store"
+import { logout, setTheme, toggleScroll } from "../../redux/reducers/users/userSlice"
+import { AppDispatch, RootState } from "../../redux/store"
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const element = document.documentElement
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
+  const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
+  const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
+  console.log(cartQuantity, cartTotalAmount);
 
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
@@ -100,9 +103,13 @@ const Navbar = () => {
       }
     }
   })
-
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+  }, [user])
   const handleLogout = () => {
-
+    dispatch(logout())
   }
 
   return (
@@ -185,17 +192,17 @@ const Navbar = () => {
                 <div className="group bg-transparent" >
                   {user ? (
                     <>
-                      <Link to="/logout" className="flex items-center text-white">
+                      <div onClick={handleLogout} className="flex sm:cursor-pointer items-center text-white">
                         <AiOutlineLogout size={35} className="transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block">logout</p>
-                      </Link>
+                      </div>
                     </>
                   ) : (
                     <>
-                      <div onClick={handleLogout} className="flex items-center text-white">
+                      <Link to="/login" className="flex items-center text-white">
                         <img src={User} alt="user" className="ml-[5px] transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block "> login <br /> My Account</p>
-                      </div>
+                      </Link>
                     </>
                   )
                   }
@@ -204,8 +211,12 @@ const Navbar = () => {
                   <Link to="/cart" className="flex items-center">
                     <img src={Cart} alt="cart" className="transition-all transform group-hover:rotate-180 duration-500 ease-in-out" />
                     <div className="flex flex-col">
-                      <span className="badge bg-white text-center text-black h-[40%] w-[55%] rounded-[50%] badge-warning">90</span>
-                      <p className="mb-0 text-white ">$1000</p>
+                      <span className={`badge ${cartQuantity >= 1 ? "bg-white" : null} text-center text-black h-6 w-6 rounded-full badge-warning flex items-center justify-center`}>
+                        {cartQuantity < 1 ? null : cartQuantity}
+                      </span>
+                      <p className="mb-0 text-white ">
+                        {cartTotalAmount < 1 ? null : `$${cartTotalAmount}`}
+                      </p>
                     </div>
                   </Link>
                 </div>

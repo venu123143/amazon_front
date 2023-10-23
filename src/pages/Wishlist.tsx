@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import LongCard from "../components/Cards/LongCard"
 import { BsCartCheck } from "react-icons/bs"
 import { GrCart } from "react-icons/gr"
 import { BsBook, BsCartX } from "react-icons/bs"
 import { AiOutlineAppstore } from "react-icons/ai"
 import { MdOutlineFlipCameraAndroid } from "react-icons/md"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import ProductCard from "../components/Cards/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../redux/store"
@@ -13,8 +13,15 @@ import { getAllWishlist } from "../redux/reducers/product/productSlice"
 
 const Wishlist = () => {
     const dispatch: AppDispatch = useDispatch()
+    const navigate = useNavigate();
     const { wishlist } = useSelector((state: RootState) => state.product)
-    
+    const { user } = useSelector((state: RootState) => state.user)
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [user])
+
     useEffect(() => {
         dispatch(getAllWishlist())
     }, [])
@@ -84,12 +91,10 @@ const Wishlist = () => {
                     </div>
                 )
             }
-
-
         </>
 
 
     )
 }
 
-export default Wishlist
+export default React.memo(Wishlist)
