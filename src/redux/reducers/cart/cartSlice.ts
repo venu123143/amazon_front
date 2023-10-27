@@ -16,6 +16,9 @@ const cartSlice = createSlice({
             const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id);
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1;
+                toast.success(`Item Quantity is increased`, {
+                    position: 'bottom-left'
+                })
             } else {
                 const tempProduct = { ...action.payload, cartQuantity: 1 }
                 state.cartItems.push(tempProduct)
@@ -40,11 +43,16 @@ const cartSlice = createSlice({
             const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id)
             if (state.cartItems[itemIndex].cartQuantity > 1) {
                 state.cartItems[itemIndex].cartQuantity -= 1
-
+                toast.info(`An item Quantity is decreased`, {
+                    position: 'bottom-left'
+                })
             } else if (state.cartItems[itemIndex].cartQuantity === 1) {
                 const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem?._id !== action.payload?._id)
                 state.cartItems = nextCartItems
                 state.cartQuantity = state.cartQuantity - 1
+                toast.error(`An item removed from cart`, {
+                    position: 'bottom-left'
+                })
             }
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
         },

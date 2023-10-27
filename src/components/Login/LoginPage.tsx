@@ -83,7 +83,7 @@ const LoginPage = () => {
                       placeholder="Enter your email" required />
 
                     <div className="text-center">
-                      <button type="submit" className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                      <button className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                         submit
                       </button> <br />
                       <button onClick={() => setForgotPassword(false)} className="hover:underline text-black dark:text-white  my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
@@ -121,9 +121,9 @@ const LoginPage = () => {
                       ) : null}
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-start">
-                        <button onClick={() => setForgotPassword(true)} className="text-sm font-medium text-primary-600 hover:underline dark:text-white">Forgot password?</button>
-                      </div>
+                      <span className="flex items-start">
+                        <div onClick={() => setForgotPassword(true)} className="text-sm font-medium text-primary-600 hover:underline dark:text-white">Forgot password?</div>
+                      </span>
                       <Link to="/otplogin" className="text-sm font-medium text-primary-600 hover:underline dark:text-white">
                         Login with OTP
                       </Link>

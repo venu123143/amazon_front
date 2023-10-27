@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
@@ -10,6 +10,7 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi"
 import { FiChevronDown } from "react-icons/fi"
 import { CiDark } from "react-icons/ci"
 import { HiMiniComputerDesktop } from "react-icons/hi2"
+
 // images
 import Logo from "../../assets/icons/vgold.png"
 import Compare from "../../assets/images/compare.svg"
@@ -26,9 +27,7 @@ const Navbar = () => {
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
   const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
   const dispatch: AppDispatch = useDispatch()
-  const navigate = useNavigate()
-  console.log(cartQuantity, cartTotalAmount);
-
+  // const navigate = useNavigate()
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const [categories, setCategories] = useState(false)
@@ -42,8 +41,8 @@ const Navbar = () => {
     } else {
       setActive(false)
       setIsDropdownOpen(false)
-
     }
+    setCategories(false)
   })
   function onWindowMatch() {
     if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
@@ -103,11 +102,7 @@ const Navbar = () => {
       }
     }
   })
-  useEffect(() => {
-    if (!user) {
-      navigate('/login')
-    }
-  }, [user])
+
   const handleLogout = () => {
     dispatch(logout())
   }
@@ -142,24 +137,21 @@ const Navbar = () => {
             <div className="search sm:w-5/12 max-w-full">
               <form>
                 <div className="relative hidden sm:flex">
-                  <button id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 hidden z-10 md:flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-l-lg hover:bg-gray-200  focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                  <button id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 hidden z-10 md:flex items-center py-2.5 px-4 text-sm font-medium text-center  rounded-l-lg text-gray-900 bg-gray-100 hover:bg-gray-200  focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                     type="button" onClick={category}> All categories <IoMdArrowDropdown size={22} /> </button>
                   {categories &&
                     (
-                      <div className="absolute left-0 top-10 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                      <div className="absolute left-0 top-10 z-10 mt-2 w-56 origin-top-right rounded-md dark:bg-transparent bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                         <div className="py-1" role="none">
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">Mobiles</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">Laptops</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">Cameras</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-3">Cloths</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-4">Tablets</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-5">Accessories</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-6">Washing Machines</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-7">Air Coinditioner</Link>
-                          <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-8">Headsets</Link>
-                          <form method="POST" action="#" role="none">
-                            <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-3">Sign out</button>
-                          </form>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-0">Mobiles</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-1">Laptops</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-2">Cameras</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-3">Cloths</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-4">Tablets</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-5">Accessories</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-6">Washing Machines</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-7">Air Coinditioner</Link>
+                          <Link to="#" className="categories" role="menuitem" id="menu-item-8">Headsets</Link>
                         </div>
                       </div>
                     )
@@ -199,7 +191,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="flex items-center text-white">
+                      <Link to="/login" data-tooltip-id="Login_tooltip" className="flex items-center text-white">
                         <img src={User} alt="user" className="ml-[5px] transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block "> login <br /> My Account</p>
                       </Link>
@@ -224,76 +216,73 @@ const Navbar = () => {
             </div>
           </div>
           {
-            screen && (
-              <div className="h-screen block sm:hidden bg-white">
-                <div className={`block h-[100vh] absolute top-20 left-0 right-0 z-10 md:hidden md:w-auto`} id="navbar-dropdown">
-                  <ul className=" font-medium  p-4 md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
-                    </li>
-                    <li className="relative">
-                      <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                        <span>Theme</span>
-                        <FiChevronDown className="inline font-Rubik" />
-                      </button>
-                      {/* <!-- Dropdown menu --> */}
-                      {
-                        dropdown && (
-                          <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
-                            <div className="py-1" role="none">
-                              <div onClick={() => {
-                                dispatch(setTheme("light"))
-                                setDropdown(false)
-                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
-                                <BsSun size={20} className="inline mr-3" />
-                                <span>Light</span>
-                              </div>
-                              <div onClick={() => {
-                                dispatch(setTheme("dark"))
-                                setDropdown(false)
-                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
-                                <CiDark size={20} className="inline mr-3" />
-                                <span>Dark</span>
-                              </div>
-                              <div onClick={() => {
-                                dispatch(setTheme("system"))
-                                setDropdown(false)
-                              }} className="text-gray-700 flex justify-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
-                                <HiMiniComputerDesktop size={20} className="inline mr-3" />
-                                <span>System</span>
-                              </div>
-
+            <div className={`md:hidden md:w-auto fixed h-screen z-20 w-full`}>
+              <div className={`  transition-all ease-linear duration-300 delay-150 ${screen === true ? "overflow-x-hidden overflow-y-auto -translate-x-0  z-20" : "-translate-x-full"} h-screen block sm:hidden bg-white md:hidden md:w-auto`} id="navbar-dropdown">
+                <ul className=" font-medium  p-4 md:p-0 border border-gray-100 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                  <li>
+                    <a href="#" className="mobile-menu" aria-current="page">Home</a>
+                  </li>
+                  <li className="relative">
+                    <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                      <span>Theme</span>
+                      <FiChevronDown className="inline font-Rubik" />
+                    </button>
+                    {
+                      dropdown && (
+                        <div className="absolute right-0  z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                          <div className="py-1" role="none">
+                            <div onClick={() => {
+                              dispatch(setTheme("light"))
+                              setDropdown(false)
+                            }} className="custom-menu-item" role="menuitem" id="menu-item-0">
+                              <BsSun size={20} className="inline mr-3" />
+                              <span>Light</span>
                             </div>
+                            <div onClick={() => {
+                              dispatch(setTheme("dark"))
+                              setDropdown(false)
+                            }} className="custom-menu-item" role="menuitem" id="menu-item-1">
+                              <CiDark size={20} className="inline mr-3" />
+                              <span>Dark</span>
+                            </div>
+                            <div onClick={() => {
+                              dispatch(setTheme("system"))
+                              setDropdown(false)
+                            }} className="custom-menu-item" role="menuitem" id="menu-item-2">
+                              <HiMiniComputerDesktop size={20} className="inline mr-3" />
+                              <span>System</span>
+                            </div>
+
                           </div>
-                        )
-                      }
-                    </li>
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-                    </li>
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-                    </li>
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-                    </li>
+                        </div>
+                      )
+                    }
+                  </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Services</a>
+                  </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Pricing</a>
+                  </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Contact</a>
+                  </li>
 
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-                    </li>
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-                    </li>
-                    <li>
-                      <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-                    </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Services</a>
+                  </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Pricing</a>
+                  </li>
+                  <li>
+                    <a href="#" className="mobile-menu">Contact</a>
+                  </li>
 
-                  </ul>
-                </div>
-
+                </ul>
               </div>
-            )
+            </div>
           }
+
         </header>
         <header className={` ${screen === true ? "pointer-events-none overflow-hidden" : "pointer-events-auto"} block sm:hidden py-1 items-center justify-center bg-[#131921] `}>
           <div className="relative block sm:hidden w-4/5 m-auto">
@@ -305,12 +294,12 @@ const Navbar = () => {
             </button>
           </div>
         </header>
-        <header className="header-bottom py-3    ">
+        <header className="header-bottom py-3 ">
           <div className="flex justify-evenly  items-center">
             <div className="relative inline-block text-left">
               <div className="flex items-center ">
 
-                <button onClick={options} className="bg-white sm:inline-flex w-full hidden justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                <button onClick={options} className="text-gray-900 bg-gray-100 hover:bg-gray-200  focus:outline-none  dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-black sm:inline-flex w-full hidden justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold shadow-md" id="menu-button" aria-expanded="true" aria-haspopup="true">
                   <IoMdKeypad size={22} />
                   Options
                   <IoMdArrowDropdown size={22} />
@@ -319,18 +308,18 @@ const Navbar = () => {
               </div>
               {
                 dropdown && (
-                  <div className="absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                  <div className="bg-white dark:bg-transparent absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                     <div className="py-1" role="none">
-                      <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">Account settings</Link>
-                      <button onClick={toggleDropdown} className="text-gray-700 w-full flex justify-between  items-center px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                      <Link to="#" className="options " role="menuitem" id="menu-item-0">Account settings</Link>
+                      <button onClick={toggleDropdown} className="options" role="menuitem" id="menu-item-1">
                         <span>Theme</span>
                         <FiChevronDown className="inline font-Rubik" />
                       </button>
 
-                      <Link to="#" className="text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">License</Link>
-                      <form method="POST" action="#" role="none">
-                        <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-3">Sign out</button>
-                      </form>
+                      <Link to="#" className="options">Account settings</Link>
+
+                      <Link to="#" className="options" role="menuitem" id="menu-item-0">sign-out</Link>
+
                     </div>
                   </div>
                 )
@@ -347,26 +336,26 @@ const Navbar = () => {
           </div>
           {
             isDropdownOpen && (
-              <div className="absolute left-1/4 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:block hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+              <div className="absolute left-1/4 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:block hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                 <div className="py-1" role="none">
                   <div onClick={() => {
                     dispatch(setTheme("light"))
                     setIsDropdownOpen(false)
-                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-0">
+                  }} className="custom-menu-item" role="menuitem" id="menu-item-0">
                     <BsSun size={20} className="inline mr-3" />
                     <span>Light</span>
                   </div>
                   <div onClick={() => {
                     dispatch(setTheme("dark"))
                     setIsDropdownOpen(false)
-                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-1">
+                  }} className="custom-menu-item" role="menuitem" id="menu-item-1">
                     <CiDark size={20} className="inline mr-3" />
                     <span>Dark</span>
                   </div>
                   <div onClick={() => {
                     dispatch(setTheme("system"))
                     setIsDropdownOpen(false)
-                  }} className="text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white" role="menuitem" id="menu-item-2">
+                  }} className="custom-menu-item" role="menuitem" id="menu-item-2">
                     <HiMiniComputerDesktop size={20} className="inline mr-3" />
                     <span>System</span>
                   </div>
