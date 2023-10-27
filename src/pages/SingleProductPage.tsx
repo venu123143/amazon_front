@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { MoonLoader, SyncLoader } from "react-spinners"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, CSSProperties, useLayoutEffect, useCallback } from "react"
+
+
 import { AiFillHeart, AiFillThunderbolt, AiOutlineHome, AiOutlineHeart, AiOutlineMinus } from "react-icons/ai"
 import { HiOutlineChevronRight } from "react-icons/hi"
 import { LiaRupeeSignSolid } from "react-icons/lia"
@@ -18,7 +20,7 @@ import { addToWishlist, getAllWishlist, getSingleProduct } from "../redux/reduce
 import { addToCart, descreaseCart, removeFromCart } from "../redux/reducers/cart/cartSlice"
 import { Image } from "../redux/reducers/blogs/blogSlice"
 
-import { borderObj, colorObj } from "../static/staticData"
+import { borderObj, colorObj, backObj } from "../static/staticData"
 
 const override: CSSProperties = {
     display: "block",
@@ -45,25 +47,56 @@ const SingleProductPage = () => {
     const { cartItems } = useSelector((state: RootState) => state.cart)
 
     const [loading, setLoading] = useState(false)
-    const [image, setImage] = useState(singleProduct?.images[0]?.url)
+
+    const [image, setImage] = useState(0)
     const [color, setColor] = useState(singleProduct?.color[0]?.title)
-    const currItem = cartItems.find((item: any) => item._id === singleProduct!._id);
+    const currItem = cartItems.find((item: any) => item._id === singleProduct!?._id);
+
+    const initialTimeInSeconds = 2 * 24 * 60 * 60;
+    const [time, setTime] = useState(initialTimeInSeconds);
 
     useEffect(() => {
-        if (!user) {
-            navigate('/login')
-        }
-    }, [user])
+        const interval = setInterval(() => {
+            if (time > 0) {
+                setTime(time - 1);
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [time]);
+
+    const formatTime = (seconds: number) => {
+        const days = Math.floor(seconds / (24 * 60 * 60));
+        const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+        const minutes = Math.floor((seconds % (60 * 60)) / 60);
+        const remainingSeconds = seconds % 60;
+
+        return `${String(days).padStart(2, "0")}d ${String(hours).padStart(
+            2,
+            "0"
+        )}h ${String(minutes).padStart(2, "0")}m ${String(
+            remainingSeconds
+        ).padStart(2, "0")}s`;
+    };
+
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [Link]);
 
     const ToWishlist = useCallback(
         (id: string) => {
-            setLoading(true);
-            dispatch(addToWishlist(id)).then(() => {
-                setLoading(false);
-            });
+            if (!user) {
+                navigate('/login')
+            } else {
+                setLoading(true);
+                dispatch(addToWishlist(id)).then(() => {
+                    setLoading(false);
+                });
+            }
         },
         [dispatch, wishlist]
     );
@@ -71,14 +104,18 @@ const SingleProductPage = () => {
     useEffect(() => {
         dispatch(getSingleProduct(pageId?.id as string))
         dispatch(getAllWishlist())
-    }, [])
+    }, [pageId?.id])
 
     const handleRadioChange = (e: any) => {
         setColor(e.target.value);
     };
 
     const handleCart = () => {
-        dispatch(addToCart(singleProduct))
+        if (!user) {
+            navigate('/login')
+        } else {
+            dispatch(addToCart(singleProduct))
+        }
     }
 
     const handleRemove = () => {
@@ -119,17 +156,18 @@ const SingleProductPage = () => {
                                         <div className="flex flex-col justify-center gap-2">
                                             {singleProduct?.images?.map((img: Image, idx: number) => (
                                                 <div key={idx} className=" bg-gray-300 rounded-md w-[80px] h-[80px] p-1">
-                                                    <img onMouseEnter={() => setImage(img?.url)} className="h-full max-w-full rounded-lg max-h-[100px] cursor-pointer m-auto"
+                                                    <img onMouseEnter={() => setImage(idx)} className="h-full max-w-full rounded-lg max-h-[100px] cursor-pointer m-auto"
                                                         src={img?.url} alt="sideImages" />
                                                 </div>
                                             ))}
                                         </div>
                                         <div className="bg-slate-300 rounded-md flex w-full shadow-lg min-h-[350px] max-h-[500px] items-center justify-center p-5">
-                                            <img className="max-w-full rounded-lg h-full" src={image} alt="Main-Image" />
+                                            <img className=" max-w-full rounded-lg h-full" src={singleProduct?.images[image]?.url} alt="Main-Image" />
                                         </div>
                                     </div>
 
                                 </div>
+
                                 <div className="lg:w-1/2 mt-5 lg:mt-0">
                                     <p className="text-[1.2rem] p-0 m-0 text-justify tracking-wide font-[450]">
                                         {singleProduct?.title}
@@ -144,7 +182,7 @@ const SingleProductPage = () => {
                                         <span className="text-[1.4rem] font-[400] mr-5 leading-loose line-through italic"><LiaRupeeSignSolid size={25} className="inline line-through" />{singleProduct!?.price + 0.3 * singleProduct!?.price}</span>
                                         <div className="block md:inline text-[1rem] w-fit font-[400] bg-gray-200 px-2 rounded-md py-2 text-[#070707]">
                                             <AiFillThunderbolt size={20} className="inline mr-1 " />Ending In:
-                                            <span className="font-[500]">1h 17m 36s</span>
+                                            <span className="font-[500] ml-2">{formatTime(time)}</span>
                                         </div>
                                     </div>
                                     <div className="">
@@ -198,7 +236,7 @@ const SingleProductPage = () => {
                                                     size={20}
                                                     color="#361AE3"
                                                     speedMultiplier={1}
-                                                    loading={isLoading}
+                                                    loading={loading}
                                                     cssOverride={override}
                                                     aria-label="Loading Spinner"
                                                     data-testid="loader"
@@ -242,23 +280,27 @@ const SingleProductPage = () => {
                             <div className="my-5">
                                 <p className="border-b font-[550] text-[1.5rem] italic ">description</p>
                                 <div className="text-justify my-5">
-                                    <p className="lowercase my-2 font-[450] text-justify text-[1.2rem]" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></p>
+                                    <div className="lowercase my-2 font-[450] text-justify text-[1.2rem]" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></div>
 
                                 </div>
-                                {/* {singleProduct?.images.map((detail, ind) => (
+                                {singleProduct?.images.map((detail, ind) => {
+                                    if (ind < 3) {
+                                        return (
                                             <div key={ind}>
-                                                <div className={`w-full ${detail.color === "yellow" ? "bg-yellow-400" : detail.color === "red" ? "bg-red-400" : detail.color === "black" ? "bg-black text-white" : "bg-white"}  h-[400px] p-5 flex justify-center items-center`}>
-                                                    <div className={`w-1/2 h-full flex justify-center`}>
-                                                        <img src={detail.url} alt="" className="h-full " />
+                                                <div className={`w-full ${backObj[singleProduct?.color[ind]?.title] ? backObj[singleProduct?.color[ind]?.title] : "bg-yellow-300"} p-5 bg-opacity-40 border md:flex space-y-3 border-black block text-center justify-center items-center`}>
+                                                    <div className={`md:w-1/2 h-full flex justify-center`}>
+                                                        <img src={detail.url} alt="" className="max-h-[300px] w-auto " />
                                                     </div>
-                                                    <div className="w-1/2 ">
-                                                        <h3 className="font-[550] text-[1.5rem]">{detail.heading}</h3>
-                                                        <p>{detail.desc}</p>
+                                                    <div className="md:w-1/2 ">
+                                                        <h3 className="font-[550] text-[1.5rem]">{singleProduct?.title}</h3>
+                                                        <p>{singleProduct?.description.slice(0, 50)}</p>
                                                     </div>
                                                 </div>
-        
+
                                             </div>
-                                        ))} */}
+                                        )
+                                    }
+                                })}
                             </div>
                         </main>
                     </section>

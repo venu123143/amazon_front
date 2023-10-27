@@ -48,8 +48,9 @@ import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
 // export const base_url = "http://localhost:5000/api"
+// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
-export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+export const base_url  = "http://3.81.201.88:5000/api"
 
 export const colorObj: any = {
     BLUE: "text-[#0000FF]",
@@ -79,6 +80,20 @@ export const borderObj: any = {
     LIGHTGREEN: "checked:border-[#00FF00]",
     CREAM: "checked:border-[#FFFDD0]",
     AQUA: "checked:border-[#00FFFF]"
+};
+export const backObj: any = {
+    BLUE: "bg-[#0000FF]",
+    RED: "bg-[#FF0000]",
+    GREEN: "bg-[#008000]",
+    WHITE: "bg-[#fff]",
+    YELLOW: "bg-[#FFFF00]",
+    PURPLE: "bg-[#800080]",
+    VIOLET: "bg-[#7F00FF]",
+    GRAY: "bg-[#B2BEB5]",
+    BLACK: "bg-[#000]",
+    LIGHTGREEN: "bg-[#00FF00]",
+    CREAM: "bg-[#FFFDD0]",
+    AQUA: "bg-[#00FFFF]"
 };
 
 

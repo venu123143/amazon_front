@@ -1,14 +1,15 @@
-import {  useState, useCallback, CSSProperties } from "react"
+import { useState, useCallback, CSSProperties } from "react"
 import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai"
 import { BsHandbag } from "react-icons/bs"
 import { GoGitCompare } from "react-icons/go"
 import RatingStar from "../../pages/Rating"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import { IProductState, addToWishlist } from "../../redux/reducers/product/productSlice"
-import { useDispatch } from "react-redux"
-import { AppDispatch } from "../../redux/store"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../redux/store"
 import { MoonLoader } from "react-spinners"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { addToCart } from "../../redux/reducers/cart/cartSlice"
 
 const override: CSSProperties = {
     display: "block",
@@ -18,19 +19,30 @@ const override: CSSProperties = {
 
 const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, }>
     = ({ data, isHidden, wishlist }) => {
-
+        const { user } = useSelector((state: RootState) => state.user)
+        const navigate = useNavigate()
         const dispatch: AppDispatch = useDispatch()
         const [isLoading, setLoading] = useState(false)
         const ToWishlist = useCallback(
             (id: string) => {
-                setLoading(true);
-                dispatch(addToWishlist(id)).then(() => {
-                    setLoading(false);
-                });
+                if (!user) {
+                    navigate('/login')
+                } else {
+                    setLoading(true);
+                    dispatch(addToWishlist(id)).then(() => {
+                        setLoading(false);
+                    });
+                }
             },
             [dispatch, wishlist]
         );
-
+        const handleCart = () => {
+            if (!user) {
+                navigate('/login')
+            } else {
+                dispatch(addToCart(data))
+            }
+        }
         return (
             <>
                 <div className={`w-full ${isHidden === true ? "hidden sm:block" : "false"}`}>
@@ -78,7 +90,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
                                     <GoGitCompare size={25} />
                                     <span className="tooltiptext">Compare</span>
                                 </div>
-                                <div className="tooltip absolute sm:right-2 sm:top-[35%] hidden sm:block transition-all ease-linear translate-x-14 group-hover:translate-x-0 hover:bg-[#c4bfbf] rounded-full p-2">
+                                <div onClick={handleCart} className="tooltip absolute sm:right-2 sm:top-[35%] hidden sm:block transition-all ease-linear translate-x-14 group-hover:translate-x-0 hover:bg-[#c4bfbf] rounded-full p-2">
                                     <BsHandbag size={25} />
                                     <span className="tooltiptext">Cart</span>
                                 </div>
@@ -88,7 +100,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
                                     <div className="rounded-sm mr-4 bg-green-100 px-2 py-0.5 text-green-700">{data?.tags[0]}</div>
                                     <div className="rounded-sm bg-blue-100 px-2 py-0.5 text-blue-700">Top Rated</div>
                                 </div>
-                                <a href="#" className=" rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white">Add to Cart </a>
+                                <button onClick={handleCart} className="rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white">Add to Cart </button>
                             </div>
                         </div>
                     </div>

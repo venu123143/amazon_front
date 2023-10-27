@@ -10,8 +10,9 @@ import { useNavigate, Link } from "react-router-dom"
 
 import { IProductState, addToWishlist } from "../../redux/reducers/product/productSlice"
 import { MoonLoader } from "react-spinners"
-import { useDispatch } from "react-redux"
-import { AppDispatch } from "../../redux/store"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../redux/store"
+import { addToCart } from "../../redux/reducers/cart/cartSlice"
 
 // const isLoading = true
 const override: CSSProperties = {
@@ -22,24 +23,35 @@ const override: CSSProperties = {
 const ProductCard:
     React.FC<{ data: IProductState; isHidden?: any, wishlist?: any, }> =
     ({ data, isHidden, wishlist }) => {
+        const { user } = useSelector((state: RootState) => state.user)
+        const navigate = useNavigate()
         const dispatch: AppDispatch = useDispatch()
         const [isLoading, setLoading] = useState(false)
 
         const ToWishlist = useCallback(
             (id: string) => {
-                setLoading(true);
-                dispatch(addToWishlist(id)).then(() => {
-                    setLoading(false);
-                });
+                if (!user) {
+                    navigate('/login')
+                } else {
+                    setLoading(true);
+                    dispatch(addToWishlist(id)).then(() => {
+                        setLoading(false);
+                    });
+                }
             },
             [dispatch, wishlist]
         );
 
-        const navigate = useNavigate()
         const handleProduct = useCallback(() => {
             navigate(`/product/${data?._id}`);
         }, [navigate]);
-
+        const handleCart = () => {
+            if (!user) {
+                navigate('/login')
+            } else {
+                dispatch(addToCart(data))
+            }
+        }
 
         return (
             <div className={`${isHidden === true ? "inline sm:hidden" : "null"}`}>
@@ -73,7 +85,7 @@ const ProductCard:
                             <GoGitCompare size={25} />
                             <span className="tooltiptext">Compare</span>
                         </div>
-                        <div className="tooltip absolute sm:right-4 sm:top-[35%] hidden sm:block transition-all ease-linear translate-x-14 group-hover:translate-x-0 hover:bg-[#c4bfbf] rounded-full p-2">
+                        <div onClick={handleCart} className="tooltip absolute sm:right-4 sm:top-[35%] hidden sm:block transition-all ease-linear translate-x-14 group-hover:translate-x-0 hover:bg-[#c4bfbf] rounded-full p-2">
                             <BsHandbag size={25} />
                             <span className="tooltiptext">Cart</span>
                         </div>
@@ -111,7 +123,7 @@ const ProductCard:
                             <span className="tooltiptext">Compare</span>
                             <GoGitCompare className="inline" />
                         </button>
-                        <button className="absolute block tooltip sm:hidden bottom-5 right-5 bg-purple-700 hover:bg-purple-600 px-[15px] py-[5px] rounded-md shadow-lg text-white">
+                        <button onClick={handleCart} className="absolute block tooltip sm:hidden bottom-5 right-5 bg-purple-700 hover:bg-purple-600 px-[15px] py-[5px] rounded-md shadow-lg text-white">
                             <span className="hidden 480px:inline">Add To Cart</span>
                             <span className="tooltiptext">Add to Cart</span>
                             <BsCart3 className="inline " />

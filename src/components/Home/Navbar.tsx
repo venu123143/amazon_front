@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
@@ -10,6 +10,7 @@ import { PiDotsThreeVerticalBold } from "react-icons/pi"
 import { FiChevronDown } from "react-icons/fi"
 import { CiDark } from "react-icons/ci"
 import { HiMiniComputerDesktop } from "react-icons/hi2"
+
 // images
 import Logo from "../../assets/icons/vgold.png"
 import Compare from "../../assets/images/compare.svg"
@@ -26,7 +27,7 @@ const Navbar = () => {
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
   const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
   const dispatch: AppDispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   console.log(cartQuantity, cartTotalAmount);
 
   const [active, setActive] = useState(false)
@@ -103,11 +104,7 @@ const Navbar = () => {
       }
     }
   })
-  useEffect(() => {
-    if (!user) {
-      navigate('/login')
-    }
-  }, [user])
+
   const handleLogout = () => {
     dispatch(logout())
   }
@@ -199,7 +196,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="flex items-center text-white">
+                      <Link to="/login"  data-tooltip-id="Login_tooltip" className="flex items-center text-white">
                         <img src={User} alt="user" className="ml-[5px] transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block "> login <br /> My Account</p>
                       </Link>
