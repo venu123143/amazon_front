@@ -52,6 +52,8 @@ export const login = createAsyncThunk('authSlice/admin-login', async (user: User
         return res
 
     } catch (error: any) {
+        console.log("error ", error);
+        
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
