@@ -9,11 +9,26 @@ import useRazorpay, { RazorpayOptions } from "react-razorpay";
 
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RaziropayKey } from "../../static/staticData";
+import { number, object, string } from "yup"
+import { useFormik } from "formik"
+import { AppDispatch } from "../../redux/store";
+import { toggleAddress } from "../../redux/reducers/users/userSlice";
+
+
+
+let AddressSchema = object({
+  name: string().min(3, 'minimum 3 characters should be there').required('name is required'),
+  mobile: string().matches(/^[0-9]{10}$/, 'Mobile should contain exactly 10 numeric digits').required('mobile is required'),
+  address: string().required('Please Enter your address'),
+  state: string().required("Please add the correct state"),
+  zipcode: number().required("zipcode is mandetory")
+});
 const Checkout = () => {
   const [Razorpay, isLoaded] = useRazorpay();
   const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
   const { cartItems, cartTotalAmount } = useSelector((state: any) => state.cart);
   console.log(cartTotalAmount);
 
@@ -84,6 +99,26 @@ const Checkout = () => {
       handlePayment();
     }
   }, [isLoaded, handlePayment])
+
+
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      mobile: '',
+      address: '',
+      state: '',
+      zipcode: '',
+    },
+    validationSchema: AddressSchema,
+    onSubmit: values => {
+      // dispatch(registerUser(values))
+      // formik.resetForm()
+      dispatch(toggleAddress(true))
+      console.log(values);
+
+    },
+  });
+
   return (
     <div className="bg-[#F0FFFF] relative w-full">
       <Link
@@ -97,24 +132,49 @@ const Checkout = () => {
       <div className="py-5 w-full 800px:flex block flex-grow justify-evenly">
         <div className="max-w-[400px] sm:w-[400px] mx-auto bg-white p-5 sm:shadow-lg">
           <h3 className="font-[550] my-5 text-[1.5rem] border-b-2">Address</h3>
-          <div className="gap-5">
-            <form className="flex flex-col justify-center">
-              <Address title="Add Name" name="name" id="name" type="text" />
+          <div className="">
+            <form className="flex flex-col justify-center" onSubmit={formik.handleSubmit}>
+              <div>
+                <Address title="Add Name" name="name" id="name" type="text"
+                  onChange={formik.handleChange("name")} onBlur={formik.handleBlur("name")} value={formik.values.name}
+                />
+                {formik.touched.name && formik.errors.name ? (
+                  <div className="text-red-500 text-[14px] ">{formik.errors.name}</div>
+                ) : null}
+
+              </div>
               <Address title="Phone Number" name="phone" id="phone" type="tel"
+                onChange={formik.handleChange("mobile")} onBlur={formik.handleBlur("mobile")} value={formik.values.mobile}
               />
+              {formik.touched.mobile && formik.errors.mobile ? (
+                <div className="text-red-500 text-[14px] ">{formik.errors.mobile}</div>
+              ) : null}
               <Address
                 title="Address"
                 name="address"
                 id="address"
                 type="text"
+                onChange={formik.handleChange("address")} onBlur={formik.handleBlur("address")} value={formik.values.address}
               />
-              <Address title="State" name="state" id="state" type="text" />
+              {formik.touched.address && formik.errors.address ? (
+                <div className="text-red-500 text-[14px] ">{formik.errors.address}</div>
+              ) : null}
+              <Address title="State" name="state" id="state" type="text"
+                onChange={formik.handleChange("state")} onBlur={formik.handleBlur("state")} value={formik.values.state}
+              />
+              {formik.touched.state && formik.errors.state ? (
+                <div className="text-red-500 text-[14px] ">{formik.errors.state}</div>
+              ) : null}
               <Address
                 title="zipcode"
                 name="zipcode"
                 id="zipcode"
                 type="text"
+                onChange={formik.handleChange("zipcode")} onBlur={formik.handleBlur("zipcode")} value={formik.values.zipcode}
               />
+              {formik.touched.zipcode && formik.errors.zipcode ? (
+                <div className="text-red-500 text-[14px] ">{formik.errors.zipcode}</div>
+              ) : null}
               <div className="flex justify-between items-end h-auto ">
                 <button type="submit" className="px-3 py-2  bg-[#361AE3] text-white hover:scale-110 transition-all shadow-lg rounded-md">
                   save address

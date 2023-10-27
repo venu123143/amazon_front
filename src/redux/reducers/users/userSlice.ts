@@ -25,6 +25,7 @@ interface AppState {
     isSuccess: boolean;
     message: string;
     theme: string | null;
+    address: boolean;
 }
 
 const initialState: AppState = {
@@ -35,6 +36,7 @@ const initialState: AppState = {
     isSuccess: false,
     message: "",
     theme: themes,
+    address: false,
 };
 
 export const registerUser = createAsyncThunk('userSlice/registerUser', async (userData: UserState, thunkAPI) => {
@@ -74,6 +76,9 @@ const slice = createSlice({
         },
         setTheme: (state, action: PayloadAction<any>) => {
             state.theme = action.payload
+        },
+        toggleAddress: (state, action: PayloadAction<any>) => {
+            state.address = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -138,5 +143,5 @@ const slice = createSlice({
 })
 
 
-export const { toggleScroll, setTheme } = slice.actions
+export const { toggleScroll, setTheme, toggleAddress } = slice.actions
 export default slice.reducer
