@@ -1,6 +1,7 @@
 
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import productService from "./productService"
+import { toast } from "react-toastify";
 
 
 export interface IProductState {
@@ -109,6 +110,9 @@ const productSlice = createSlice({
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-right'
+            })
         })
         builder.addCase(getSingleProduct.pending, (state) => {
             state.isLoading = true
@@ -122,6 +126,9 @@ const productSlice = createSlice({
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-right'
+            })
         })
         builder.addCase(addToWishlist.pending, (state) => {
             state.isLoading = true
@@ -135,6 +142,9 @@ const productSlice = createSlice({
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-right'
+            })
         })
         builder.addCase(getAllWishlist.pending, (state) => {
             state.isLoading = true
@@ -148,6 +158,9 @@ const productSlice = createSlice({
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-right'
+            })
         })
 
     }

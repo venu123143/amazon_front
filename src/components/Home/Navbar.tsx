@@ -28,8 +28,7 @@ const Navbar = () => {
   const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
   const dispatch: AppDispatch = useDispatch()
   // const navigate = useNavigate()
-  console.log(cartQuantity, cartTotalAmount);
-
+  
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const [categories, setCategories] = useState(false)
