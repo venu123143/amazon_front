@@ -104,21 +104,28 @@ const PopularProduct = () => {
     ]
     return (
         <>
-            <div className="rounded-md sm:block justify-between sm:m-[20px] select-none">
-                <h3 className="font-[550] text-[1.5rem] hover:underline w-fit m-auto sm:m-px">Popular Products</h3>
-                <Slider responsive={responsive} >
-                    {
-                        products.map((item, index) => {
-                            if (index < 10) {
-                                return (
-                                    <ProductCard key={index} data={item} wishlist={wishlist} />
-                                )
-                            }
-                        })
-                    }
-                </Slider>
+            {products.length === 0 ? (
+                <>
+                    Loading...
+                </>
+            ) : (
+                <div className="rounded-md sm:block justify-between sm:m-[20px] select-none">
+                    <h3 className="font-[550] text-[1.5rem] text-skin-base hover:underline w-fit m-auto sm:m-px">Popular Products</h3>
+                    <Slider responsive={responsive} >
+                        {
+                            products.map((item, index) => {
+                                if (index < 10) {
+                                    return (
+                                        <ProductCard key={index} data={item} wishlist={wishlist} />
+                                    )
+                                }
+                            })
+                        }
+                    </Slider>
 
-            </div >
+                </div >
+
+            )}
 
         </>
     )

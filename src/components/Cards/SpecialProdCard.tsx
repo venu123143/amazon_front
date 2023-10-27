@@ -165,7 +165,7 @@ const SpecialProdCard: React.FC<{ data: IProductState, wishlist?: any }> = ({ da
                         </div>
                     </div>
                     <div className="w-1/2 h-full  relative">
-                        <div onClick={() => ToWishlist(data?._id as string)} className="absolute tooltip cursor-pointer right-0 top-0" >
+                        <div onClick={() => ToWishlist(data?._id as string)} className="bg-[#c4bfbf] p-2 rounded-full absolute tooltip cursor-pointer right-0 top-0" >
                             {isLoading ?
                                 <MoonLoader
                                     size={20}
