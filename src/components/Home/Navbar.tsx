@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
-import { AiOutlineMenu, AiOutlineLogout, AiOutlineUser } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
 import { LiaTimesSolid } from "react-icons/lia"
 import { BsSearch, BsSun } from "react-icons/bs"
 import { IoMdArrowDropdown, IoMdKeypad } from "react-icons/io"

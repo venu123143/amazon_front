@@ -111,6 +111,7 @@ const Checkout = () => {
     validationSchema: AddressSchema,
     onSubmit: values => {
       // formik.resetForm()
+      console.log(values);
       dispatch(toggleAddress(true))
 
     },
