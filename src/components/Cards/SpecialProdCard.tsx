@@ -159,10 +159,9 @@ const SpecialProdCard: React.FC<{ data: IProductState, wishlist?: any }> = ({ da
                                         </div>
                                     ))
                                 }
-
-
                             </Slider>
                         </div>
+                        <p className="400px:hidden block font-400 text-[#777777] text-[.81rem]">Products Left: {data?.quantity - data?.sold}</p>
                     </div>
                     <div className="w-1/2 h-full  relative">
                         <div onClick={() => ToWishlist(data?._id as string)} className="bg-[#c4bfbf] p-2 rounded-full absolute tooltip cursor-pointer right-0 top-0" >
@@ -189,23 +188,22 @@ const SpecialProdCard: React.FC<{ data: IProductState, wishlist?: any }> = ({ da
                                 </div>
                                 <p className="">{data?.ratings?.length} reviews</p>
                             </div>
-                            <div className="flex text-skin-base">
-                                <p className="mr-[20px] ">$ {data?.price}</p>
-                                <p className="line-through">$ {data?.price + data?.price * 0.3}</p>
+                            <div className="flex justify-between flex-grow-0  text-skin-base">
+                                <p className=" text-[.91rem]">$ {data?.price}</p>
+                                <p className="line-through text-[.91rem]">$ {data?.price + data?.price * 0.3}</p>
                             </div>
                             <div className=" flex w-full items-center justify-between">
                                 <p className="hidden lg:block text-skin-base"><b>{formatTime(time).days + 1}</b> day</p>
-                                <div className="flex h-auto w-auto items-center  justify-between ">
+                                <div className="mt-5 400px:m-auto flex h-auto w-auto items-center  justify-between ">
                                     <span className="w-[30px] h-[30px] mr-2 justify-center flex items-center text-[.91rem] rounded-full bg-orange-400">{formatTime(time).hours}</span>
                                     <span className="w-[30px] h-[30px] mr-2 justify-center flex items-center  text-[.91rem] rounded-full bg-blue-400">{formatTime(time).minutes}</span>
                                     <span className="w-[30px] h-[30px] justify-center flex items-center text-[.91rem]  rounded-full bg-green-400">{formatTime(time).sec}</span>
                                 </div>
                             </div>
-                            <p className="absolute bottom-14 left-0 font-400 text-[#777777] text-[.81rem]">Products Left: {data?.quantity - data?.sold}</p>
-                            <div className=" absolute bottom-12  w-full bg-gray-200 rounded-full h-1 shadow-lg dark:bg-gray-700">
+                            <p className="400px:block hidden absolute bottom-14 left-0 font-400 text-[#777777] text-[.81rem]">Products Left: {data?.quantity - data?.sold}</p>
+                            <div className="400px:block hidden absolute bottom-12  w-full bg-gray-200 rounded-full h-1 shadow-lg dark:bg-gray-700">
                                 <div className="bg-green-600 hover:bg-orange-600 h-1 shadow-lg rounded-full"
                                     style={{ width: `${(data.quantity - data?.sold) / data?.quantity * 100}%` }}
-
                                 ></div>
                             </div>
                         </Link>

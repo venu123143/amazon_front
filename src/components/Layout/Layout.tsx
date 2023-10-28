@@ -10,7 +10,7 @@ const Layout = () => {
     // const { screen } = useSelector((state: any) => state.functions)
     
     return (
-        <div className={``}>
+        <div className={`bg-skin-background`}>
             <Navbar />
             <Outlet />
             <Footer />

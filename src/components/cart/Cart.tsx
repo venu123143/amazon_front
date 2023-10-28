@@ -35,8 +35,8 @@ const Cart = () => {
 
     return (
         <>
-            <div className='cart-container   bg-[#fffff7]'>
-                <h2 className=''>Shopping Cart</h2>
+            <div className='cart-container   bg-skin-background'>
+                <h2 className='text-skin-base'>Shopping Cart</h2>
                 <div className="continue-shopping">
                     <Link to="/products" className="p-3 py-2 text-white tracking-wider rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
                         <BsArrowLeftShort size={28} className="inline" />
@@ -46,7 +46,7 @@ const Cart = () => {
                 {
                     cartItems.length === 0 ? (
                         <div className="cart-empty">
-                            <p>your cart is currently empty</p>
+                            <p className='text-skin-base'>your cart is currently empty</p>
                             <div className="start-shopping min-h-screen">
                                 <Link to="/" className=" text-[#777777] flex items-center hover:text-black">
                                     <BsArrowLeftShort size={28} className="inline" />
@@ -68,17 +68,17 @@ const Cart = () => {
                                         <div className="cart-product">
                                             <img src={cartItem.images[0].url} alt={cartItem?.title} className='hidden sm:block' />
                                             <div className='flex flex-col justify-center items-baseline'>
-                                                <h3 className='line-clamp-1 mt-10'>{cartItem?.title}</h3>
+                                                <h3 className='line-clamp-1 mt-10 text-skin-base'>{cartItem?.title}</h3>
                                                 <button onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
                                             </div>
                                         </div>
-                                        <div className="cart-product-price">${cartItem?.price}</div>
+                                        <div className="cart-product-price text-skin-base">${cartItem?.price}</div>
                                         <div className="cart-product-quantity">
-                                            <button className='' onClick={() => handleDecreaseCart(cartItem)}>-</button>
-                                            <div className="count">{cartItem.cartQuantity}</div>
-                                            <button className='' onClick={() => handleIncreaseCart(cartItem)}>+</button>
+                                            <button className='text-skin-base' onClick={() => handleDecreaseCart(cartItem)}>-</button>
+                                            <div className="count text-skin-base">{cartItem.cartQuantity}</div>
+                                            <button className='text-skin-base' onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                         </div>
-                                        <div className="cart-product-total-price">
+                                        <div className=" text-skin-base cart-product-total-price">
                                             ${cartItem.price * cartItem.cartQuantity}
                                         </div>
                                     </div>
@@ -89,11 +89,11 @@ const Cart = () => {
                                     clear cart
                                 </button>
                                 <div className="cart-checkout ">
-                                    <div className="subtotal">
+                                    <div className="text-skin-base subtotal">
                                         <span>subtotal</span>
                                         <span>${cartTotalAmount}</span>
                                     </div>
-                                    <p>taxes and shipping calculated at checkout</p>
+                                    <p className='text-skin-base'>taxes and shipping calculated at checkout</p>
                                     <Link to="/checkout" className="button group flex items-center justify-center">
                                         <span className='text-white group-hover:text-black text-[1rem] font-[400]'>Checkout</span>
                                     </Link>

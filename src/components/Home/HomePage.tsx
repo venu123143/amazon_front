@@ -16,7 +16,7 @@ import Offers from "./Offers.tsx"
 const HomePage = () => {
   return (
     <>
-      <div className="bg-skin-background">
+      <div className="">
         <Carousel />
         <Home />
         <FeatureCollection />

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
-import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineLogout, AiOutlineUser } from "react-icons/ai"
 import { LiaTimesSolid } from "react-icons/lia"
 import { BsSearch, BsSun } from "react-icons/bs"
 import { IoMdArrowDropdown, IoMdKeypad } from "react-icons/io"
@@ -185,7 +185,7 @@ const Navbar = () => {
                   {user ? (
                     <>
                       <div onClick={handleLogout} className="flex sm:cursor-pointer items-center text-white">
-                        <AiOutlineLogout size={35} className="transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
+                        <AiOutlineLogout title="logout" size={35} className="transition-all transform group-hover:-scale-x-100 duration-500 ease-in-out" />
                         <p className="mb-0 text-[.91rem] hidden lg:block">logout</p>
                       </div>
                     </>
@@ -216,69 +216,59 @@ const Navbar = () => {
             </div>
           </div>
           {
-            <div className={`md:hidden md:w-auto fixed h-screen z-20 w-full`}>
-              <div className={`  transition-all ease-linear duration-300 delay-150 ${screen === true ? "overflow-x-hidden overflow-y-auto -translate-x-0  z-20" : "-translate-x-full"} h-screen block sm:hidden bg-white md:hidden md:w-auto`} id="navbar-dropdown">
-                <ul className=" font-medium  p-4 md:p-0 border border-gray-100 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                  <li>
-                    <a href="#" className="mobile-menu" aria-current="page">Home</a>
-                  </li>
-                  <li className="relative">
-                    <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                      <span>Theme</span>
-                      <FiChevronDown className="inline font-Rubik" />
-                    </button>
-                    {
-                      dropdown && (
-                        <div className="absolute right-0  z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
-                          <div className="py-1" role="none">
-                            <div onClick={() => {
-                              dispatch(setTheme("light"))
-                              setDropdown(false)
-                            }} className="custom-menu-item" role="menuitem" id="menu-item-0">
-                              <BsSun size={20} className="inline mr-3" />
-                              <span>Light</span>
-                            </div>
-                            <div onClick={() => {
-                              dispatch(setTheme("dark"))
-                              setDropdown(false)
-                            }} className="custom-menu-item" role="menuitem" id="menu-item-1">
-                              <CiDark size={20} className="inline mr-3" />
-                              <span>Dark</span>
-                            </div>
-                            <div onClick={() => {
-                              dispatch(setTheme("system"))
-                              setDropdown(false)
-                            }} className="custom-menu-item" role="menuitem" id="menu-item-2">
-                              <HiMiniComputerDesktop size={20} className="inline mr-3" />
-                              <span>System</span>
-                            </div>
-
+            <div className={`transition-all absolute w-full h-full z-10 ease-linear duration-300 delay-150 ${screen === true ? "overflow-x-hidden overflow-y-auto -translate-x-0 " : "-translate-x-full"} block bg-white dark:bg-gray-800 sm:hidden md:w-auto`} id="navbar-dropdown">
+              <div className=" font-medium  p-4 md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 ">
+                <span>
+                  <Link to="/" onClick={() => screenFuncTrue()} className="mobile-menu">Home</Link>
+                </span>
+                <span className="relative">
+                  <button id="dropdownNavbarLink" onClick={options} data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                    <span>Theme</span>
+                    <FiChevronDown className="inline font-Rubik" />
+                  </button>
+                  {
+                    dropdown && (
+                      <div className="absolute right-0  z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-transparent shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                        <div className="py-1" role="none">
+                          <div onClick={() => {
+                            dispatch(setTheme("light"))
+                            setDropdown(false)
+                            screenFuncTrue()
+                          }} className="custom-menu-item" role="menuitem" id="menu-item-0">
+                            <BsSun size={20} className="inline mr-3" />
+                            <span>Light</span>
                           </div>
+                          <div onClick={() => {
+                            dispatch(setTheme("dark"))
+                            setDropdown(false)
+                            screenFuncTrue()
+                          }} className="custom-menu-item" role="menuitem" id="menu-item-1">
+                            <CiDark size={20} className="inline mr-3" />
+                            <span>Dark</span>
+                          </div>
+                          <div onClick={() => {
+                            dispatch(setTheme("system"))
+                            setDropdown(false)
+                            screenFuncTrue()
+                          }} className="custom-menu-item" role="menuitem" id="menu-item-2">
+                            <HiMiniComputerDesktop size={20} className="inline mr-3" />
+                            <span>System</span>
+                          </div>
+
                         </div>
-                      )
-                    }
-                  </li>
-                  <li>
-                    <a href="#" className="mobile-menu">Services</a>
-                  </li>
-                  <li>
-                    <a href="#" className="mobile-menu">Pricing</a>
-                  </li>
-                  <li>
-                    <a href="#" className="mobile-menu">Contact</a>
-                  </li>
-
-                  <li>
-                    <a href="#" className="mobile-menu">Services</a>
-                  </li>
-                  <li>
-                    <a href="#" className="mobile-menu">Pricing</a>
-                  </li>
-                  <li>
-                    <a href="#" className="mobile-menu">Contact</a>
-                  </li>
-
-                </ul>
+                      </div>
+                    )
+                  }
+                </span>
+                <span>
+                  <Link to="/settings" onClick={() => screenFuncTrue()} className="mobile-menu">Settings</Link>
+                </span>
+                <span>
+                  <Link to="/profile" onClick={() => screenFuncTrue()} className="mobile-menu">Profile</Link>
+                </span>
+                <span>
+                  <Link to="/contact" onClick={() => screenFuncTrue()} className="mobile-menu">Contact</Link>
+                </span>
               </div>
             </div>
           }
@@ -310,7 +300,7 @@ const Navbar = () => {
                 dropdown && (
                   <div className="bg-white dark:bg-transparent absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                     <div className="py-1" role="none">
-                      <Link to="#" className="options " role="menuitem" id="menu-item-0">Account settings</Link>
+                      <button className="options " role="menuitem" id="menu-item-0">Profile</button>
                       <button onClick={toggleDropdown} className="options" role="menuitem" id="menu-item-1">
                         <span>Theme</span>
                         <FiChevronDown className="inline font-Rubik" />

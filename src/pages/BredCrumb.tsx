@@ -74,7 +74,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                         <RxCross2 className="text-black" size={25} />
                     </button>
                     <div>
-                        <div className="bg-white  py-[10px] px-[15px] shadow-lg">
+                        <div className="  py-[10px] px-[15px] shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] mb-[20px] ">Shop By Categories</h3>
                             <div className="h-[150px] overflow-y-scroll no-scrollbar">
                                 <ul className="pl-0 list-none text-[#777777] cursor-pointer capitalize text-[16px] ">
@@ -89,7 +89,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="bg-white  py-[10px] px-[15px] shadow-lg">
+                        <div className="  py-[10px] px-[15px] shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] mb-[20px] ">Filter By</h3>
                             <div >
                                 <h5 className="text-[14px] font-[600] my-[10px]">Avalibility</h5>
@@ -214,7 +214,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white  py-[10px] px-[15px] shadow-lg">
+                        <div className="  py-[10px] px-[15px] shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Brands</h3>
                             <div>
                                 <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
@@ -281,7 +281,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                             </div>
 
                         </div>
-                        <div className="bg-white  py-[10px] px-[15px] shadow-lg">
+                        <div className="  py-[10px] px-[15px] shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Product Tags</h3>
                             <div>
                                 <div className="flex flex-wrap items-center">
@@ -301,7 +301,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
 
                             </div>
                         </div>
-                        <div className="bg-white  py-[10px] px-[15px]  shadow-lg">
+                        <div className="  py-[10px] px-[15px]  shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Random Product</h3>
                             <div>
                                 <div className="flex w-full items-center border-b py-2 border-[#777777]">

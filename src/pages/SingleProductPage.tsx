@@ -42,7 +42,7 @@ const SingleProductPage = () => {
     const dispatch: AppDispatch = useDispatch()
     const pageId = useParams()
     const navigate = useNavigate()
-    const { singleProduct, wishlist, isLoading } = useSelector((state: RootState) => state.product)
+    const { singleProduct, wishlist, isLoading, isReviewAdded } = useSelector((state: RootState) => state.product)
     const { user } = useSelector((state: RootState) => state.user)
     const { cartItems } = useSelector((state: RootState) => state.cart)
 
@@ -104,7 +104,7 @@ const SingleProductPage = () => {
     useEffect(() => {
         dispatch(getSingleProduct(pageId?.id as string))
         dispatch(getAllWishlist())
-    }, [pageId?.id])
+    }, [pageId?.id, dispatch, isReviewAdded])
 
     const handleRadioChange = (e: any) => {
         setColor(e.target.value);
@@ -125,6 +125,8 @@ const SingleProductPage = () => {
             dispatch(descreaseCart(singleProduct))
         }
     }
+    console.log(singleProduct);
+    
     return (
 
         <>
@@ -141,9 +143,9 @@ const SingleProductPage = () => {
                 <section className="sm:mx-5 ">
                     <section className="related-produts bg-red-50m0 px-5 py-5 ">
                         <main >
-                            <div className="flex items-center justify-start text-[#525258]">
+                            <div className="flex items-center justify-start text-[#525258] dark:text-white">
                                 <Link to="/">
-                                    <AiOutlineHome className="inline mr-2" size={20} />
+                                    <AiOutlineHome className="inline mr-2 mb-1" size={20} />
                                     Home</Link>
                                 <HiOutlineChevronRight size={20} className="inline" />
                                 <Link to="/products">Products</Link>
@@ -168,8 +170,8 @@ const SingleProductPage = () => {
 
                                 </div>
 
-                                <div className="lg:w-1/2 mt-5 lg:mt-0">
-                                    <p className="text-[1.2rem] p-0 m-0 text-justify tracking-wide font-[450]">
+                                <div className="lg:w-1/2 text-skin-base mt-5 lg:mt-0">
+                                    <p className="text-[1.2rem]  p-0 m-0 text-justify tracking-wide font-[450]">
                                         {singleProduct?.title}
                                     </p>
                                     <div className="flex items-center text-[1.5rem]">
@@ -187,7 +189,7 @@ const SingleProductPage = () => {
                                     </div>
                                     <div className="">
                                         <p className="font-semibold tracking-Fwide text-[1rem]">Choose your color: <span className="font-medium">{color}</span></p>
-                                        <div className="flex w-max gap-4">
+                                        <div className="flex items-center w-max gap-4">
                                             {singleProduct?.color.map((color, id) => (
                                                 <div key={id} className="inline-flex items-center">
                                                     <label
@@ -201,7 +203,7 @@ const SingleProductPage = () => {
                                                             type="radio"
                                                             // checked={color}
                                                             onChange={handleRadioChange}
-                                                            className={`text-skin-light ${colorObj[color?.title]}  ${borderObj[color?.title]} before:content[''] peer relative h-5 w-5 sm:cursor-pointer appearance-none rounded-full border border-black transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:opacity-0 before:transition-opacity hover:before:opacity-10`}
+                                                            className={`text-skin-light ${colorObj[color?.title]}  ${borderObj[color?.title]} before:content[''] peer relative h-5 w-5 sm:cursor-pointer appearance-none rounded-full border border-black  dark:border-white transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:opacity-0 before:transition-opacity hover:before:opacity-10`}
                                                         />
                                                         <div className={`${colorObj[color?.title]}  pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 opacity-0 transition-opacity peer-checked:opacity-100`}>
                                                             <FaCircle />
@@ -210,7 +212,7 @@ const SingleProductPage = () => {
                                                 </div>
 
                                             ))}
-
+                                            <p>select one color ( * )</p>
                                         </div>
                                     </div>
 
@@ -247,26 +249,26 @@ const SingleProductPage = () => {
                                     </div>
                                     <div className="">
                                         <div className="flex gap-5 items-center my-2">
-                                            <h3 className="text-[.91rem] text-[#1c1c1b] mb-0 font-[450]">Seller :</h3>
+                                            <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Seller :</h3>
                                             <p className="text-[.85rem] mb-0 col-auto">{singleProduct?.seller?.firstname}</p>
                                         </div>
                                         <div className="flex gap-5 items-center my-2">
-                                            <h3 className="text-[.91rem] text-[#1c1c1b] mb-0 font-[450]">Category :</h3>
+                                            <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Category :</h3>
                                             <p className="text-[.85rem] mb-0 col-auto">{singleProduct?.category?.title}</p>
                                         </div>
                                         <div className="flex gap-5 items-center my-2">
-                                            <h3 className="text-[.91rem] text-[#1c1c1b] mb-0 font-[450]">Brand :</h3>
+                                            <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Brand :</h3>
                                             <p className="text-[.85rem] mb-0">{singleProduct?.brand?.title}</p>
                                         </div>
 
                                     </div>
                                     <div className="">
-                                        <h3 className="text-[.91rem] text-[#1c1c1b] mb-0 font-[450]">Tags :</h3>
+                                        <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Tags :</h3>
                                         <div className='my-3 flex flex-wrap -m-1'>
                                             {
                                                 singleProduct?.tags?.map((tag, index) => (
                                                     <span key={index}
-                                                        className="m-1 select-none flex flex-wrap justify-between items-center text-xs sm:text-sm bg-gray-200 hover:text-white hover:bg-gradient-to-tr from-pink-600 to-purple-400 rounded px-4 py-2 font-medium leading-loose cursor-pointer dark:text-gray-300">
+                                                        className="tag">
                                                         {tag} <RxCross2 className="ml-2" size={15} />
                                                     </span>
 
@@ -278,9 +280,9 @@ const SingleProductPage = () => {
                                 </div>
                             </section>
                             <div className="my-5">
-                                <p className="border-b font-[550] text-[1.5rem] italic ">description</p>
+                                <p className="border-b text-skin-base font-[550] text-[1.5rem] italic ">description</p>
                                 <div className="text-justify my-5">
-                                    <div className="lowercase my-2 font-[450] text-justify text-[1.2rem]" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></div>
+                                    <div className="lowercase text-skin-base my-2 font-[450] text-justify text-[1.2rem]" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></div>
 
                                 </div>
                                 {singleProduct?.images.map((detail, ind) => {
@@ -289,14 +291,13 @@ const SingleProductPage = () => {
                                             <div key={ind}>
                                                 <div className={`w-full ${backObj[singleProduct?.color[ind]?.title] ? backObj[singleProduct?.color[ind]?.title] : "bg-yellow-300"} p-5 bg-opacity-40 border md:flex space-y-3 border-black block text-center justify-center items-center`}>
                                                     <div className={`md:w-1/2 h-full flex justify-center`}>
-                                                        <img src={detail.url} alt="" className="max-h-[300px] w-auto " />
+                                                        <img src={detail.url} alt="" className="sm:max-h-[300px] max-h-[200px] w-auto " />
                                                     </div>
                                                     <div className="md:w-1/2 ">
-                                                        <h3 className="font-[550] text-[1.5rem]">{singleProduct?.title}</h3>
-                                                        <p>{singleProduct?.description.slice(0, 50)}</p>
+                                                        <h3 className="font-[550] text-[1.5rem] text-skin-base">{singleProduct?.title}</h3>
+                                                        <p className="line-clamp-3" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></p>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         )
                                     }
@@ -311,12 +312,13 @@ const SingleProductPage = () => {
                     <PopularProduct />
                 </section>
                 <section className="sm:mx-5 my-5 shadow-lg">
-                    <CreateReview />
+                    <CreateReview prodId={singleProduct?._id as string} />
                 </section>
                 <section className="sm:mx-5">
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
+                    {singleProduct?.ratings?.map((rating, index) => (
+                        <ReviewCard key={index} rating={rating} />
+                    ))}
+
                 </section>
             </div >
 

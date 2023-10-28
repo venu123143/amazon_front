@@ -31,12 +31,12 @@ const FeatureCollection = () => {
         </div>
       </section>
       <h3 className="font-[550] text-[1.5rem] text-skin-base ml-5 hover:underline w-fit">Top Categories</h3>
-      <section className=" bg-[#fffff7] rounded-md shadow-lg px-[10px] m-[20px]">
+      <section className=" bg-[#ffffff] dark:opacity-75 rounded-md shadow-lg px-[10px] m-[20px]">
 
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1  ">
           {categories.map((item: any, index) => (
             <Link to="/" key={index}>
-              <div key={index} className="flex items-center justify-between sm:justify-center cursor-pointer">
+              <div key={index} className="flex items-center justify-between md:justify-center cursor-pointer">
                 <div>
                   <h6 className="font-medium text-[1rem]">{item.item}</h6>
                   <p className="mb-0 text-[1rem]">{item.para}</p>
@@ -46,10 +46,9 @@ const FeatureCollection = () => {
                 </div>
               </div>
             </Link>
-          ))
-
-          }
+          ))}
         </div>
+
       </section >
     </>
   )

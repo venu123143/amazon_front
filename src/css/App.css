@@ -122,16 +122,6 @@ footer:not(:first-child) {
     }
 }
 
-
-.button {
-    background-color: var(--color-232f3e);
-}
-
-.button:hover {
-    background-color: var(--color-febd69);
-    color: #131921;
-}
-
 .small-banner-content h4 {
     font-size: 1rem;
     font-weight: 400;

@@ -63,6 +63,16 @@ export const getAllWishlist = createAsyncThunk('productSlice/getAllWishlist', as
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
+export const createReview = createAsyncThunk('productSlice/createReview', async (data: any, thunkAPI) => {
+    try {
+        const review = await productService.review({ star: data?.rating, prodId: data?.prodId, comment: data?.comment, title: data?.title })
+        return review
+    } catch (error: any) {
+        console.log(error);
+
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
 
 
 interface ProductState {
@@ -75,6 +85,7 @@ interface ProductState {
     message: string;
     modal: boolean;
     handleWishlist: boolean;
+    isReviewAdded: boolean;
 }
 
 const initialState: ProductState = {
@@ -86,7 +97,8 @@ const initialState: ProductState = {
     isSuccess: false,
     message: "",
     modal: false,
-    handleWishlist: false
+    handleWishlist: false,
+    isReviewAdded: false
 }
 
 const productSlice = createSlice({
@@ -95,6 +107,9 @@ const productSlice = createSlice({
     reducers: {
         setWishlist: (state, action) => {
             state.handleWishlist = action.payload
+        },
+        handleReview: (state, action) => {
+            state.isReviewAdded = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -162,10 +177,28 @@ const productSlice = createSlice({
                 position: 'top-right'
             })
         })
+        builder.addCase(createReview.pending, (state) => {
+            state.isLoading = true
+        }).addCase(createReview.fulfilled, (state) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            toast.success("product reviewed sucessfully", {
+                position: 'top-right'
+            })
+        }).addCase(createReview.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = true
+            state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-right'
+            })
+        })
 
     }
 })
 
 
-export const { setWishlist } = productSlice.actions
+export const { setWishlist, handleReview } = productSlice.actions
 export default productSlice.reducer

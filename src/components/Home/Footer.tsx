@@ -6,7 +6,7 @@ import { AiOutlineInstagram, AiOutlineLinkedin, AiOutlineTwitter, AiOutlineGithu
 const Footer = () => {
   return (
     <>
-      <footer className="py-4  ">
+      <footer className="py-4">
         <div className="w-full sm:justify-around sm:flex sm:items-center">
           <div className="sm:w-1/3 w-full mb-[10px]">
             <div className="footer-top-data flex items-center justify-center">

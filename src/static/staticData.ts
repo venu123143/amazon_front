@@ -77,7 +77,7 @@ export const borderObj: any = {
     VIOLET: "checked:border-[#7F00FF]",
     GRAY: "checked:border-[#B2BEB5]",
     BLACK: "checked:border-[#000]",
-    LIGHTGREEN: "checked:border-[#00FF00]",
+    "LIGHT-GREEN": "checked:border-[#00FF00]",
     CREAM: "checked:border-[#FFFDD0]",
     AQUA: "checked:border-[#00FFFF]"
 };

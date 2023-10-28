@@ -1,7 +1,7 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsStarHalf } from "react-icons/bs";
 
-const RatingStar = ({ stars }:any) => {
+const RatingStar = ({ stars }: any) => {
     return (
         <div className="flex">
             {Array.from({ length: 5 }, (_, index) => {
@@ -12,7 +12,7 @@ const RatingStar = ({ stars }:any) => {
                         {stars >= index + 1 ? (
                             <AiFillStar className="text-[#ffd700]" />
                         ) : stars >= number ? (
-                            <BsStarHalf className="text-[#ffd700]" />
+                            <BsStarHalf size={17} className="text-[#ffd700]" />
                         ) : (
                             <AiOutlineStar className="icon" />
                         )}

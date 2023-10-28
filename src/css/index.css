@@ -4,18 +4,25 @@
 
 /* styles.css or your preferred CSS file */
 .custom-menu-item {
-  @apply text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm  dark:bg-gray-700 dark:text-white dark:hover:bg-white dark:hover:text-black hover:bg-gray-500 hover:text-white;
+  @apply text-gray-700 flex justify-start px-4 py-2 border-b-2 text-sm dark:bg-gray-700 dark:text-white dark:hover:bg-white dark:hover:text-black hover:bg-gray-500 hover:text-white;
 }
 
-.categories{
+.categories {
   @apply text-gray-700 block px-4 py-2 border-b-2 text-sm hover:bg-gray-500 hover:text-white dark:text-white dark:bg-black dark:hover:bg-slate-300 dark:hover:text-black
 }
-.mobile-menu{
+
+.mobile-menu {
   @apply block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
 }
-.options{
-  @apply text-gray-700 hover:bg-gray-500 hover:text-white dark:bg-gray-700 dark:hover:bg-white dark:hover:text-black dark:text-white w-full flex justify-between  items-center px-4 py-2 border-b-2 text-sm 
+
+.options {
+  @apply text-gray-700 hover:bg-gray-500 hover:text-white dark:bg-gray-700 dark:hover:bg-white dark:hover:text-black dark:text-white w-full flex justify-between items-center px-4 py-2 border-b-2 text-sm
 }
+
+.tag {
+  @apply dark:text-black m-1 select-none flex flex-wrap justify-between items-center text-xs sm:text-sm bg-gray-200 hover:text-white hover:bg-gradient-to-tr from-pink-600 to-purple-400 rounded px-4 py-2 font-medium leading-loose cursor-pointer
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +64,7 @@ a {
   :root {
     --text-color-base: #000;
     --text-color-text-light: #777777;
-    --text-color-text-base: #000 ;
+    --text-color-text-base: #000;
     --text-color-background: #FFFFF7;
     --text-color-background-light: #030303;
     --text-color-background-hover: #f97316;
@@ -67,7 +74,7 @@ a {
     --color-base: #000000;
     --color-text-light: #777777;
     --color-text-base: #1c1b1b;
-    --color-background: #fffff7; 
+    --color-background: #fffff7;
     --color-background-light: #030303;
     --color-background-hover: #f97316;
     --color-main: #febd69;
@@ -87,10 +94,10 @@ a {
     --color-base: #ffffff;
     --color-text-light: #777777;
     --color-text-base: #1c1b1b;
-    --color-background: #000000; 
+    --color-background: #000000;
     --color-background-light: #030303;
     --color-background-hover: #232f3e;
     --color-main: #febd69;
-    --color-light: #f97316 ;
+    --color-light: #f97316;
   }
 }
