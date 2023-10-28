@@ -22,12 +22,17 @@ const review = async ({ star, prodId, comment, title }: { star: number, prodId: 
     const res = await axios.put(`${base_url}/product/rating`, { star, prodId, comment, title }, { withCredentials: true })
     return res.data
 }
+const deletereview = async (id: string) => {
+    const res = await axios.delete(`${base_url}/product/rating/${id}`, { withCredentials: true })
+    return res.data
+}
 const productService = {
     getProducts,
     getProduct,
     Wishlist,
     GetWishlist,
     review,
+    deletereview
 }
 
 export default productService

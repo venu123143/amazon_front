@@ -1,9 +1,23 @@
 import { AiOutlineUser } from "react-icons/ai"
 import RatingStar from "../../pages/Rating"
 import React, { useState } from "react"
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
 
 const ReviewCard = ({ rating }: any) => {
+    // const dispatch: AppDispatch = useDispatch()
+    const { user } = useSelector((state: RootState) => state.user)
     const [readmore, setReadMore] = useState(false)
+
+    const handleEdit = () => {
+
+    }
+    const handleReport = () => {
+
+    }
+    const handleDelete = () => {
+
+    }
     return (
         <>
             <section className=" dark:bg-[#0c1317]  px-5 py-5 border-b">
@@ -24,13 +38,17 @@ const ReviewCard = ({ rating }: any) => {
                 <span onClick={() => setReadMore(true)} className={`text-sm font-medium mr-5 text-blue-700 hover:underline cursor-pointer ${readmore ? "hidden" : "block"} `}>more</span>
                 <span onClick={() => setReadMore(false)} className={`text-sm font-medium mr-5 text-blue-700 hover:underline cursor-pointer ${readmore ? "block" : "hidden"} `}>read less</span>
                 <div className="mt-5">
-                    <button className="text-sm font-medium mr-5 hover:bg-gray-100 text-blue-700 hover:underline ">
-                        Edit Review
-                    </button>
-                    <button className="text-sm font-medium mr-5 text-red-700 hover:underline ">
-                        Delete Review
-                    </button>
-                    <button className="text-sm font-medium text-[#1f1c1d] dark:text-gray-500 hover:underline ">
+                    {rating?.postedBy?._id === user?._id ? (
+                        <button onClick={handleEdit} className="text-sm font-medium mr-5 hover:bg-gray-100 text-blue-700 hover:underline ">
+                            Edit Review
+                        </button>
+                    ) : null}
+                    {rating?.postedBy?._id === user?._id ? (
+                        <button onClick={handleDelete} className="text-sm font-medium mr-5 text-red-700 hover:underline ">
+                            Delete Review
+                        </button>
+                    ) : null}
+                    <button onClick={handleReport} className="text-sm font-medium text-[#1f1c1d] dark:text-gray-500 hover:underline ">
                         Report Review
                     </button>
                 </div>

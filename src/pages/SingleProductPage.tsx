@@ -42,7 +42,7 @@ const SingleProductPage = () => {
     const dispatch: AppDispatch = useDispatch()
     const pageId = useParams()
     const navigate = useNavigate()
-    const { singleProduct, wishlist, isLoading, isReviewAdded } = useSelector((state: RootState) => state.product)
+    const { singleProduct, wishlist, isLoading } = useSelector((state: RootState) => state.product)
     const { user } = useSelector((state: RootState) => state.user)
     const { cartItems } = useSelector((state: RootState) => state.cart)
 
@@ -104,7 +104,7 @@ const SingleProductPage = () => {
     useEffect(() => {
         dispatch(getSingleProduct(pageId?.id as string))
         dispatch(getAllWishlist())
-    }, [pageId?.id, dispatch, isReviewAdded])
+    }, [pageId?.id, dispatch])
 
     const handleRadioChange = (e: any) => {
         setColor(e.target.value);
@@ -125,8 +125,8 @@ const SingleProductPage = () => {
             dispatch(descreaseCart(singleProduct))
         }
     }
-    console.log(singleProduct);
-    
+
+
     return (
 
         <>
@@ -308,7 +308,7 @@ const SingleProductPage = () => {
                 </section>
 
                 <section className="sm:mx-5 my-5 shadow-lg">
-                    {/* <h3 className="mx-5 font-[550] text-[2rem]">Related Products</h3> */}
+                    <h3 className="mx-5 font-[550] text-[2rem]">Related Products</h3>
                     <PopularProduct />
                 </section>
                 <section className="sm:mx-5 my-5 shadow-lg">

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
 import { number, object, string } from "yup"
 import { useFormik } from "formik"
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { AiFillStar, AiOutlineStar, AiOutlineUpload } from "react-icons/ai"
-import { useDispatch } from "react-redux";
-import { createReview, handleReview } from "../../redux/reducers/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createReview, getSingleProduct } from "../../redux/reducers/product/productSlice";
+import { useNavigate } from "react-router-dom";
 
 let RatingSchema = object({
     title: string().min(3, 'minimum 3 characters should be there').required('title is required'),
@@ -14,6 +15,8 @@ let RatingSchema = object({
 
 const CreateReview = ({ prodId }: { prodId: string }) => {
     const dispatch: AppDispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector((state: RootState) => state.user)
     const [rating, setRating] = useState(0)
     const formik = useFormik({
         initialValues: {
@@ -24,10 +27,16 @@ const CreateReview = ({ prodId }: { prodId: string }) => {
         },
         validationSchema: RatingSchema,
         onSubmit: values => {
-            dispatch(createReview(values))
-            dispatch(handleReview(true))
-            setRating(0)
-            formik.resetForm()
+            console.log(values);
+
+            if (!user) {
+                navigate('/login')
+            } else {
+                dispatch(createReview(values))
+                dispatch(getSingleProduct(prodId))
+                setRating(0)
+                formik.resetForm()
+            }
         },
     });
     useEffect(() => {

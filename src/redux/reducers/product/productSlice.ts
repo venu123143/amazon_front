@@ -73,6 +73,16 @@ export const createReview = createAsyncThunk('productSlice/createReview', async 
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
+export const deleteReview = createAsyncThunk('productSlice/deleteReview', async (id: string, thunkAPI) => {
+    try {
+        const review = await productService.deletereview(id)
+        return review
+    } catch (error: any) {
+        console.log(error);
+
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
 
 
 interface ProductState {
