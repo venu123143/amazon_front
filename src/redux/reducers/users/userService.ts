@@ -24,11 +24,21 @@ const logout = async (): Promise<any> => {
     return res.data
 }
 
+const forgot = async (email: string) => {
+    const res = await axios.post(`${base_url}/users/forgot-password-token`, { email })
+    return res.data
+}
 
+const reset = async (token: string, password: string) => {
+    const res = await axios.put(`${base_url}/users/resetpassword/${token}`, { password })
+    return res.data
+}
 const userService = {
     login,
     logout,
-    register
+    register,
+    forgot,
+    reset
 }
 
 export default userService

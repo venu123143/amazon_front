@@ -87,6 +87,8 @@ const Navbar = () => {
         break;
       default:
         localStorage.removeItem("theme")
+        // localStorage.setItem("theme", "dark")
+
         onWindowMatch()
         break;
     }

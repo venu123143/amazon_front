@@ -5,7 +5,7 @@ import { BsArrowLeftShort } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
-import { login } from "../../redux/reducers/users/userSlice"
+import { forgotPassword, login } from "../../redux/reducers/users/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import { object, string } from "yup"
@@ -23,7 +23,8 @@ const LoginPage = () => {
   const { isLoading, user, isError, isSuccess } = useSelector((state: RootState) => state.user)
   const [visible, setVisible] = useState(false)
   const [forgotpassword, setForgotPassword] = useState(false)
-  // const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState("")
+
   useEffect(() => {
     if (user !== null) {
       navigate('/')
@@ -34,7 +35,8 @@ const LoginPage = () => {
     margin: "0 auto",
     borderColor: "red",
     width: 380,
-    borderRadius: "30px"
+    borderRadius: "30px",
+    zIndex: 20,
   };
 
   const formik = useFormik({
@@ -49,9 +51,15 @@ const LoginPage = () => {
 
     },
   });
+  const handleSubmit = () => {
+    dispatch(forgotPassword(email))
+    setEmail("")
+    if (isSuccess === true) navigate('/')
+  }
+
   return (
     // bg-skin-background
-    <section className="bg-skin-background w-full">
+    <section className="bg-skin-background w-full group">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] dark:hover:text-white flex items-center hover:text-black">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to home</button>
@@ -70,6 +78,8 @@ const LoginPage = () => {
               aria-label="Loading Spinner"
               data-testid="loader"
             />
+            <div className={`${isLoading === true ? "block absolute z-10 top-0 left-0 right-0 bottom-0 bg-black opacity-50 group:pointer-events-none overflow-hidden " : "hidden"}`}></div>
+
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               {forgotpassword === true ? (
                 <>
@@ -79,11 +89,13 @@ const LoginPage = () => {
                     </h1>
                     <p className="font-light text-center text-[#777777] mb-2">we will send you an email to reset your password</p>
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Your email</label>
-                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    <input
+                      onChange={(e) => setEmail(e.target.value)} value={email}
+                      type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Enter your email" required />
 
                     <div className="text-center">
-                      <button className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
+                      <button onClick={handleSubmit} className="bg-skin-light text-skin-background hover:text-skin-backgroundLight hover:bg-skin-main shadow-lg my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">
                         submit
                       </button> <br />
                       <button onClick={() => setForgotPassword(false)} className="hover:underline text-black dark:text-white  my-[10px] text-[0.91rem] px-[25px] py-[6px] rounded-[25px]">

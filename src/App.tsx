@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />
         <Route path="/sign-up" element={<RegisterPage />} />
-        <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/reset/:id" element={<ResetPassword />} />
         <Route path='/compare' element={<Compare />} />
         <Route path='/sucess' element={<Sucess />} />
         <Route path='/cancel' element={<Cancel />} />

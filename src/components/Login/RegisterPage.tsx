@@ -43,7 +43,8 @@ const SignUpPage = () => {
     margin: "0 auto",
     borderColor: "red",
     width: 380,
-    borderRadius: "30px"
+    borderRadius: "30px",
+    zIndex: 20,
   };
   const formik = useFormik({
     initialValues: {
@@ -62,7 +63,7 @@ const SignUpPage = () => {
   });
 
   return (
-    <section className=" bg-skin-background w-full">
+    <section className=" bg-skin-background w-full group">
       <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to home</button>
@@ -77,6 +78,8 @@ const SignUpPage = () => {
               aria-label="Loading Spinner"
               data-testid="loader"
             />
+                    <div className={`${isLoading === true ? "block absolute z-10 top-0 left-0 right-0 bottom-0 bg-black opacity-50 group:pointer-events-none overflow-hidden " : "hidden"}`}></div>
+
             <div className="p-4 space-y-4 md:space-y-6 sm:p-8">
               <>
                 <h1 className="text-xl font-bold leading-tight text-center tracking-tight text-gray-900 md:text-2xl dark:text-white">

@@ -1,15 +1,17 @@
 // import React from 'react'
 import { useState, useRef, useEffect, CSSProperties } from "react"
 import { BsArrowLeftShort } from "react-icons/bs"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { BarLoader } from "react-spinners"
+import { RootState } from "../../redux/store"
 
 const LoginWithOtp = () => {
     const [sendOtp, setSendOtp] = useState(false)
     const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
     const codesRef = useRef<any>([]);
+    const { isLoading } = useSelector((state: RootState) => state.user)
     // const [loading, setLoading] = useState(false)
-    const loading = false;
 
 
     const override: CSSProperties = {
@@ -17,7 +19,8 @@ const LoginWithOtp = () => {
         margin: "0 auto",
         borderColor: "red",
         width: 380,
-        borderRadius: "30px"
+        borderRadius: "30px",
+        zIndex: 20,
     };
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
         const newOtp: string[] = [...otp]
@@ -44,7 +47,7 @@ const LoginWithOtp = () => {
     }, [otp]);
 
     return (
-        <section className="bg-skin-background w-full relative">
+        <section className="bg-skin-background w-full relative group">
             <Link to="/" className="absolute top-2 left-2 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
                 <BsArrowLeftShort size={28} className="inline" />
                 <button>back to home</button>
@@ -54,11 +57,13 @@ const LoginWithOtp = () => {
                     <div className="w-full bg-white rounded-lg shadow-lg border mx-2 400px:mx-0 md:mt-0 sm:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <BarLoader
                             color="#361AE3"
-                            loading={loading}
+                            loading={isLoading}
                             cssOverride={override}
                             aria-label="Loading Spinner"
                             data-testid="loader"
                         />
+                        <div className={`${isLoading === true ? "block absolute z-10 top-0 left-0 right-0 bottom-0 bg-black opacity-50 group:pointer-events-none overflow-hidden " : "hidden"}`}></div>
+
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             {
                                 sendOtp === true ? (
