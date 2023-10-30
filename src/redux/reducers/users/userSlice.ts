@@ -55,7 +55,7 @@ export const login = createAsyncThunk('authSlice/admin-login', async (user: User
         return res
 
     } catch (error: any) {
-        console.log("error ", error);
+        // console.log("error ", error);
 
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
@@ -66,6 +66,7 @@ export const logout = createAsyncThunk('authSlice/logoutUser', async (_, thunkAP
         return res
 
     } catch (error: any) {
+        localStorage.removeItem("token")
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
@@ -155,6 +156,7 @@ const slice = createSlice({
             state.isError = true
             state.isLoading = false
             state.message = action.payload?.message
+            state.user = null
             toast.error(state.message, {
                 position: 'top-right'
             })
