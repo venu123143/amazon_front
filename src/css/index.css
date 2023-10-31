@@ -22,6 +22,12 @@
 .tag {
   @apply dark:text-black m-1 select-none flex flex-wrap justify-between items-center text-xs sm:text-sm bg-gray-200 hover:text-white hover:bg-gradient-to-tr from-pink-600 to-purple-400 rounded px-4 py-2 font-medium leading-loose cursor-pointer
 }
+.custom-select{
+  @apply border-none bg-transparent border-white
+} 
+.css-b62m3t-container{
+  @apply border-none bg-transparent
+}
 
 * {
   margin: 0;

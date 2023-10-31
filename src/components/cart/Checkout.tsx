@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react"
+import { useCallback, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import Address from "./Address";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -15,6 +15,8 @@ import { number, object, string } from "yup"
 import { useFormik } from "formik"
 import { AppDispatch } from "../../redux/store";
 import { toggleAddress } from "../../redux/reducers/users/userSlice";
+import { Order, createRazorOrder } from "../../redux/reducers/orders/orderSlice";
+import { clearCart } from "../../redux/reducers/cart/cartSlice";
 
 
 
@@ -26,10 +28,13 @@ let AddressSchema = object({
   zipcode: number().required("zipcode is mandetory")
 });
 const Checkout = () => {
+
+  const [address, setAddress] = useState<any>("")
   const [Razorpay, isLoaded] = useRazorpay();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const { cartItems, cartTotalAmount } = useSelector((state: any) => state.cart);
+  const { createOrder } = useSelector((state: any) => state.orders);
 
   const handleCheckout = async () => {
     console.log("clicked button");
@@ -50,54 +55,54 @@ const Checkout = () => {
 
   };
 
-  const handlePaymentSucess = async () => {
+  const handlePaymentSucess = async (e: any) => {
+    dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount }))
+    dispatch(clearCart())
     navigate('/sucess')
   }
   const handlePaymentFailure = async (response: any) => {
     console.log(response);
+  
     navigate('/cancel')
   }
+
+
+
   const handlePayment = useCallback(async () => {
-    const amount = cartTotalAmount * 100
-    const res = await axios.post(
-      "http://localhost:5000/api/product/create-raziropay-session",
-      { cartItems, cartTotalAmount });
+    dispatch(createRazorOrder({ cartItems, cartTotalAmount }))
+    if (createOrder !== null && address !== "") {
+      const options: RazorpayOptions = {
+        key: RaziropayKey,
+        amount: createOrder?.amount?.toString(),
+        currency: "INR",
+        name: "Amazon clone transation",
+        description: "Test Transaction 1",
+        image: Logo,
+        order_id: createOrder?.id,
+        handler: handlePaymentSucess,
+        prefill: {
+          name: "Dummy Name",
+          email: "RaziropayKey.Dummy@example.com",
+          contact: "9000090000",
+        },
+        notes: {
+          address: "Hitech city Hyderabad.",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp1 = new Razorpay(options);
+      console.log(rzp1);
 
-    const options: RazorpayOptions = {
-      key: RaziropayKey,
-      amount: amount.toString(),
-      currency: "INR",
-      name: "Amazon clone transation",
-      description: "Test Transaction 1",
-      image: Logo,
-      order_id: res.data?.orderId,
-      handler: handlePaymentSucess,
-      prefill: {
-        name: "Dummy Name",
-        email: "RaziropayKey.Dummy@example.com",
-        contact: "9000090000",
-      },
-      notes: {
-        address: "Hitech city Hyderabad.",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-
-    const rzp1 = new Razorpay(options);
-
-    rzp1.on("payment.failed", function (response: any) {
-      handlePaymentFailure(response)
-    });
-
-    rzp1.open();
-  }, [Razorpay])
-  useEffect(() => {
-    if (isLoaded) {
-      handlePayment();
+      rzp1.on("payment.failed", function (response: any) {
+        handlePaymentFailure(response)
+      });
+      rzp1.open();
     }
-  }, [isLoaded, handlePayment])
+
+  }, [isLoaded, createOrder])
+
 
 
   const formik = useFormik({
@@ -111,11 +116,13 @@ const Checkout = () => {
     validationSchema: AddressSchema,
     onSubmit: values => {
       // formik.resetForm()
-      console.log(values);
+      setAddress(values)
       dispatch(toggleAddress(true))
 
     },
   });
+
+
 
   return (
     <div className="bg-[#F0FFFF] dark:bg-skin-background relative w-full">
@@ -190,7 +197,7 @@ const Checkout = () => {
         <div className="max-w-[400px] h-auto mx-auto bg-white dark:bg-[#222e35] sm:shadow-lg p-5">
           <h3 className="font-[550] border-b-2 my-5 text-[1.5rem] text-skin-base">Checkout</h3>
           {cartItems.map((item: any) => (
-            <div key={item.id}>
+            <div key={item._id}>
               <section className="border-b space-y-6 pb-2">
                 <div className="grid gap-2 my-1 grid-cols-5 col-span-8">
                   <div className="col-span-1  m-auto">

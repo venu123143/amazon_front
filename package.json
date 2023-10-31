@@ -12,7 +12,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/stripe-js": "^2.1.6",
+    "async": "^3.2.4",
     "axios": "^1.4.0",
+    "countries-states-cities-service": "^1.3.4",
     "formik": "^2.4.5",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
@@ -24,6 +26,7 @@
     "react-razorpay": "^2.0.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
+    "react-select": "^5.7.7",
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",
@@ -32,6 +35,7 @@
     "yup": "^1.3.2"
   },
   "devDependencies": {
+    "@types/async": "^3.2.22",
     "@types/jquery": "^3.5.17",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
