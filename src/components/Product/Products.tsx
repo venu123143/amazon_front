@@ -20,13 +20,15 @@ const Products = () => {
     const [grid, setGrid] = useState(3)
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist } = useSelector((state: RootState) => state.product)
+    const { user } = useSelector((state: RootState) => state.user)
 
     const getProducts = () => {
         dispatch(getAllProducts())
     }
     useEffect(() => {
         getProducts()
-        dispatch(getAllWishlist())
+        if (user)
+            dispatch(getAllWishlist())
     }, [])
 
     $(document).on('click', '.griditem div', function () {

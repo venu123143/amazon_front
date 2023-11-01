@@ -10,13 +10,14 @@ import useRazorpay, { RazorpayOptions } from "react-razorpay";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { RaziropayKey } from "../../static/staticData";
+import { RaziropayKey, base_url } from "../../static/staticData";
 import { number, object, string } from "yup"
 import { useFormik } from "formik"
 import { AppDispatch } from "../../redux/store";
 import { toggleAddress } from "../../redux/reducers/users/userSlice";
 import { Order, createRazorOrder } from "../../redux/reducers/orders/orderSlice";
 import { clearCart } from "../../redux/reducers/cart/cartSlice";
+import { toast } from "react-toastify";
 
 
 
@@ -34,7 +35,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const { cartItems, cartTotalAmount } = useSelector((state: any) => state.cart);
-  const { createOrder } = useSelector((state: any) => state.orders);
+  // const { createOrder } = useSelector((state: any) => state.orders);
 
   const handleCheckout = async () => {
     console.log("clicked button");
@@ -62,15 +63,30 @@ const Checkout = () => {
   }
   const handlePaymentFailure = async (response: any) => {
     console.log(response);
-  
+
     navigate('/cancel')
   }
 
 
 
   const handlePayment = useCallback(async () => {
-    dispatch(createRazorOrder({ cartItems, cartTotalAmount }))
-    if (createOrder !== null && address !== "") {
+    // dispatch(createRazorOrder({ cartItems, cartTotalAmount }))
+    try {
+      if (address === "") {
+        toast.error("please  fill the address")
+        return
+      }
+      let res = await axios.post(`${base_url}/product/create-raziropay-session`,
+        { cartTotalAmount }) as any;
+      const createOrder = res.data
+      if (res?.response?.data?.message) {
+        toast.error(res?.response?.data?.message, {
+          position: "top-right"
+        })
+        return
+      }
+      console.log(res);
+
       const options: RazorpayOptions = {
         key: RaziropayKey,
         amount: createOrder?.amount?.toString(),
@@ -93,15 +109,16 @@ const Checkout = () => {
         },
       };
       const rzp1 = new Razorpay(options);
-      console.log(rzp1);
-
       rzp1.on("payment.failed", function (response: any) {
         handlePaymentFailure(response)
       });
       rzp1.open();
+    } catch (error: any) {
+      console.log(error);
+
     }
 
-  }, [isLoaded, createOrder])
+  }, [isLoaded])
 
 
 

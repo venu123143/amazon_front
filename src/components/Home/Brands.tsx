@@ -1,11 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react"
-import { brands } from "../../static/staticData";
 import { Link } from "react-router-dom";
-import BlogCard from "../Cards/BlogCard.tsx"
 // import { blogs } from "../../static/staticData";
 import { AppDispatch, RootState } from "../../redux/store.ts";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogs } from "../../redux/reducers/blogs/blogSlice.ts";
+import BlogCard from "../Cards/BlogCard.tsx"
+import { brands } from "../../static/staticData";
 
 const BrandsAndBlogs = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -17,7 +17,7 @@ const BrandsAndBlogs = () => {
     <div className="">
       <section className="rounded-md sm:block justify-between shadow-lg px-[10px] m-[20px]  ">
         <h3 className="font-[550] text-skin-base text-[1.5rem] hover:underline w-fit">Our Top Brands</h3>
-        <div className=" bg-slate-300 rounded-md py-3 grid grid-cols-2 sm:grid-cols-4  lg:flex items-center justify-around">
+        <div className=" dark:bg-slate-300 rounded-md py-3 grid grid-cols-2 sm:grid-cols-4  lg:flex items-center justify-around">
           {brands.map((item: any, index) => (
             <div key={index} className="flex justify-evenly rounded-md hover:bg-[#CCFFFF] cursor-pointer">
               <Link to="/" key={index}>

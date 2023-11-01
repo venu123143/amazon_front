@@ -4,7 +4,7 @@ import { useFormik } from "formik"
 import { AppDispatch, RootState } from "../../redux/store";
 import { AiFillStar, AiOutlineStar, AiOutlineUpload } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getSingleProduct } from "../../redux/reducers/product/productSlice";
+import { createReview, getSingleProduct, handleReview } from "../../redux/reducers/product/productSlice";
 import { useNavigate } from "react-router-dom";
 
 let RatingSchema = object({
@@ -17,6 +17,7 @@ const CreateReview = ({ prodId }: { prodId: string }) => {
     const dispatch: AppDispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector((state: RootState) => state.user)
+    const { isReviewAdded } = useSelector((state: RootState) => state.product)
     const [rating, setRating] = useState(0)
     const formik = useFormik({
         initialValues: {
@@ -33,6 +34,7 @@ const CreateReview = ({ prodId }: { prodId: string }) => {
                 navigate('/login')
             } else {
                 dispatch(createReview(values))
+                dispatch(handleReview(!isReviewAdded))
                 dispatch(getSingleProduct(prodId))
                 setRating(0)
                 formik.resetForm()
@@ -49,27 +51,29 @@ const CreateReview = ({ prodId }: { prodId: string }) => {
                 <h3 className="font-semibold border-b-black text-skin-base text-[1.5rem]">Create Review</h3>
                 <h5 className="text-skin-base">Over all Rating</h5>
                 <div>
-                    <form action="" className="space-y-4" onSubmit={formik.handleSubmit}>
-                        <div className="flex transition-all delay-200 mb-5">
-                            <div className="cursor-pointer" onClick={() => setRating(1)}>
-                                {rating >= 1 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                    <form action="" className="space-y-2" onSubmit={formik.handleSubmit}>
+                        <div>
+                            <div className="flex transition-all delay-200 ">
+                                <div className="cursor-pointer" onClick={() => setRating(1)}>
+                                    {rating >= 1 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                                </div>
+                                <div className="cursor-pointer" onClick={() => setRating(2)}>
+                                    {rating >= 2 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                                </div>
+                                <div className="cursor-pointer" onClick={() => setRating(3)}>
+                                    {rating >= 3 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                                </div>
+                                <div className="cursor-pointer" onClick={() => setRating(4)}>
+                                    {rating >= 4 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                                </div>
+                                <div className="cursor-pointer" onClick={() => setRating(5)}>
+                                    {rating >= 5 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
+                                </div>
                             </div>
-                            <div className="cursor-pointer" onClick={() => setRating(2)}>
-                                {rating >= 2 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setRating(3)}>
-                                {rating >= 3 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setRating(4)}>
-                                {rating >= 4 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setRating(5)}>
-                                {rating >= 5 ? <AiFillStar className="text-[#ffd700]  " size={30} /> : <AiOutlineStar className="text-[#ffd700] " size={30} />}
-                            </div>
+                            {formik.touched.rating && formik.errors.rating && rating === 0 ? (
+                                <div className="text-red-500 text-[14px] ">{formik.errors.rating}</div>
+                            ) : null}
                         </div>
-                        {formik.touched.rating && formik.errors.rating && rating === 0 ? (
-                            <div className="text-red-500 text-[14px] ">{formik.errors.rating}</div>
-                        ) : null}
                         <div className="">
                             <label htmlFor="reviewTitle" className="font-Rubik font-[400] text-skin-base text-md">Review title</label>
                             <input

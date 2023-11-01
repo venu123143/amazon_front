@@ -24,13 +24,14 @@ import Checkout from "./components/cart/Checkout";
 import ResetPassword from "./components/Login/ResetPassword";
 import Cancel from "./pages/Cancel";
 import Sucess from "./pages/Sucess";
-
+import { PrivateRoutes } from "./components/Error/PrivateRoutes"
+import Orders from "./components/Product/Orders";
 const App = () => {
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false}
         pauseOnFocusLoss draggable pauseOnHover theme="light" />
-      <Routes>
+      <Routes >
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path='/products' element={<Products />} />
@@ -40,7 +41,8 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/checkout' element={<Checkout />} />
+          <Route path='/checkout' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
+          <Route path='/orders' element={<PrivateRoutes><Orders/></PrivateRoutes>} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />

@@ -263,7 +263,7 @@ const Navbar = () => {
                   }
                 </span>
                 <span>
-                  <Link to="/settings" onClick={() => screenFuncTrue()} className="mobile-menu">Settings</Link>
+                  <Link to="/orders" onClick={() => screenFuncTrue()} className="mobile-menu">Orders</Link>
                 </span>
                 <span>
                   <Link to="/profile" onClick={() => screenFuncTrue()} className="mobile-menu">Profile</Link>
@@ -310,7 +310,7 @@ const Navbar = () => {
 
                       <Link to="#" className="options">Account settings</Link>
 
-                      <Link to="#" className="options" role="menuitem" id="menu-item-0">sign-out</Link>
+                      <Link to="/orders" className="options" role="menuitem" id="menu-item-0">Orders</Link>
 
                     </div>
                   </div>

@@ -7,9 +7,11 @@ import { getAllProducts, getAllWishlist } from "../../redux/reducers/product/pro
 const SpecialCart = () => {
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist } = useSelector((state: RootState) => state.product)
+    const { user } = useSelector((state: RootState) => state.user)
     useEffect(() => {
         dispatch(getAllProducts())
-        dispatch(getAllWishlist())
+        if (user)
+            dispatch(getAllWishlist())
     }, [])
     return (
         <>

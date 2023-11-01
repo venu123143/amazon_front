@@ -1,8 +1,8 @@
 import axios from "axios"
 import { base_url } from "../../../static/staticData";
 
-const createRazorOrder = async (cartItems: any[], cartTotalAmount: number) => {
-    const res = await axios.post(`${base_url}/product/create-raziropay-session`, { cartItems, cartTotalAmount });
+const getOrders = async () => {
+    const res = await axios.get(`${base_url}/users/orders`, { withCredentials: true });
     return res.data
 }
 const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: string, paymentId: string, address: any) => {
@@ -28,6 +28,6 @@ const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: s
 
 const orderService = {
     createOrder,
-    createRazorOrder,
+    getOrders
 }
 export default orderService

@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -15,7 +16,9 @@ const Cart = () => {
             navigate('/login')
         }
     }, [user])
-
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
     useEffect(() => {
         dispatch(cartTotal())
     }, [cartItems, dispatch])

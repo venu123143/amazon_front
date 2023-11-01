@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { MoonLoader, SyncLoader } from "react-spinners"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { useState, useEffect, CSSProperties, useLayoutEffect, useCallback } from "react"
+import { useState, useEffect, CSSProperties, useCallback, useLayoutEffect } from "react"
 
 
 import { AiFillHeart, AiFillThunderbolt, AiOutlineHome, AiOutlineHeart, AiOutlineMinus } from "react-icons/ai"
@@ -42,7 +42,7 @@ const SingleProductPage = () => {
     const dispatch: AppDispatch = useDispatch()
     const pageId = useParams()
     const navigate = useNavigate()
-    const { singleProduct, wishlist, isLoading } = useSelector((state: RootState) => state.product)
+    const { singleProduct, wishlist, isLoading, isReviewAdded } = useSelector((state: RootState) => state.product)
     const { user } = useSelector((state: RootState) => state.user)
     const { cartItems } = useSelector((state: RootState) => state.cart)
 
@@ -68,7 +68,9 @@ const SingleProductPage = () => {
             clearInterval(interval);
         };
     }, [time]);
-
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
     const formatTime = (seconds: number) => {
         const days = Math.floor(seconds / (24 * 60 * 60));
         const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
@@ -83,28 +85,24 @@ const SingleProductPage = () => {
         ).padStart(2, "0")}s`;
     };
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, [Link]);
 
-    const ToWishlist = useCallback(
-        (id: string) => {
-            if (!user) {
-                navigate('/login')
-            } else {
-                setLoading(true);
-                dispatch(addToWishlist(id)).then(() => {
-                    setLoading(false);
-                });
-            }
-        },
-        [dispatch, wishlist]
-    );
+
+    const ToWishlist = useCallback((id: string) => {
+        if (!user) {
+            navigate('/login')
+        } else {
+            setLoading(true);
+            dispatch(addToWishlist(id)).then(() => {
+                setLoading(false);
+            });
+        }
+    }, [dispatch, wishlist]);
 
     useEffect(() => {
         dispatch(getSingleProduct(pageId?.id as string))
-        dispatch(getAllWishlist())
-    }, [pageId?.id, dispatch])
+        if (user)
+            dispatch(getAllWishlist())
+    }, [pageId?.id, dispatch, isReviewAdded])
 
     const handleRadioChange = (e: any) => {
         setColor(e.target.value);

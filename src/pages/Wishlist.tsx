@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useLayoutEffect } from "react"
 import LongCard from "../components/Cards/LongCard"
 import { BsCartCheck } from "react-icons/bs"
 import { GrCart } from "react-icons/gr"
@@ -21,7 +21,9 @@ const Wishlist = () => {
             navigate('/login')
         }
     }, [user])
-
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
     useEffect(() => {
         dispatch(getAllWishlist())
     }, [])

@@ -24,9 +24,11 @@ const SamplePrevArrow = (props: any) => {
 const PopularProduct = () => {
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist } = useSelector((state: RootState) => state.product)
+    const { user } = useSelector((state: RootState) => state.user)
     useEffect(() => {
         dispatch(getAllProducts())
-        dispatch(getAllWishlist())
+        if (user)
+            dispatch(getAllWishlist())
     }, [])
 
     const responsive = [

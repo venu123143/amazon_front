@@ -1,6 +1,7 @@
 
 // import catBanner4 from "../../assets/images/catbanner-04.jpg"
-// import { CSSProperties } from "react"
+import { useLayoutEffect } from "react"
+import { Link } from "react-router-dom"
 
 import FeatureCollection from "./Features"
 import Carousel from "./Carousel"
@@ -14,6 +15,9 @@ import Offers from "./Offers.tsx"
 // import { SyncLoader } from "react-spinners"
 
 const HomePage = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [Link]);
   return (
     <>
       <div className="">

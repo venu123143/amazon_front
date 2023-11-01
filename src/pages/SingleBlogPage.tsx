@@ -24,7 +24,6 @@ const BlogPage = () => {
   const { singleBlog, isLoading } = useSelector((state: RootState) => state.blog)
   // const navigate = useNavigate();
   const pageId = useParams()
-  console.log(singleBlog);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);

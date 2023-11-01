@@ -37,11 +37,6 @@ export default {
       },
       textColor: {
         skin: {
-
-        }
-      },
-      textColor: {
-        skin: {
           base: `var(--text-color-base)`,
           textLight: `var(--text-color-text-light)`,
           textBase: `var(--text-color-text-base)`,

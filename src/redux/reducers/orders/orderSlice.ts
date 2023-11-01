@@ -36,9 +36,9 @@ interface IOrder extends Document {
     orderStatus: string;
 }
 
-export const createRazorOrder = createAsyncThunk('orderSlice/createRazorOrder', async (data: any, thunkAPI) => {
+export const getOrders = createAsyncThunk('orderSlice/createRazorOrder', async (_, thunkAPI) => {
     try {
-        const order = await orderService.createRazorOrder(data?.cartItems, data?.cartTotalAmount)
+        const order = await orderService.getOrders()
         return order
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error?.response?.data)
@@ -76,14 +76,14 @@ const orderSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(createRazorOrder.pending, (state) => {
+        builder.addCase(getOrders.pending, (state) => {
             state.isLoading = true
-        }).addCase(createRazorOrder.fulfilled, (state, action: PayloadAction<any>) => {
-            state.createOrder = action.payload
+        }).addCase(getOrders.fulfilled, (state, action: PayloadAction<any>) => {
+            state.orders = action.payload
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
-        }).addCase(createRazorOrder.rejected, (state, action: PayloadAction<any>) => {
+        }).addCase(getOrders.rejected, (state, action: PayloadAction<any>) => {
             state.isError = false
             state.isLoading = false
             state.message = action.payload?.message
