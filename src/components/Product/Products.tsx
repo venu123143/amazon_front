@@ -1,6 +1,8 @@
 import $ from "jquery"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
 import { RxCross2 } from "react-icons/rx"
 import { AiOutlineMenu } from "react-icons/ai"
 import { HiOutlineBars4 } from "react-icons/hi2"
@@ -15,21 +17,33 @@ import BredCrumb from "../../pages/BredCrumb"
 import img from "../../assets/icons/headPhones.webp"
 import ProductCard from "../Cards/ProductCard"
 import LongCard from "../Cards/LongCard"
-
+import { getAllBrands, getCategories, getColors } from "../../redux/reducers/filters/filterSlice"
+import { stars, backObj } from "../../static/staticData"
 const Products = () => {
     const [grid, setGrid] = useState(3)
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist } = useSelector((state: RootState) => state.product)
+    const { categories, colors, brands } = useSelector((state: RootState) => state.filters)
     const { user } = useSelector((state: RootState) => state.user)
 
+
+    const handleColor = (id: string) => {
+        console.log(id)
+    }
     const getProducts = () => {
         dispatch(getAllProducts())
     }
     useEffect(() => {
         getProducts()
+        dispatch(getCategories())
+        dispatch(getColors())
+        dispatch(getAllBrands())
         if (user)
             dispatch(getAllWishlist())
     }, [])
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
 
     $(document).on('click', '.griditem div', function () {
         $(this).removeClass('griditem-color').addClass('griditem-active').siblings().removeClass('griditem-active').addClass('griditem-color')
@@ -45,14 +59,11 @@ const Products = () => {
                             <h3 className="text-black  text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
                             <div className="h-[150px] overflow-y-scroll no-scrollbar">
                                 <ul className="pl-0 list-none text-[#777777] cursor-pointer capitalize text-[16px] ">
-                                    <li className="hover:text-black my-2">Watch</li>
-                                    <li className="hover:text-black my-2">Tv</li>
-                                    <li className="hover:text-black my-2">Cameras</li>
-                                    <li className="hover:text-black my-2">Laptops</li>
-                                    <li className="hover:text-black my-2">Mobiles</li>
-                                    <li className="hover:text-black my-2">Electronics</li>
-                                    <li className="hover:text-black my-2">Camera</li>
-                                    <li className="hover:text-black my-2">Laptop</li>
+                                    {categories && categories.map((cat) => (
+                                        <li value={cat?._id} key={cat?._id} className="hover:text-black hover:bg-gray-200 bg-opacity-90 my-2">{cat?.title}</li>
+
+                                    ))}
+
                                 </ul>
                             </div>
                         </div>
@@ -67,7 +78,7 @@ const Products = () => {
                                         type="checkbox"
                                         value="" id="InStock" />
                                     <label
-                                        className="inline-block text-[#777777] pl-[0.15rem] hover:cursor-pointer"
+                                        className="inline-block text-[#777777] hover:bg-slate-100 w-full pl-[0.15rem] hover:cursor-pointer"
                                         htmlFor="InStock">
                                         In Stock(1)
                                     </label>
@@ -98,154 +109,50 @@ const Products = () => {
                                 </div>
                                 <h3 className="text-[14px] font-[600] my-[10px] ">Colors</h3>
                                 <div>
-                                    <ul className="colors ps-0">
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
+                                    <ul className="colors flex flex-wrap gap-2.5 ps-0">
+                                        {colors && colors.map((each, index) => (
+                                            <input key={index} onClick={() => handleColor(each?._id)} className={`w-[23px] h-[23px] focus:border-black border-2 focus: rounded-full cursor-pointer ${backObj[each?.title]}`} />
+                                        ))}
                                     </ul>
                                 </div>
-                                <h3 className="text-[14px] font-[600] my-[10px] ">Size</h3>
-                                <div>
-                                    <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative hover:pl-0 float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem] "
-                                            type="checkbox"
-                                            value=""
-                                            id="small" />
-                                        <label
-                                            className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="small">
-                                            S
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="medium" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="medium">
-                                            M
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="large" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="large">
-                                            L
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="ExtraLarge" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="ExtraLarge">
-                                            XL
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="DoubleExtra" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="DoubleExtra">
-                                            XXL
-                                        </label>
-                                    </div>
-
-
-                                </div>
+                                <h3 className="text-[14px] font-[600] my-[10px] ">Rating</h3>
+                                {
+                                    stars.map((star, index) => (
+                                        <div key={index} className="mb-[0.125rem] min-h-[1.5rem] pl-[1.5rem]">
+                                            <input
+                                                className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                                type="checkbox"
+                                                value="" id={star?.name} />
+                                            <label
+                                                className="inline-block text-[#777777] hover:bg-slate-100 w-full pl-[0.15rem] hover:cursor-pointer"
+                                                htmlFor={star?.name}>
+                                                {star?.value}
+                                            </label>
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                         <div className="bg-white rounded-lg py-[10px] px-[15px] mb-3 shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Brands</h3>
-                            <div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
+                            {brands && brands.map((brand) => (
+                                <div className="mb-[0.125rem]  min-h-[1.5rem] pl-[1.5rem]">
                                     <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
+                                        className="relative float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
                                         type="checkbox"
-                                        value=""
-                                        id="BRAND1" />
+                                        value={brand?._id}
+                                        id={brand?.title} />
                                     <label
                                         className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND1">
-                                        SAMSUNG
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND2" />
-                                    <label
-                                        className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND2">
-                                        ASUS
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND3" />
-                                    <label
-                                        className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND3">
-                                        APPLE
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND4" />
-                                    <label
-                                        className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND4">
-                                        BOAT
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="LENEVO" />
-                                    <label
-                                        className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="LENEVO">
-                                        LENAVO
+                                        htmlFor={brand?.title}>
+                                        {brand?.title}
                                     </label>
                                 </div>
 
-                            </div>
+                            ))}
+
+
+
 
                         </div>
                         <div className="bg-white rounded-lg py-[10px] px-[15px] mb-3 shadow-lg">

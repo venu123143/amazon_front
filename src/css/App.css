@@ -198,18 +198,7 @@ footer:not(:first-child) {
 /* our store - filters (colors)*/
 .colors {
     list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.colors li {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 50%;
-    cursor: pointer;
-
+   
 }
 
 .colors li:hover {

@@ -14,6 +14,7 @@ const Orders = () => {
     useEffect(() => {
         dispatch(getOrders())
     }, [])
+
     return (
         <section className=''>
             {orders.length === 0 ? (
@@ -22,11 +23,11 @@ const Orders = () => {
                 </>
             ) : (
                 <>
-                    <div className="rounded-md sm:block justify-between px-[10px] m-[20px]">
-                        <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full">My Orders</h3>
+                    <div className="rounded-md sm:block justify-between">
+                        <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full mt-5">My Orders</h3>
                         <div className="md:flex gap-5 sm:p-5 block">
                             <div className="md:w-3/12 relative ">
-                                <div className="sticky top-32 rounded-lg py-[10px] px-[15px]  mb-3">
+                                <div className="sticky bg-white top-32 rounded-lg py-[10px] px-[15px]  mb-3">
                                     <Link to="/orders" className="bg-[#00BFFF] mb-5 hover:bg-[#00FFFF]  py-3 px-2 rounded-md cursor-pointer flex items-center">
                                         <BsCartCheck size={25} className="inline mr-[1rem]" />
                                         <span className="text-lg  font-Roboto font-semibold">My Orders</span>
@@ -50,13 +51,14 @@ const Orders = () => {
 
                                 </div>
                             </div>
-                            <div>
+                            <div className='md:w-9/12 sm:space-y-3 '>
                                 {
-                                    orders?.map((item, index) => (
-                                        <OrderCard key={index} order={item} />
-                                    ))
+                                    orders?.map((item) => item?.orderItems?.map((each, idx) => (
+                                        <OrderCard key={idx} order={each} item={item} />
+                                    )))
                                 }
                             </div>
+
                         </div>
                     </div>
                 </>

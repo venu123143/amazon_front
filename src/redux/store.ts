@@ -4,13 +4,15 @@ import cartReducer from "./reducers/cart/cartSlice"
 import productReducer from "./reducers/product/productSlice"
 import blogReducer from "./reducers/blogs/blogSlice"
 import orderReducer from "./reducers/orders/orderSlice"
+import filterReducer from "./reducers/filters/filterSlice"
 const Store = configureStore({
     reducer: {
         user: userSlice,
         cart: cartReducer,
         product: productReducer,
         blog: blogReducer,
-        orders: orderReducer
+        orders: orderReducer,
+        filters: filterReducer
     },
 })
 

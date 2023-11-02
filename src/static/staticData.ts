@@ -47,10 +47,18 @@ import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-// export const base_url = "http://localhost:5000/api"
-export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+export const base_url = "http://localhost:5000/api"
+// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
+
+
+
+export const stars = [{ name: 'five', value: 5 }, { name: 'four', value: 4 },
+    { name: 'three', value: 3 },
+    { name: 'twp', value: 2 },
+    { name: 'one', value: 1 },
+    ]
 
 export const colorObj: any = {
     BLUE: "text-[#0000FF]",
@@ -96,7 +104,14 @@ export const backObj: any = {
     AQUA: "bg-[#00FFFF]"
 };
 
-
+export const orderStatus: any = {
+    Processing: "bg-[#00FFFF]",
+    Dispatched: "bg-[#FFFF00]",
+    Cancelled: "bg-[#FF0000] text-[#fff]",
+    Delivered: "bg-[#008000] text-[#000]",
+    Returned: "bg-[#000] text-[#fff]",
+    Ordered: "bg-[#00FF00]"
+}
 export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopal.v@ahex.co.in"]
 export const information = ["Privacy Policy", "Refund Policy", "Shipping Policy", "Terms of Service", "Blogs"]
 export const account = ["Search ", "About Us", "Faq", "Contact", "Size Chart"]

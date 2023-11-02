@@ -1,11 +1,11 @@
 
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 // import { blogs } from "../../static/staticData";
 import BigBlogCard from "../Cards/BigBlogCard";
 import { AppDispatch, RootState } from "../../redux/store";
 import { getAllBlogs } from "../../redux/reducers/blogs/blogSlice";
-
+import { Link } from "react-router-dom";
 const Blogs = () => {
   const dispatch: AppDispatch = useDispatch()
   const { blogs } = useSelector((state: RootState) => state.blog)
@@ -14,7 +14,10 @@ const Blogs = () => {
     dispatch(getAllBlogs())
   }, [])
 
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [Link]);
+  
   return (
     <section className="bg-skin-background">
       <div className="sm:px-5">

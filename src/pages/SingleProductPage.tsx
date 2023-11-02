@@ -3,7 +3,6 @@ import { MoonLoader, SyncLoader } from "react-spinners"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, CSSProperties, useCallback, useLayoutEffect } from "react"
 
-
 import { AiFillHeart, AiFillThunderbolt, AiOutlineHome, AiOutlineHeart, AiOutlineMinus } from "react-icons/ai"
 import { HiOutlineChevronRight } from "react-icons/hi"
 import { LiaRupeeSignSolid } from "react-icons/lia"

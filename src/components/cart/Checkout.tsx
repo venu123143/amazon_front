@@ -15,7 +15,7 @@ import { number, object, string } from "yup"
 import { useFormik } from "formik"
 import { AppDispatch } from "../../redux/store";
 import { toggleAddress } from "../../redux/reducers/users/userSlice";
-import { Order, createRazorOrder } from "../../redux/reducers/orders/orderSlice";
+import { Order } from "../../redux/reducers/orders/orderSlice";
 import { clearCart } from "../../redux/reducers/cart/cartSlice";
 import { toast } from "react-toastify";
 
@@ -70,7 +70,6 @@ const Checkout = () => {
 
 
   const handlePayment = useCallback(async () => {
-    // dispatch(createRazorOrder({ cartItems, cartTotalAmount }))
     try {
       if (address === "") {
         toast.error("please  fill the address")

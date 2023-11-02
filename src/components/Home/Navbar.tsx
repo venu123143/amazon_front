@@ -302,15 +302,15 @@ const Navbar = () => {
                 dropdown && (
                   <div className="bg-white dark:bg-transparent absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                     <div className="py-1" role="none">
-                      <button className="options " role="menuitem" id="menu-item-0">Profile</button>
+                      <button onClick={() => setDropdown(false)} className="options " role="menuitem" id="menu-item-0">Profile</button>
                       <button onClick={toggleDropdown} className="options" role="menuitem" id="menu-item-1">
                         <span>Theme</span>
                         <FiChevronDown className="inline font-Rubik" />
                       </button>
 
-                      <Link to="#" className="options">Account settings</Link>
+                      <Link onClick={() => setDropdown(false)} to="#" className="options">Account settings</Link>
 
-                      <Link to="/orders" className="options" role="menuitem" id="menu-item-0">Orders</Link>
+                      <Link to="/orders" onClick={() => setDropdown(false)} className="options" role="menuitem" id="menu-item-0">Orders</Link>
 
                     </div>
                   </div>
