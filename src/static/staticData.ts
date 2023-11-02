@@ -53,13 +53,13 @@ export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 // export const base_url  = "http://3.81.201.88:5000/api"
 
 export type Filters = {
-    color: string[];
-    category: string | null;
-    brand: string[];
-    totalRating: string[];
-    sort: string | null;
+    color?: string[];
+    category?: string | null;
+    brand?: string[];
+    totalRating?: string[];
+    sort?: string | null;
     page: number;
-    limit: number;
+    limit?: number;
 };
 
 export const stars = [{ name: 'five', value: 5 }, { name: 'four', value: 4 },

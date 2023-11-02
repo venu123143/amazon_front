@@ -26,7 +26,7 @@ export interface IProductState {
 }
 
 
-export const getAllProducts = createAsyncThunk('productSlice/getAllProducts', async (data?: Filters, thunkAPI) => {
+export const getAllProducts = createAsyncThunk('productSlice/getAllProducts', async (data: Filters, thunkAPI) => {
     try {
         const prod = await productService.getProducts(data)
         return prod
@@ -92,6 +92,7 @@ interface ProductState {
     singleProduct: IProductState | null;
     isError: boolean;
     isLoading: boolean;
+    wishlistLoading: boolean;
     isSuccess: boolean;
     message: string;
     modal: boolean;
@@ -105,6 +106,7 @@ const initialState: ProductState = {
     singleProduct: null,
     isError: false,
     isLoading: false,
+    wishlistLoading: false,
     isSuccess: false,
     message: "",
     modal: false,
@@ -157,14 +159,14 @@ const productSlice = createSlice({
             })
         })
         builder.addCase(addToWishlist.pending, (state) => {
-            state.isLoading = true
+            state.wishlistLoading = true
         }).addCase(addToWishlist.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
             state.wishlist = action.payload?.wishlist
         }).addCase(addToWishlist.rejected, (state, action: PayloadAction<any>) => {
-            state.isLoading = false
+            state.wishlistLoading = false
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message
@@ -173,14 +175,14 @@ const productSlice = createSlice({
             })
         })
         builder.addCase(getAllWishlist.pending, (state) => {
-            state.isLoading = true
+            state.wishlistLoading = true
         }).addCase(getAllWishlist.fulfilled, (state, action: PayloadAction<any>) => {
-            state.isLoading = false
+            state.wishlistLoading = false
             state.isSuccess = true
             state.isError = false
             state.wishlist = action.payload?.wishlist
         }).addCase(getAllWishlist.rejected, (state, action: PayloadAction<any>) => {
-            state.isLoading = false
+            state.wishlistLoading = false
             state.isSuccess = false
             state.isError = true
             state.message = action.payload?.message

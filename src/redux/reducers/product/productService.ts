@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Filters, base_url } from "../../../static/staticData";
 
-const getProducts = async (data?: Filters) => {
+const getProducts = async (data: Filters) => {
     const params = new URLSearchParams();
 
     for (const key of Object.keys(data)) {

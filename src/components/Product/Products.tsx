@@ -34,7 +34,6 @@ const MainSpinner: CSSProperties = {
 
 const Products = () => {
     const [grid, setGrid] = useState(3)
-    const [page, setPages] = useState(1)
     const dispatch: AppDispatch = useDispatch()
     const { products, wishlist, isLoading } = useSelector((state: RootState) => state.product)
     const { categories, colors, brands } = useSelector((state: RootState) => state.filters)
@@ -45,12 +44,12 @@ const Products = () => {
         brand: [],
         totalRating: [],
         sort: '-createdAt',
-        page: page,
+        page: 1,
         limit: 12
     })
 
     const handleColor = (id: string) => {
-        setFilters({ ...filters, color: [...filters.color, id] })
+        setFilters({ ...filters, color: [...filters.color as string[], id] })
     }
     const getProducts = () => {
         dispatch(getAllProducts(filters))
@@ -64,7 +63,7 @@ const Products = () => {
         dispatch(getAllBrands())
         if (user)
             dispatch(getAllWishlist())
-    }, [filters, page])
+    }, [filters])
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [Link]);
@@ -72,7 +71,7 @@ const Products = () => {
         setFilters((prevFilters) => {
             return {
                 ...prevFilters,
-                totalRating: prevFilters.totalRating.filter((value) => value !== valueToRemove),
+                totalRating: prevFilters?.totalRating!.filter((value) => value !== valueToRemove),
             };
         });
     };
@@ -80,7 +79,7 @@ const Products = () => {
         setFilters((prevFilters) => {
             return {
                 ...prevFilters,
-                brand: prevFilters.brand.filter((brand) => brand !== brandToRemove),
+                brand: prevFilters?.brand!.filter((brand) => brand !== brandToRemove),
             };
         });
     };
@@ -133,7 +132,6 @@ const Products = () => {
 
                                 <div >
                                     <h5 className="text-[14px] font-[600] my-[10px]">Avalibility</h5>
-                                    {/* <!--Default checkbox--> */}
                                     <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
                                         <input
                                             className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
@@ -184,7 +182,7 @@ const Products = () => {
                                                 <input
                                                     className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
                                                     type="checkbox"
-                                                    onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, totalRating: [...filters.totalRating, e.target.value] }) : removeTotalRating(e.target.value); }}
+                                                    onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, totalRating: [...filters.totalRating as string[], e.target.value] }) : removeTotalRating(e.target.value); }}
                                                     value={star.value} id={star?.name} />
                                                 <label
                                                     className="inline-block text-[#777777] hover:bg-slate-100 w-full pl-[0.15rem] hover:cursor-pointer"
@@ -203,7 +201,7 @@ const Products = () => {
                                         <input
                                             className="relative float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
                                             type="checkbox"
-                                            onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, brand: [...filters.brand, e.target.value] }) : removeBrand(e.target.value) }}
+                                            onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, brand: [...filters.brand as string[], e.target.value] }) : removeBrand(e.target.value) }}
                                             value={brand?._id}
                                             id={brand?.title} />
                                         <label
@@ -282,7 +280,7 @@ const Products = () => {
                                         </select>
                                     </div>
                                     <div className="flex items-center gap-5">
-                                        <p>21 products</p>
+                                        <p>{products.length} products</p>
                                         <div className="flex gap-3 items-center griditem">
                                             <div className=" p-2 rounded-lg cursor-pointer griditem-color" onClick={() => setGrid(1)}>
                                                 <BsThreeDotsVertical size={20} />
