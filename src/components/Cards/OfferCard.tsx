@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"
 
-const OfferCard: React.FC<any> = ({ color, title, offer, img, brand }) => {
+const OfferCard: React.FC<any> = ({ color, title, offer, img, brand, path }) => {
     return (
         <>
-            <section className={`${color === "black" ? 'bg-black' : 'bg-white'} h-[400px] w-[300px] rounded-lg shadow-lg border p-[10px] `}>
+            <Link to={path} className={`${color === "black" ? 'bg-black' : 'bg-white'} h-[400px] w-[300px] rounded-lg shadow-lg border p-[10px] `}>
                 <div className={`${color === "black" ? 'text-white' : 'text-black'} h-1/4 relative`}>
                     <p className="text-[13px] font-[400] uppercase absolute top-5 left-1 ">{brand}</p>
                     <h6 className="font-Rubik text-[1.7rem] font-[500] absolute top-10 left-0  h-[40px] overflow-hidden">{title}</h6>
@@ -11,7 +12,7 @@ const OfferCard: React.FC<any> = ({ color, title, offer, img, brand }) => {
                 <div className="h-3/4 flex items-center justify-center md:cursor-pointer">
                     <img src={img} alt="offerIMG" className="h-[90%] ease-in-out hover:rotate-6 transition-all" />
                 </div>
-            </section>
+            </Link>
         </>
     )
 }

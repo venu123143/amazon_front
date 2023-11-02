@@ -26,7 +26,7 @@ const PopularProduct = () => {
     const { products, wishlist } = useSelector((state: RootState) => state.product)
     const { user } = useSelector((state: RootState) => state.user)
     useEffect(() => {
-        dispatch(getAllProducts())
+        dispatch(getAllProducts({}))
         if (user)
             dispatch(getAllWishlist())
     }, [])

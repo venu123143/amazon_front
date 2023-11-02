@@ -25,6 +25,7 @@ const Orders = () => {
                 <>
                     <div className="rounded-md sm:block justify-between">
                         <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full mt-5">My Orders</h3>
+                       
                         <div className="md:flex gap-5 sm:p-5 block">
                             <div className="md:w-3/12 relative ">
                                 <div className="sticky bg-white top-32 rounded-lg py-[10px] px-[15px]  mb-3">
@@ -64,7 +65,7 @@ const Orders = () => {
                 </>
             )
             }
-        </section>
+        </section >
     )
 }
 

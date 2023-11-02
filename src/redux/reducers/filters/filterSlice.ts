@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export interface Category {
     title: string;
+    _id: string;
 }
 interface FilterState {
     brands: any[];

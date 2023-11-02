@@ -1,8 +1,29 @@
 import axios from "axios";
-import { base_url } from "../../../static/staticData";
+import { Filters, base_url } from "../../../static/staticData";
 
-const getProducts = async () => {
-    const res = await axios.get(`${base_url}/product/`)
+const getProducts = async (data?: Filters) => {
+    const params = new URLSearchParams();
+
+    for (const key of Object.keys(data)) {
+        const value = data[key as keyof Filters];
+
+        if (value !== null && value !== undefined) {
+            if (Array.isArray(value)) {
+                if (value.length > 0) {
+                    // params.append(key, value.map(v => v.toString()).join('|'));
+                    params.append(key, value.join(','));
+                }
+            } else if (value !== '' && value !== 0) {
+                params.append(key, String(value));
+            }
+        }
+    }
+
+    const queryString = params.toString();
+
+    console.log(queryString);
+
+    const res = await axios.get(`${base_url}/product/?${params.toString()}`)
     return res.data
 }
 const getProduct = async (id: string) => {

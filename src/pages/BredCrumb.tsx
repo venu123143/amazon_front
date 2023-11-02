@@ -1,17 +1,43 @@
 import { Link } from "react-router-dom"
 import { BsChevronDown } from "react-icons/bs"
-import { useState } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { RxCross2 } from "react-icons/rx"
 import RatingStar from "./Rating"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import img from "../assets/images/headphone.jpg"
-
+import { AppDispatch, RootState } from "../redux/store"
+import { getAllWishlist } from "../redux/reducers/product/productSlice"
+import { getAllProducts } from "../redux/reducers/product/productSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllBrands, getCategories, getColors } from "../redux/reducers/filters/filterSlice"
+import { backObj, stars } from "../static/staticData"
 const BredCrumb: React.FC<any> = ({ title }) => {
     const [dropdown, setDropdown] = useState(false)
     const [sort, setSort] = useState(false)
+    const dispatch: AppDispatch = useDispatch()
+    const { categories, colors, brands } = useSelector((state: RootState) => state.filters)
+    const { user } = useSelector((state: RootState) => state.user)
 
+
+    const handleColor = (id: string) => {
+        console.log(id)
+    }
+    const getProducts = () => {
+        dispatch(getAllProducts({}))
+    }
+    useEffect(() => {
+        getProducts()
+        dispatch(getCategories())
+        dispatch(getColors())
+        dispatch(getAllBrands())
+        if (user)
+            dispatch(getAllWishlist())
+    }, [])
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
     return (
-        <div className="mb-0 py-4 relative w-full">
+        <div className="mb-0 py-4 relative w-full bg-skin-background text-skin-base">
             <p className="text-center  mb-0">
                 <Link to="/">Home &nbsp;</Link>
                 / {title}
@@ -27,19 +53,14 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                 >
                     Sort By <BsChevronDown className={`transform ${sort ? 'rotate-180' : ''} ml-2`} size={15} />
                 </button>
-                <div
-                    tabIndex={-1}
-                    id="offbutton"
-                    data-drawer-show="onbutton"
-                    className={`duration-300 ease-in-out ${sort ? 'transform-none visible  ' : 'invisible '
-                        } fixed bottom-0 left-0 right-0 top-0 translate-y-full overflow-y-scroll bg-white z-20`} >
+                <div className={`duration-300 ease-in-out ${sort ? 'transform-none visible group:overflow-hidden  ' : 'invisible '} fixed bottom-0 left-0 right-0 top-0 translate-y-full bg-skin-background z-20`} >
                     <button onClick={() => setSort(!sort)} className="absolute z-20 top-5 right-5 focus:outline-none">
-                        <RxCross2 className="text-black" size={25} />
+                        <RxCross2 className="text-skin-base" size={25} />
                     </button>
                     <div className="py-[10px] px-[15px] mt-5 w-full">
-                        <div className="">
-                            <h3 className="text-black text-[1rem] font-[600] mb-[20px] ">Filter By</h3>
-                            <select data-te-select-init className="bg-[#f2f2f2] px-3 py-2 rounded-md border-none">
+                        <div className="bg-skin-background text-skin-base">
+                            <h3 className="bg-skin-background text-skin-base text-[1rem] font-[600] mb-[20px] ">Filter By</h3>
+                            <select data-te-select-init className="text-skin-base bg-skin-background px-3 py-2 rounded-md border-none">
                                 <option value="manual">Featured</option>
                                 <option value="best-selling">Best Selling</option>
                                 <option value="title-ascending">Alphabetically, A-Z</option>
@@ -53,39 +74,29 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                     </div>
                 </div>
             </div>
-            <div className="absolute md:hidden right-0 top-0 flex items-center justify-center px-4 py-2">
+            <div className="absolute md:hidden bg-skin-background  right-0 top-0 flex items-center justify-center px-4 py-2">
                 <button
                     onClick={() => setDropdown(!dropdown)}
-                    id="onbutton"
-                    data-drawer-target="#offbutton"
-                    aria-controls="#offbutton"
                     className="transition duration-300 ease-in-out translate-y-0 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
                     type="button"
                 >
                     Filters <BsChevronDown className={`transform ${dropdown ? 'rotate-180' : ''} ml-2`} size={15} />
                 </button>
-                <div
-                    tabIndex={-1}
-                    id="offbutton"
-                    data-drawer-show="onbutton"
-                    className={`duration-300 ease-in-out ${dropdown ? 'transform-none visible  ' : 'invisible '
-                        } fixed bottom-0 left-0 right-0 top-0 translate-y-full overflow-y-scroll z-20`} >
+                <div className={`duration-300 ease-in-out ${dropdown ? 'transform-none visible  ' : 'invisible '
+                    } fixed bottom-0 left-0 right-0 top-0 translate-y-full bg-skin-background overflow-y-scroll z-20`} >
                     <button onClick={() => setDropdown(!dropdown)} className="absolute z-20 top-5 right-5 focus:outline-none">
-                        <RxCross2 className="text-black" size={25} />
+                        <RxCross2 className="text-skin-base" size={25} />
                     </button>
                     <div>
                         <div className="  py-[10px] px-[15px] shadow-lg">
-                            <h3 className="text-black text-[1rem] font-[600] mb-[20px] ">Shop By Categories</h3>
+                            <h3 className="text-skin-base text-[1rem] font-[600] mb-[20px] ">Shop By Categories</h3>
                             <div className="h-[150px] overflow-y-scroll no-scrollbar">
-                                <ul className="pl-0 list-none text-[#777777] cursor-pointer capitalize text-[16px] ">
-                                    <li className="hover:text-black my-2">Watch</li>
-                                    <li className="hover:text-black my-2">Tv</li>
-                                    <li className="hover:text-black my-2">Cameras</li>
-                                    <li className="hover:text-black my-2">Laptops</li>
-                                    <li className="hover:text-black my-2">Mobiles</li>
-                                    <li className="hover:text-black my-2">Electronics</li>
-                                    <li className="hover:text-black my-2">Camera</li>
-                                    <li className="hover:text-black my-2">Laptop</li>
+                                <ul className="pl-0 list-none text-[#777777] capitalize text-[16px] ">
+                                    {categories && categories.map((cat) => (
+                                        <li value={cat?._id} key={cat?._id} className="hover:text-black hover:bg-gray-200 bg-opacity-90 my-2">{cat?.title}</li>
+
+                                    ))}
+
                                 </ul>
                             </div>
                         </div>
@@ -132,153 +143,48 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                                 </div>
                                 <h3 className="text-[14px] font-[600] my-[10px] ">Colors</h3>
                                 <div>
-                                    <ul className="colors ps-0">
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
+                                    <ul className="colors flex flex-wrap gap-2.5 ps-0">
+                                        {colors && colors.map((each, index) => (
+                                            <input key={index} onClick={() => handleColor(each?._id)} className={`w-[25px] h-[25px] focus:border-black border-2 focus: rounded-full cursor-pointer ${backObj[each?.title]}`} />
+                                        ))}
                                     </ul>
                                 </div>
                                 <h3 className="text-[14px] font-[600] my-[10px] ">Size</h3>
-                                <div>
-                                    <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative hover:pl-0 float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem] "
-                                            type="checkbox"
-                                            value=""
-                                            id="small" />
-                                        <label
-                                            className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="small">
-                                            S
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="medium" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="medium">
-                                            M
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="large" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="large">
-                                            L
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="ExtraLarge" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="ExtraLarge">
-                                            XL
-                                        </label>
-                                    </div>
-                                    <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                        <input
-                                            className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                            type="checkbox"
-                                            value=""
-                                            id="DoubleExtra" />
-                                        <label
-                                            className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                            htmlFor="DoubleExtra">
-                                            XXL
-                                        </label>
-                                    </div>
-
-                                </div>
+                                {
+                                    stars.map((star, index) => (
+                                        <div key={index} className="mb-[0.125rem] min-h-[1.5rem] pl-[1.5rem]">
+                                            <input
+                                                className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                                type="checkbox"
+                                                value={star.value} id={star?.name} />
+                                            <label
+                                                className="inline-block text-[#777777] hover:bg-slate-100 w-full pl-[0.15rem] hover:cursor-pointer"
+                                                htmlFor={star?.name}>
+                                                {star?.value}
+                                            </label>
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                         <div className="  py-[10px] px-[15px] shadow-lg">
                             <h3 className="text-black text-[1rem] font-[600] space-x-2 mb-[20px] ">Brands</h3>
-                            <div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
+                            {brands && brands.map((brand) => (
+                                <div key={brand?._id} className="mb-[0.125rem]  min-h-[1.5rem] pl-[1.5rem]">
                                     <input
-                                        className="relative hover:pl-0 float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                        className="relative float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
                                         type="checkbox"
-                                        value=""
-                                        id="BRAND1" />
+                                        value={brand?._id}
+                                        id={brand?.title} />
                                     <label
                                         className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND1">
-                                        SAMSUNG
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem] "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND2" />
-                                    <label
-                                        className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND2">
-                                        ASUS
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND3" />
-                                    <label
-                                        className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND3">
-                                        APPLE
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative  float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="BRAND4" />
-                                    <label
-                                        className="inline-block text-[#777777] pl-[0.15rem] w-full hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="BRAND4">
-                                        BOAT
-                                    </label>
-                                </div>
-                                <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
-                                    <input
-                                        className="relative float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]   border-[0.125rem]  "
-                                        type="checkbox"
-                                        value=""
-                                        id="LENEVO" />
-                                    <label
-                                        className="inline-block text-[#777777] w-full pl-[0.15rem] hover:cursor-pointer hover:bg-slate-100"
-                                        htmlFor="LENEVO">
-                                        LENEVO
+                                        htmlFor={brand?.title}>
+                                        {brand?.title}
                                     </label>
                                 </div>
 
-                            </div>
+                            ))}
+
 
                         </div>
                         <div className="  py-[10px] px-[15px] shadow-lg">

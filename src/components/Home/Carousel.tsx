@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const SampleNextArrow = (props: any) => {
     const { className, style, onClick } = props;
@@ -84,19 +85,30 @@ const Carousel = () => {
         <div className=" cursor-pointer">
             <Slider responsive={responsive}>
                 <div>
-                    <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/OnePlus/Flagship/115G/19Aug/D66357764_WLD_OnePlus_Salami_NewLaunch_DesktopTallHero_3000x1200._CB598553099_.jpg" alt="img1" />
+                    <Link to="/product/6532112c35ca026efd058444">
+                        <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/OnePlus/Flagship/115G/19Aug/D66357764_WLD_OnePlus_Salami_NewLaunch_DesktopTallHero_3000x1200._CB598553099_.jpg" alt="img1" />
+                    </Link>
                 </div>
                 <div>
-                    <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/wearables/Boat_SIgma/wave_3000x1200-up._CB596878552_.jpg" alt="img4" />
+                    <Link to="/product/65433425ff2dd51bb661f308">
+                        <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/wearables/Boat_SIgma/wave_3000x1200-up._CB596878552_.jpg" alt="img4" />
+                    </Link>
                 </div>
                 <div>
-                    <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/tiyesum/iQOOZ7Pro/NewKV/14thAug/D92526702_WLD_iQOO-Z7-Pro-5G_New-Launch_Tall_hero_3000x1200._CB598193729_.jpg" alt="img3" />
+                    <Link to="/">
+                        <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/tiyesum/iQOOZ7Pro/NewKV/14thAug/D92526702_WLD_iQOO-Z7-Pro-5G_New-Launch_Tall_hero_3000x1200._CB598193729_.jpg" alt="img3" />
+                    </Link>
                 </div>
                 <div>
-                    <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/Samsung/SamsungBAU/Q5B5/Sale-is-live/D87778320_INWLD-WLD-Samsung-Q5B5-NewLaunch-July23_tallhero_3000x1200_2._CB598491787_.jpg" alt="img4" />
+                    <Link to="/product/6532185135ca026efd0584ed">
+                        <img className=" h-full bg-no-repeat" src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/Samsung/SamsungBAU/Q5B5/Sale-is-live/D87778320_INWLD-WLD-Samsung-Q5B5-NewLaunch-July23_tallhero_3000x1200_2._CB598491787_.jpg" alt="img4" />
+
+                    </Link>
                 </div>
                 <div>
-                    <img className=" h-full bg-no-repeat" src="https://m.media-amazon.com/images/I/71NvQQcaVfL._SX3000_.jpg" alt="img5" />
+                    <Link target="_black" to="https://www.primevideo.com/detail/Adipurush/0JIHKJ9VD04K1S5CAGG2QB7PBO">
+                        <img className=" h-full bg-no-repeat" src="https://m.media-amazon.com/images/I/71NvQQcaVfL._SX3000_.jpg" alt="img5" />
+                    </Link>
                 </div>
             </Slider>
         </div>

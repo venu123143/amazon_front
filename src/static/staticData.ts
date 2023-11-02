@@ -47,18 +47,26 @@ import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-export const base_url = "http://localhost:5000/api"
-// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+// export const base_url = "http://localhost:5000/api"
+export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
-
+export type Filters = {
+    color: string[];
+    category: string | null;
+    brand: string[];
+    totalRating: string[];
+    sort: string | null;
+    page: number;
+    limit: number;
+};
 
 export const stars = [{ name: 'five', value: 5 }, { name: 'four', value: 4 },
-    { name: 'three', value: 3 },
-    { name: 'twp', value: 2 },
-    { name: 'one', value: 1 },
-    ]
+{ name: 'three', value: 3 },
+{ name: 'twp', value: 2 },
+{ name: 'one', value: 1 },
+]
 
 export const colorObj: any = {
     BLUE: "text-[#0000FF]",
@@ -246,10 +254,10 @@ export const topProducts = [
 export const carousel = [watch, iphoneblue, iphonered, earpods, speaker, phone, camera]
 
 export const offers = [
-    { brand: 'Boat Watch', color: "black", title: 'Boat Watch Xtend Sport', offer: 'From $399 or $16.32/mo. for 24 mo*', img: boatWatch },
-    { brand: 'Boat Headphones', color: "white", title: 'Boat Rockerz 400', offer: 'From $399 or $16.32/mo. for 24 mo*', img: headPhones },
-    { brand: 'Boat soundbars', color: "white", title: 'Boat Aavante Bar', offer: 'From $399 or $16.32/mo. for 24 mo*', img: soundbars },
-    { brand: 'Boat earpods', color: "white", title: 'Boat Airdopes 161', offer: 'From $399 or $16.32/mo. for 24 mo*', img: boat161 },
+    { brand: 'Boat Watch', color: "black", title: 'Boat Watch Xtend Sport', offer: 'From $399 or $16.32/mo. for 24 mo*', img: boatWatch, path: '/product/65433b9aff2dd51bb661f369' },
+    { brand: 'Boat Headphones', color: "white", title: 'Boat Rockerz 400', offer: 'From $399 or $16.32/mo. for 24 mo*', img: headPhones, path: '/product/654351c9ff2dd51bb661f538' },
+    { brand: 'Boat soundbars', color: "white", title: 'Boat Aavante Bar', offer: 'From $399 or $16.32/mo. for 24 mo*', img: soundbars, path: '/product/654341a2ff2dd51bb661f4b3' },
+    { brand: 'Boat earpods', color: "white", title: 'Boat Airdopes 161', offer: 'From $399 or $16.32/mo. for 24 mo*', img: boat161, path: '/product/654330f7ff2dd51bb661f293' },
 ]
 
 
