@@ -35,7 +35,7 @@ const FeatureCollection = () => {
 
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1  ">
           {categories.map((item: any, index) => (
-            <Link to="/" key={index}>
+            <Link to={`/products?category=${item?.params}`} key={index}>
               <div key={index} className="flex items-center justify-between md:justify-center cursor-pointer">
                 <div>
                   <h6 className="font-medium text-[1rem]">{item.item}</h6>

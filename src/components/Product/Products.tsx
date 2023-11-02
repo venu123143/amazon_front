@@ -1,12 +1,12 @@
 import $ from "jquery"
 import { useState, useEffect, useLayoutEffect, CSSProperties } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 import { RxCross2 } from "react-icons/rx"
 import { AiOutlineMenu } from "react-icons/ai"
 import { HiOutlineBars4 } from "react-icons/hi2"
-import { BsThreeDotsVertical } from "react-icons/bs"
+import { BsCartX, BsThreeDotsVertical } from "react-icons/bs"
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { LiaRupeeSignSolid } from "react-icons/lia"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -298,42 +298,62 @@ const Products = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="sm:pb-5 products">
-
-                                <div className={` ${grid === 3 ? "grid lg:grid-cols-2 sm:gap-5 border border-b-2 sm:border-none 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center border border-b-2 sm:border-none sm:gap-5 grid-cols-1" : "grid sm:gap-5 place-items-center border border-b-2 sm:border-none grid-cols-1"} `}>
-                                    {(grid === 1 || grid === 2 || grid === 3) && products?.map((item, index) => (
-                                        <ProductCard key={index} data={item} wishlist={wishlist} />
-                                    ))}
-                                    {
-                                        grid === 4 && products?.map((item, index) => (
-                                            <LongCard key={index} data={item} wishlist={wishlist} />
-                                        ))
-                                    }
-                                </div>
-                            </div>
-
-                            <nav className="my-[20px]">
-                                <div className="flex border bg-white rounded-lg justify-between -space-x-px text-sm ">
-                                    <button onClick={() => setFilters({ ...filters, page: filters.page > 1 ? filters.page - 1 : 1 })} className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        Previous
-                                    </button>
-                                    <button onClick={() => setFilters({ ...filters, page: 1 })} className={`${filters.page === 1 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
-                                        1
-                                    </button>
-                                    <button onClick={() => setFilters({ ...filters, page: 2 })} className={`${filters.page === 2 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
-                                        2
-                                    </button>
-                                    <div className="flex items-center">
-                                        ---
+                            {products.length === 0 ? (
+                                <>
+                                    <div id="empty-wishlist" className="bg-skin-background" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                                        <div className="empty-wishlist" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                            <div className="empty-wishlist-icon" style={{ zIndex: '-1', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'rgba(0, 0, 0, 0.1)', fontSize: '15rem', fontWeight: '530', fontFamily: 'poppins' }}>
+                                                <BsCartX className="w-full h-screen opacity-50" />
+                                            </div>
+                                            <h2 className="text-skin-base" style={{ textAlign: 'center', fontSize: '50px', fontWeight: 'bold', fontFamily: 'poppins' }}>No products preset with this filter</h2>
+                                            <NavLink className="hover:shadow-lg transition-all hover:scale-110" style={{ padding: '12px 15px', margin: '20px 20px', color: 'white', textDecoration: 'none', fontStyle: 'italic', fontFamily: 'poppins', background: 'linear-gradient(93.87deg, red,gray)', borderRadius: "8px" }}
+                                                to="/">Go to Home</NavLink>
+                                            <p className="text-skin-backgroundHover" style={{ fontStyle: 'italic', fontFamily: 'poppins', textAlign: 'center' }}>Clear Filter and Try again..!</p>
+                                        </div>
                                     </div>
-                                    <button onClick={() => setFilters({ ...filters, page: 3 })} className={`${filters.page === 3 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
-                                        3
-                                    </button>
-                                    <button onClick={() => setFilters({ ...filters, page: filters.page > 1 ? filters.page + 1 : 1 })} className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        Next
-                                    </button>
+                                </>
+                            ) : (
+                                <div>
+                                    <div className="sm:pb-5 products">
+
+                                        <div className={` ${grid === 3 ? "grid lg:grid-cols-2 sm:gap-5 border border-b-2 sm:border-none 1100px:grid-cols-3 grid-cols-1 place-items-center" : "null"} ${grid === 2 ? "grid md:grid-cols-2 place-items-center border border-b-2 sm:border-none sm:gap-5 grid-cols-1" : "grid sm:gap-5 place-items-center border border-b-2 sm:border-none grid-cols-1"} `}>
+                                            {(grid === 1 || grid === 2 || grid === 3) && products?.map((item, index) => (
+                                                <ProductCard key={index} data={item} wishlist={wishlist} />
+                                            ))}
+                                            {
+                                                grid === 4 && products?.map((item, index) => (
+                                                    <LongCard key={index} data={item} wishlist={wishlist} />
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                    <nav className="my-[20px]">
+                                        <div className="flex border bg-white rounded-lg justify-between -space-x-px text-sm ">
+                                            <button onClick={() => setFilters({ ...filters, page: filters.page! > 1 ? filters.page! - 1 : 1 })} className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                Previous
+                                            </button>
+                                            <button onClick={() => setFilters({ ...filters, page: 1 })} className={`${filters.page === 1 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
+                                                1
+                                            </button>
+                                            <button onClick={() => setFilters({ ...filters, page: 2 })} className={`${filters.page === 2 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
+                                                2
+                                            </button>
+                                            <div className="flex items-center">
+                                                ---
+                                            </div>
+                                            <button onClick={() => setFilters({ ...filters, page: 3 })} className={`${filters.page === 3 ? "bg-slate-400" : ""} flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>
+                                                3
+                                            </button>
+                                            <button onClick={() => setFilters({ ...filters, page: filters.page! > 1 ? filters.page! + 1 : 1 })} className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                Next
+                                            </button>
+                                        </div>
+                                    </nav>
                                 </div>
-                            </nav>
+
+
+                            )}
+
 
                         </div>
                     </div>

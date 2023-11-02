@@ -20,6 +20,9 @@ import { addToCart, descreaseCart, removeFromCart } from "../redux/reducers/cart
 import { Image } from "../redux/reducers/blogs/blogSlice"
 
 import { borderObj, colorObj, backObj } from "../static/staticData"
+import Slider from "react-slick";
+import { SampleNextArrow, SamplePrevArrow } from "../components/Home/Carousel"
+
 
 const override: CSSProperties = {
     display: "block",
@@ -122,7 +125,21 @@ const SingleProductPage = () => {
             dispatch(descreaseCart(singleProduct))
         }
     }
+    const responsive = [
+        {
+            breakpoint: 650,
+            settings: {
+                dots: true,
+                infinite: false,
+                speed: 1000,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                nextArrow: <SampleNextArrow />,
+                prevArrow: <SamplePrevArrow />
+            }
+        },
 
+    ]
 
     return (
 
@@ -152,7 +169,7 @@ const SingleProductPage = () => {
                             <section className="block lg:flex gap-5 w-full mt-5">
                                 <div className="lg:w-1/2">
                                     <div className="flex gap-4">
-                                        <div className="flex flex-col justify-center gap-2">
+                                        <div className="hidden sm:flex flex-col justify-center gap-2">
                                             {singleProduct?.images?.map((img: Image, idx: number) => (
                                                 <div key={idx} className=" bg-gray-300 rounded-md w-[80px] h-[80px] p-1">
                                                     <img onMouseEnter={() => setImage(idx)} className="h-full max-w-full rounded-lg max-h-[100px] cursor-pointer m-auto"
@@ -160,8 +177,20 @@ const SingleProductPage = () => {
                                                 </div>
                                             ))}
                                         </div>
-                                        <div className="bg-slate-300 rounded-md flex w-full shadow-lg min-h-[350px] max-h-[500px] items-center justify-center p-5">
+
+                                        <div className="hidden sm:flex bg-slate-300 rounded-md w-full shadow-lg min-h-[350px] max-h-[500px] items-center justify-center p-5">
                                             <img className=" max-w-full rounded-lg h-full" src={singleProduct?.images[image]?.url} alt="Main-Image" />
+                                        </div>
+                                        <div className="sm:hidden block  w-full h-full ">
+                                            <Slider responsive={responsive} >
+                                                {singleProduct?.images?.map((img: Image, idx: number) => (
+                                                    <div key={idx} className=" bg-gray-300 rounded-md p-1">
+                                                        <img className="h-full max-w-full rounded-lg cursor-pointer m-auto"
+                                                            src={img?.url} alt="sideImages" />
+                                                    </div>
+                                                ))}
+
+                                            </Slider>
                                         </div>
                                     </div>
 

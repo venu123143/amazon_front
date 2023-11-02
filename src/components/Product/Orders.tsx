@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import { getOrders } from '../../redux/reducers/orders/orderSlice'
 import OrderCard from '../Cards/OrderCard'
-import { Link } from 'react-router-dom'
-import { BsBook, BsCartCheck } from 'react-icons/bs'
+import { Link, NavLink } from 'react-router-dom'
+import { BsBook, BsCartCheck, BsCartX } from 'react-icons/bs'
 import { GrCart } from 'react-icons/gr'
 import { MdOutlineFlipCameraAndroid } from 'react-icons/md'
 import { AiOutlineAppstore } from 'react-icons/ai'
@@ -19,13 +19,23 @@ const Orders = () => {
         <section className=''>
             {orders.length === 0 ? (
                 <>
-                    No orders
+                    <div id="empty-wishlist" className="bg-skin-background" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                        <div className="empty-wishlist" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <div className="empty-wishlist-icon" style={{ zIndex: '-1', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'rgba(0, 0, 0, 0.1)', fontSize: '15rem', fontWeight: '530', fontFamily: 'poppins' }}>
+                                <BsCartX className="w-full h-screen opacity-50" />
+                            </div>
+                            <h2 className="text-skin-base" style={{ textAlign: 'center', fontSize: '50px', fontWeight: 'bold', fontFamily: 'poppins' }}>You Haven't placed any order</h2>
+                            <NavLink className="hover:shadow-lg transition-all hover:scale-110" style={{ padding: '12px 15px', margin: '20px 20px', color: 'white', textDecoration: 'none', fontStyle: 'italic', fontFamily: 'poppins', background: 'linear-gradient(93.87deg, orange, gray)', borderRadius: "8px" }}
+                                to="/products">Place Order</NavLink>
+                            <p className="text-skin-backgroundHover" style={{ fontStyle: 'italic', fontFamily: 'poppins', textAlign: 'center' }}>Place some order and come back soon!</p>
+                        </div>
+                    </div>
                 </>
             ) : (
                 <>
                     <div className="rounded-md sm:block justify-between">
                         <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full mt-5">My Orders</h3>
-                       
+
                         <div className="md:flex gap-5 sm:p-5 block">
                             <div className="md:w-3/12 relative ">
                                 <div className="sticky bg-white top-32 rounded-lg py-[10px] px-[15px]  mb-3">

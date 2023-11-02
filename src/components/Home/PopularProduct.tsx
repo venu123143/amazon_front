@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { getAllProducts, getAllWishlist } from "../../redux/reducers/product/productSlice";
 
-const SampleNextArrow = (props: any) => {
+export const SampleNextArrow = (props: any) => {
     const { className, style, onClick, currentSlide, slideCount } = props;
     const isLastSlide = currentSlide === slideCount - 1;
     return (
         <div className={`${className}  absolute right-0 top-[50%] p-[20px] bg-black hover:bg-black  ${isLastSlide ? 'hidden' : ''}  `} style={{ ...style, zIndex: '1', display: 'flex', border: '2px solid white', height: '60%', alignItems: 'center', justifyContent: 'center', borderRadius: '5px' }} onClick={onClick} />
     )
 }
-const SamplePrevArrow = (props: any) => {
+export const SamplePrevArrow = (props: any) => {
     const { className, style, onClick, currentSlide } = props;
     const isFirstSlide = currentSlide === 0;
     return (

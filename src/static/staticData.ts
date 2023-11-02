@@ -58,7 +58,7 @@ export type Filters = {
     brand?: string[];
     totalRating?: string[];
     sort?: string | null;
-    page: number;
+    page?: number;
     limit?: number;
 };
 
@@ -161,52 +161,63 @@ export const categories = [
     {
         item: "Music & Gaming",
         para: "20 items",
-        img: game
+        img: game,
+        params: 'gaming'
     },
     {
         item: "Cameras & Videos",
         para: "10 items",
-        img: camera
+        img: camera,
+        params: 'cameras'
     },
     {
         item: "Smart Television",
         para: "10 items",
-        img: tv
+        img: tv,
+        params: 'tv'
     },
     {
         item: "HeadPhones",
         para: "10 items",
-        img: headphone
+        img: headphone,
+        params: 'earpods'
     },
     {
         item: "Smart watches",
         para: "10 items",
-        img: watch
+        img: watch,
+        params: 'watches'
     },
     {
         item: "Computers & Laptops",
         para: "10 items",
-        img: laptop
+        img: laptop,
+        params: 'laptops'
     },
     {
         item: "Accesories",
         para: "10 items",
-        img: earpods
+        img: earpods,
+        params: 'electronics'
     },
     {
         item: "Portable Speakers",
         para: "10 items",
-        img: speaker
+        img: speaker,
+        params: 'speakers'
     },
     {
         item: "Home Appliancies",
         para: "10 items",
-        img: homeappli
+        img: homeappli,
+        params: 'homeAppliancies'
     },
     {
         item: "Mobile & Tablet",
         para: "10 items",
-        img: phone
+        img: phone,
+        params: 'mobiles'
+
     },
 ]
 

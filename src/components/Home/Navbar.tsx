@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
@@ -19,6 +19,8 @@ import User from "../../assets/images/user.svg"
 import Cart from "../../assets/images/cart.svg"
 import { logout, setTheme, toggleScroll } from "../../redux/reducers/users/userSlice"
 import { AppDispatch, RootState } from "../../redux/store"
+import { Category, getCategories } from "../../redux/reducers/filters/filterSlice"
+import { getAllProducts } from "../../redux/reducers/product/productSlice"
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -26,11 +28,12 @@ const Navbar = () => {
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
   const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
+  const { categories } = useSelector((state: RootState) => state.filters)
   const dispatch: AppDispatch = useDispatch()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
-  const [categories, setCategories] = useState(false)
+  const [openCate, setOpenCat] = useState(false)
 
 
   window.addEventListener('scroll', () => {
@@ -42,7 +45,7 @@ const Navbar = () => {
       setActive(false)
       setIsDropdownOpen(false)
     }
-    setCategories(false)
+    setOpenCat(false)
   })
   function onWindowMatch() {
     if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
@@ -54,12 +57,12 @@ const Navbar = () => {
   onWindowMatch()
 
   const category = () => {
-    setCategories(!categories)
+    setOpenCat(!openCate)
     setDropdown(false)
   }
   const options = () => {
     setDropdown(!dropdown)
-    setCategories(false)
+    setOpenCat(false)
     setIsDropdownOpen(false)
 
   }
@@ -108,7 +111,14 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout())
   }
-
+  const handleCategory = (id: string) => {
+    dispatch(getAllProducts({ category: id }))
+    navigate('/products')
+    setOpenCat(false)
+  }
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [])
   return (
     <>
       <div className={`sm:static`}>
@@ -141,19 +151,15 @@ const Navbar = () => {
                 <div className="relative hidden sm:flex">
                   <button id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 hidden z-10 md:flex items-center py-2.5 px-4 text-sm font-medium text-center  rounded-l-lg text-gray-900 bg-gray-100 hover:bg-gray-200  focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                     type="button" onClick={category}> All categories <IoMdArrowDropdown size={22} /> </button>
-                  {categories &&
+                  {openCate &&
                     (
-                      <div className="absolute left-0 top-10 z-10 mt-2 w-56 origin-top-right rounded-md dark:bg-transparent bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+                      <div className="absolute left-0 top-10 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black  focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                         <div className="py-1" role="none">
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-0">Mobiles</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-1">Laptops</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-2">Cameras</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-3">Cloths</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-4">Tablets</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-5">Accessories</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-6">Washing Machines</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-7">Air Coinditioner</Link>
-                          <Link to="#" className="categories" role="menuitem" id="menu-item-8">Headsets</Link>
+                          {categories && categories.map((cat: Category) => (
+                            <div onClick={() => handleCategory(cat?._id)} key={cat?._id} className="hover:text-black hover:bg-gray-200 bg-opacity-90 pl-5 my-2">{cat?.title}</div>
+
+                          ))}
+
                         </div>
                       </div>
                     )

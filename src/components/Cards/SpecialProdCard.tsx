@@ -11,7 +11,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/reducers/cart/cartSlice";
 
-const SampleNextArrow = (props: any) => {
+export const SampleNextArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
         <div
@@ -21,7 +21,7 @@ const SampleNextArrow = (props: any) => {
     )
 }
 
-const SamplePrevArrow = (props: any) => {
+export const SamplePrevArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
         <div
