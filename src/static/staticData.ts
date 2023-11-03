@@ -35,8 +35,8 @@ import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-export const base_url = "http://localhost:5000/api"
-// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+// export const base_url = "http://localhost:5000/api"
+export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
@@ -112,6 +112,22 @@ export const orderStatus: any = {
     Returned: "bg-[#000] text-[#fff]",
     Ordered: "bg-[#00FF00]"
 }
+
+
+export const formatTime = (seconds: number) => {
+    const days = Math.floor(seconds / (24 * 60 * 60));
+    const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((seconds % (60 * 60)) / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${String(days).padStart(2, "0")}d ${String(hours).padStart(
+        2,
+        "0"
+    )}h ${String(minutes).padStart(2, "0")}m ${String(
+        remainingSeconds
+    ).padStart(2, "0")}s`;
+};
+
 export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopal.v@ahex.co.in"]
 export const information = ["Privacy Policy", "Refund Policy", "Shipping Policy", "Terms of Service", "Blogs"]
 export const account = ["Search ", "About Us", "Faq", "Contact", "Size Chart"]

@@ -428,3 +428,10 @@ footer:not(:first-child) {
     gap: 5px;
 }
 /* custom css for dropdown countries-cites */
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

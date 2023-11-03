@@ -1,3 +1,4 @@
+import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux"
 import { MoonLoader, SyncLoader } from "react-spinners"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -19,8 +20,7 @@ import { addToWishlist, getAllWishlist, getSingleProduct } from "../redux/reduce
 import { addToCart, descreaseCart, removeFromCart } from "../redux/reducers/cart/cartSlice"
 import { Image } from "../redux/reducers/blogs/blogSlice"
 
-import { borderObj, colorObj, backObj } from "../static/staticData"
-import Slider from "react-slick";
+import { borderObj, colorObj, backObj, formatTime } from "../static/staticData"
 import { SampleNextArrow, SamplePrevArrow } from "../components/Home/Carousel"
 
 
@@ -73,19 +73,6 @@ const SingleProductPage = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [Link, pageId]);
-    const formatTime = (seconds: number) => {
-        const days = Math.floor(seconds / (24 * 60 * 60));
-        const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
-        const minutes = Math.floor((seconds % (60 * 60)) / 60);
-        const remainingSeconds = seconds % 60;
-
-        return `${String(days).padStart(2, "0")}d ${String(hours).padStart(
-            2,
-            "0"
-        )}h ${String(minutes).padStart(2, "0")}m ${String(
-            remainingSeconds
-        ).padStart(2, "0")}s`;
-    };
 
 
 
@@ -131,7 +118,7 @@ const SingleProductPage = () => {
             settings: {
                 dots: true,
                 infinite: false,
-                speed: 1000,
+                speed: 500,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 nextArrow: <SampleNextArrow />,
@@ -189,7 +176,6 @@ const SingleProductPage = () => {
                                                             src={img?.url} alt="sideImages" />
                                                     </div>
                                                 ))}
-
                                             </Slider>
                                         </div>
                                     </div>
