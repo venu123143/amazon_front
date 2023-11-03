@@ -14,7 +14,14 @@ const getProducts = async (data: Filters) => {
                     params.append(key, value.join(','));
                 }
             } else if (value !== '' && value !== 0) {
-                params.append(key, String(value));
+                if (key === 'minPrice') {
+                    params.append(`price[gte]`, String(value))
+                } else if (key === 'maxPrice') {
+                    params.append(`price[lte]`, String(value))
+
+                } else {
+                    params.append(key, String(value));
+                }
             }
         }
     }
@@ -23,7 +30,7 @@ const getProducts = async (data: Filters) => {
 
     console.log(queryString);
 
-    const res = await axios.get(`${base_url}/product/?${params.toString()}`)
+    const res = await axios.get(`${base_url}/product/?${params.toString()} `)
     return res.data
 }
 const getProduct = async (id: string) => {

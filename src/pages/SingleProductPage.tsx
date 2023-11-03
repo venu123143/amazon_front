@@ -72,7 +72,7 @@ const SingleProductPage = () => {
     }, [time]);
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
-    }, [Link]);
+    }, [Link, pageId]);
     const formatTime = (seconds: number) => {
         const days = Math.floor(seconds / (24 * 60 * 60));
         const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
@@ -320,8 +320,8 @@ const SingleProductPage = () => {
                                                         <img src={detail.url} alt="" className="sm:max-h-[300px] max-h-[200px] w-auto " />
                                                     </div>
                                                     <div className="md:w-1/2 ">
-                                                        <h3 className="font-[550] text-[1.5rem] text-skin-base">{singleProduct?.title}</h3>
-                                                        <p className="line-clamp-3" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></p>
+                                                        <h3 className="text-skin-base font-[550] text-[1.5rem]">{singleProduct?.title}</h3>
+                                                        <p className="text-skin-base line-clamp-3" dangerouslySetInnerHTML={{ __html: singleProduct?.description as string }}></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,7 +334,6 @@ const SingleProductPage = () => {
                 </section>
 
                 <section className="sm:mx-5 my-5 shadow-lg">
-                    <h3 className="mx-5 font-[550] text-[2rem]">Related Products</h3>
                     <PopularProduct />
                 </section>
                 <section className="sm:mx-5 my-5 shadow-lg">

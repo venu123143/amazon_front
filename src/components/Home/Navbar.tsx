@@ -24,6 +24,8 @@ import { getAllProducts } from "../../redux/reducers/product/productSlice"
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selctedCat, setSelectedCat] = useState("")
+  const [query, setQuery] = useState("")
   const element = document.documentElement
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
@@ -35,6 +37,10 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false)
   const [openCate, setOpenCat] = useState(false)
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(getAllProducts({ title: query }))
+  }
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
@@ -147,17 +153,16 @@ const Navbar = () => {
               </h1>
             </div>
             <div className="search sm:w-5/12 max-w-full">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="relative hidden sm:flex">
                   <button id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 hidden z-10 md:flex items-center py-2.5 px-4 text-sm font-medium text-center  rounded-l-lg text-gray-900 bg-gray-100 hover:bg-gray-200  focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                    type="button" onClick={category}> All categories <IoMdArrowDropdown size={22} /> </button>
+                    type="button" onClick={category}> {selctedCat === "" ? "All categories " : selctedCat}<IoMdArrowDropdown size={22} /> </button>
                   {openCate &&
                     (
                       <div className="absolute left-0 top-10 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black  focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                         <div className="py-1" role="none">
                           {categories && categories.map((cat: Category) => (
-                            <div onClick={() => handleCategory(cat?._id)} key={cat?._id} className="hover:text-black hover:bg-gray-200 bg-opacity-90 pl-5 my-2">{cat?.title}</div>
-
+                            <div onClick={() => { handleCategory(cat?._id); setSelectedCat(cat?.title) }} key={cat?._id} className="hover:text-black hover:bg-gray-200 bg-opacity-90 pl-5 my-2">{cat?.title}</div>
                           ))}
 
                         </div>
@@ -165,7 +170,9 @@ const Navbar = () => {
                     )
                   }
                   <div className="relative w-full">
-                    <input type="search" id="search-dropdown" className="block outline-none border-none p-2.5  w-full z-20 text-md md:rounded-l-none rounded-lg rounded-r-lg"
+                    <input
+                      onChange={(e) => setQuery(e.target.value)} value={query}
+                      type="search" id="search-dropdown" className="block outline-none border-none p-2.5  w-full z-20 text-md md:rounded-l-none rounded-lg rounded-r-lg"
                       placeholder="Search for cloths, electronics Phones etc..." required />
                     <button type="submit" className="group bg-[#febd69] absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white rounded-r-lg">
                       <BsSearch size={22} />
@@ -224,7 +231,7 @@ const Navbar = () => {
             </div>
           </div>
           {
-            <div className={`transition-all absolute w-full h-full z-10 ease-linear duration-300 delay-150 ${screen === true ? "overflow-x-hidden overflow-y-auto -translate-x-0 " : "-translate-x-full"} block bg-white dark:bg-gray-800 sm:hidden md:w-auto`} id="navbar-dropdown">
+            <div className={`transition-all w-full z-10 h-screen absolute ease-linear duration-300 delay-150 ${screen === true ? "group:overflow-hidden -translate-x-0 " : "-translate-x-full"} block bg-white dark:bg-gray-800 sm:hidden md:w-auto`} id="navbar-dropdown">
               <div className=" font-medium  p-4 md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 ">
                 <span>
                   <Link to="/" onClick={() => screenFuncTrue()} className="mobile-menu">Home</Link>
@@ -284,12 +291,16 @@ const Navbar = () => {
         </header>
         <header className={` ${screen === true ? "pointer-events-none overflow-hidden" : "pointer-events-auto"} block sm:hidden py-1 items-center justify-center bg-[#131921] `}>
           <div className="relative block sm:hidden w-4/5 m-auto">
-            <input type="search" id="search-dropdown" className="block outline-none border-none p-2.5  w-full z-20 md:rounded-l-none rounded-lg rounded-r-lg"
-              placeholder="Search for cloths, electronics Phones etc..." required />
-            <button type="submit" className="group bg-[#febd69] absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white rounded-r-lg">
-              <BsSearch size={22} />
-              <span className="sr-only">Search</span>
-            </button>
+            <form action="" onSubmit={handleSubmit}>
+              <input
+                onChange={(e) => setQuery(e.target.value)} value={query}
+                type="search" id="search-dropdown" className="block outline-none border-none p-2.5  w-full z-20 md:rounded-l-none rounded-lg rounded-r-lg"
+                placeholder="Search for cloths, electronics Phones etc..." required />
+              <button type="submit" className="group bg-[#febd69] absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white rounded-r-lg">
+                <BsSearch size={22} />
+                <span className="sr-only">Search</span>
+              </button>
+            </form>
           </div>
         </header>
         <header className="header-bottom py-3 ">

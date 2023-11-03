@@ -44,6 +44,8 @@ const Products = () => {
         brand: [],
         totalRating: [],
         sort: '-createdAt',
+        minPrice: null,
+        maxPrice: null,
         page: 1,
         limit: 12
     })
@@ -91,7 +93,9 @@ const Products = () => {
             totalRating: [],
             sort: '-createdAt',
             page: 1,
-            limit: 12
+            limit: 12,
+            minPrice: null,
+            maxPrice: null
         });
     };
     $(document).on('click', '.griditem div', function () {
@@ -108,7 +112,7 @@ const Products = () => {
                     data-testid="loader"
                 />
             </div>
-            <div className="bg-skin-background group">
+            <div className="bg-skin-background">
                 <BredCrumb title="Our Store" />
                 <div className="sm:px-5">
                     <div className="w-full flex justify-center ">
@@ -158,11 +162,15 @@ const Products = () => {
                                     <h3 className="text-[14px] font-[600] my-[10px] ">Price</h3>
                                     <div className="mb-3 flex  justify-between items-center">
                                         <div className="mr-[10px]">
-                                            <input type="number" id="first_name" className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:shadow-sky-600 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            <input
+                                                onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })} value={filters.minPrice as string}
+                                                type="number" id="first_name" className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:shadow-sky-600 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="From" min={1} required />
                                         </div>
                                         <div className="ml-[10px]">
-                                            <input type="number" id="first_name" className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            <input
+                                                onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })} value={filters.maxPrice as string}
+                                                type="number" id="first_name" className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="To" min={2} required />
                                         </div>
 
@@ -171,7 +179,7 @@ const Products = () => {
                                     <div>
                                         <ul className="colors flex flex-wrap gap-2.5 ps-0">
                                             {colors && colors.map((each, index) => (
-                                                <input key={index} onClick={() => handleColor(each?._id)} className={`w-[23px] h-[23px] focus:border-black border-2 focus: rounded-full cursor-pointer ${backObj[each?.title]}`} />
+                                                <input key={index} readOnly onClick={() => handleColor(each?._id)} className={`w-[23px] h-[23px] focus:border-black border-2 focus: rounded-full cursor-pointer ${backObj[each?.title]}`} />
                                             ))}
                                         </ul>
                                     </div>

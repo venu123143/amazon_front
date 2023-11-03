@@ -42,15 +42,15 @@ const App = () => {
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
-          <Route path='/orders' element={<PrivateRoutes><Orders/></PrivateRoutes>} />
+          <Route path='/orders' element={<PrivateRoutes><Orders /></PrivateRoutes>} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />
         <Route path="/sign-up" element={<RegisterPage />} />
         <Route path="/reset/:id" element={<ResetPassword />} />
         <Route path='/compare' element={<Compare />} />
-        <Route path='/sucess' element={<Sucess />} />
-        <Route path='/cancel' element={<Cancel />} />
+        <Route path='/sucess' element={<PrivateRoutes><Sucess /></PrivateRoutes>} />
+        <Route path='/cancel' element={<PrivateRoutes><Cancel /></PrivateRoutes>} />
         <Route path="*" element={<Errorpage />} />
       </Routes>
     </>

@@ -19,25 +19,13 @@ import apple from "../assets/images/brand-06.png"
 import intel from "../assets/images/brand-07.png"
 import sandisk from "../assets/images/brand-08.png"
 
-// iphone images
-import blue from "../assets/icons/iphoneBlue.jpg"
-import yellow from "../assets/icons/iphoneYellow.jpg"
-import red from "../assets/icons/iphoneRed.jpg"
-import white from "../assets/icons/iphoneWhite.jpg"
-
-// blogs
-
-// special card iphone
-import iphoneblue from "../assets/icons/iphoneBlue.jpg"
-import iphonered from "../assets/icons/iphoneRed.jpg"
 
 // offers boat products
 import boatWatch from "../assets/icons/boatWatch.webp"
 import boat161 from "../assets/icons/boat161.webp"
 import headPhones from "../assets/icons/headPhones.webp"
 import soundbars from "../assets/icons/soundbars.webp"
-import speakers from "../assets/icons/BoatPartySpeakers.webp"
-import Boatearpods from "../assets/icons/boatEarPods.webp"
+
 
 
 
@@ -47,17 +35,21 @@ import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-// export const base_url = "http://localhost:5000/api"
-export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+export const base_url = "http://localhost:5000/api"
+// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
 export type Filters = {
+    title?: string | null;
+    queryCategory?: string;
     color?: string[];
     category?: string | null;
     brand?: string[];
     totalRating?: string[];
     sort?: string | null;
+    minPrice?: string | null;
+    maxPrice?: string | null;
     page?: number;
     limit?: number;
 };
@@ -223,46 +215,6 @@ export const categories = [
 
 export const brands = [dell, bose, lg, sandisk, apple, samsung, canon, intel]
 
-export const topProducts = [
-    {
-        title: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Yellow color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "yellow",
-        image: yellow,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 Blue color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "blue",
-        image: blue,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 red color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "red",
-        image: red,
-        rating: 4
-    },
-    {
-        title: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        description: "Iphone 13 white color A15 Bionic chip with 4-core GPU Up to 19 hours video playback footnote faceID and Superfast 5G cellular 15.40 cm or 13.76 cm",
-        price: 64999,
-        color: "white",
-        image: white,
-        rating: 4
-    },
-
-]
-
-
-
-
-export const carousel = [watch, iphoneblue, iphonered, earpods, speaker, phone, camera]
 
 export const offers = [
     { brand: 'Boat Watch', color: "black", title: 'Boat Watch Xtend Sport', offer: 'From $399 or $16.32/mo. for 24 mo*', img: boatWatch, path: '/product/65433b9aff2dd51bb661f369' },
@@ -303,42 +255,6 @@ export const compareProducts = [
     },
 ]
 
-
-
-export const cartData = [
-    {
-        id: 1,
-        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        image: speakers,
-        price: 6999,
-        cartQuantity: 1,
-    },
-    {
-        id: 2,
-        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        image: Boatearpods,
-        price: 1099,
-        cartQuantity: 1,
-    }, {
-        id: 3,
-        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        image: boat161,
-        price: 899,
-        cartQuantity: 1,
-    },
-    {
-        id: 4,
-        name: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        desc: "ASUS Vivobook S 14 Intel EVO H-Series Core i5 12th Gen 12500H - (8 GB/512 GB SSD/Windows 11 Home) S3402ZA-LY521WS Thin and Light Laptop (14 Inch, Neutral Grey, 1.50 Kg, With MS Office)",
-        image: headPhones,
-        price: 999,
-        cartQuantity: 1,
-    },
-
-]
 
 export const RaziropayKey = "rzp_test_5H2f34UHN19PKM"
 
