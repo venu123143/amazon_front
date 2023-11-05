@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import React, { useCallback, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import Address from "./Address";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -7,14 +7,14 @@ import Logo from "../../assets/icons/vgold.png"
 
 import useRazorpay, { RazorpayOptions } from "react-razorpay";
 
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RaziropayKey, base_url } from "../../static/staticData";
 import { number, object, string } from "yup"
 import { useFormik } from "formik"
 import { AppDispatch } from "../../redux/store";
-import { toggleAddress } from "../../redux/reducers/users/userSlice";
+import { saveAddress, toggleAddress } from "../../redux/reducers/users/userSlice";
 import { Order } from "../../redux/reducers/orders/orderSlice";
 import { clearCart } from "../../redux/reducers/cart/cartSlice";
 import { toast } from "react-toastify";
@@ -30,34 +30,37 @@ let AddressSchema = object({
 });
 const Checkout = () => {
 
-  const [address, setAddress] = useState<any>("")
   const [Razorpay, isLoaded] = useRazorpay();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const { cartItems, cartTotalAmount } = useSelector((state: any) => state.cart);
+  const { cartItems } = useSelector((state: any) => state.cart);
+  const { address } = useSelector((state: any) => state.user);
+  console.log(address);
+
   // const { createOrder } = useSelector((state: any) => state.orders);
 
-  const handleCheckout = async () => {
-    console.log("clicked button");
-    const stripe = await loadStripe(
-      "pk_test_51NurmeSIbcockITrXLp3KUY7hbWoFuO2Fp4G8XFpUU8CXwbvUJI50zYVy0qWHrjsNhfc7Vb0lbcXrs5qhXJPTt9J003fUuNx5y"
-    );
-    const response = await axios.post(
-      "http://localhost:5000/api/product/create-checkout-session",
-      { cartItems });
-    const session = await response.data;
-    const checkout = await stripe?.redirectToCheckout({
-      sessionId: session?.id,
-    });
+  // const handleCheckout = async () => {
+  //   console.log("clicked button");
+  //   const stripe = await loadStripe(
+  //     "pk_test_51NurmeSIbcockITrXLp3KUY7hbWoFuO2Fp4G8XFpUU8CXwbvUJI50zYVy0qWHrjsNhfc7Vb0lbcXrs5qhXJPTt9J003fUuNx5y"
+  //   );
+  //   const response = await axios.post(
+  //     "http://localhost:5000/api/product/create-checkout-session",
+  //     { cartItems });
+  //   const session = await response.data;
+  //   const checkout = await stripe?.redirectToCheckout({
+  //     sessionId: session?.id,
+  //   });
 
-    if (checkout && checkout.error) {
-      console.log(checkout.error, "error occured");
-    }
+  //   if (checkout && checkout.error) {
+  //     console.log(checkout.error, "error occured");
+  //   }
 
-  };
+  // };
+  const totalPrice = cartItems.reduce((total: number, item: any) => total + item.price, 0);
 
   const handlePaymentSucess = async (e: any) => {
-    dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount }))
+    dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount: totalPrice }))
     dispatch(clearCart())
     navigate('/sucess')
   }
@@ -67,24 +70,37 @@ const Checkout = () => {
     navigate('/cancel')
   }
 
-
+  useEffect(() => {
+    formik.setValues({
+      name: address?.name,
+      mobile: address?.mobile,
+      address: address?.address,
+      state: address?.state,
+      zipcode: address?.zipcode,
+    })
+  }, [address])
 
   const handlePayment = useCallback(async () => {
     try {
-      if (address === "") {
+
+      if (!address) {
         toast.error("please  fill the address")
         return
       }
+      if (totalPrice > 100000) {
+        toast.info("test payment only accepts less than one Lakh rupees ")
+        return
+      }
       let res = await axios.post(`${base_url}/product/create-raziropay-session`,
-        { cartTotalAmount }) as any;
+        { cartTotalAmount: totalPrice }) as any;
       const createOrder = res.data
+
       if (res?.response?.data?.message) {
         toast.error(res?.response?.data?.message, {
           position: "top-right"
         })
         return
       }
-      console.log(res);
 
       const options: RazorpayOptions = {
         key: RaziropayKey,
@@ -108,16 +124,16 @@ const Checkout = () => {
         },
       };
       const rzp1 = new Razorpay(options);
+
       rzp1.on("payment.failed", function (response: any) {
         handlePaymentFailure(response)
       });
       rzp1.open();
     } catch (error: any) {
-      console.log(error);
-
+      toast.error(error?.response?.data.message)
     }
 
-  }, [isLoaded])
+  }, [isLoaded, address])
 
 
 
@@ -131,21 +147,16 @@ const Checkout = () => {
     },
     validationSchema: AddressSchema,
     onSubmit: values => {
-      // formik.resetForm()
-      setAddress(values)
+      dispatch(saveAddress(values))
       dispatch(toggleAddress(true))
-
+      // formik.resetForm()
     },
   });
-
-
-
   return (
     <div className="bg-[#F0FFFF] dark:bg-skin-background relative w-full">
       <Link
         to="/cart"
-        className="ml-3 pt-3 text-[#777777] flex items-center hover:text-black"
-      >
+        className="ml-3 pt-3 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
         <BsArrowLeftShort size={28} className="inline" />
         <button>back to Cart</button>
       </Link>
@@ -202,7 +213,7 @@ const Checkout = () => {
                 </button>
                 <div
                   onClick={handlePayment}
-                  className="bg-red-600 px-3 py-2 cursor-pointer sm:block hidden rounded-md text-white shadow-md hover:scale-110 transition-all"
+                  className="bg-red-600 px-3 py-2 cursor-pointer  rounded-md text-white shadow-md hover:scale-110 transition-all"
                 >
                   Proceed Payment
                 </div>
@@ -246,7 +257,7 @@ const Checkout = () => {
           <div className="p-4 space-y-3 border-b">
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>Subtotal</span>
-              <span className="font-semibold text-skin-base">$ {cartTotalAmount}</span>
+              <span className="font-semibold text-skin-base">$ {totalPrice}</span>
             </div>
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>GST (5%)</span>
@@ -259,7 +270,7 @@ const Checkout = () => {
           </div>
           <div className="font-semibold text-skin-base text-xl px-8 flex justify-between py-8">
             <span>Total</span>
-            <span>$ {cartTotalAmount}</span>
+            <span>$ {totalPrice}</span>
           </div>
           <div className="sm:px-8 flex justify-between">
             <input
@@ -273,7 +284,7 @@ const Checkout = () => {
           </div>
           <div className="flex justify-center items-center mt-5">
             <button
-              onClick={handleCheckout}
+              onClick={handlePayment}
               className="bg-red-600 px-3 py-2 w-[75%] shadow-lg  rounded-md text-white hover:scale-110 transition-all"
             >
               Proceed Payment
@@ -285,4 +296,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default React.memo(Checkout);

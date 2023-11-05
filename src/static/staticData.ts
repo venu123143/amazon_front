@@ -27,16 +27,14 @@ import headPhones from "../assets/icons/headPhones.webp"
 import soundbars from "../assets/icons/soundbars.webp"
 
 
-
-
 import { LiaShippingFastSolid } from "react-icons/lia"
 import { AiOutlineGift } from "react-icons/ai"
 import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-// export const base_url = "http://localhost:5000/api"
-export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+export const base_url = "http://localhost:5000/api"
+// export const base_url=  "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
@@ -110,7 +108,7 @@ export const orderStatus: any = {
     Cancelled: "bg-[#FF0000] text-[#fff]",
     Delivered: "bg-[#008000] text-[#000]",
     Returned: "bg-[#000] text-[#fff]",
-    Ordered: "bg-[#00FF00]"
+    Ordered: "bg-[#00FF00] text-[#000000]"
 }
 
 

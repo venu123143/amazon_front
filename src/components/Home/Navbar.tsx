@@ -40,6 +40,7 @@ const Navbar = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(getAllProducts({ title: query }))
+    navigate(`/search?q=${query}`)
   }
 
   window.addEventListener('scroll', () => {
@@ -119,7 +120,7 @@ const Navbar = () => {
   }
   const handleCategory = (id: string) => {
     dispatch(getAllProducts({ category: id }))
-    navigate('/products')
+    navigate(`/search?f=${id}`)
     setOpenCat(false)
   }
   useEffect(() => {

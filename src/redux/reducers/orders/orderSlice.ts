@@ -52,9 +52,25 @@ export const Order = createAsyncThunk('orderSlice/Order', async (data: any, thun
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
+export const getOrder = createAsyncThunk('orderSlice/gerOrder', async (id: string, thunkAPI) => {
+    try {
+        const order = await orderService.orders(id)
+        return order
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
+export const updateOrder = createAsyncThunk('orderSlice/updateOrder', async (data: { id: string, Status: string, }, thunkAPI) => {
+    try {
+        const order = await orderService.updateStatus(data.id, data.Status)
+        return order
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
 interface OrderState {
     orders: IOrder[],
-    createOrder: null,
+    updateOrder: boolean,
     isError: boolean,
     isLoading: boolean,
     isSuccess: boolean,
@@ -63,7 +79,7 @@ interface OrderState {
 
 const initialState: OrderState = {
     orders: [],
-    createOrder: null,
+    updateOrder: false,
     isError: false,
     isLoading: false,
     isSuccess: false,
@@ -93,8 +109,8 @@ const orderSlice = createSlice({
         })
         builder.addCase(Order.pending, (state) => {
             state.isLoading = true
-        }).addCase(Order.fulfilled, (state, action: PayloadAction<any>) => {
-            state.orders = action.payload
+        }).addCase(Order.fulfilled, (state) => {
+            // state.orders = action.payload
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
@@ -102,6 +118,42 @@ const orderSlice = createSlice({
                 position: "top-right"
             })
         }).addCase(Order.rejected, (state, action: PayloadAction<any>) => {
+            state.isError = false
+            state.isLoading = false
+            state.message = action.payload?.message
+            toast.error(state.message, {
+                position: "top-right"
+            })
+        })
+        builder.addCase(getOrder.pending, (state) => {
+            state.isLoading = true
+        }).addCase(getOrder.fulfilled, (state, action: PayloadAction<any>) => {
+            state.orders = action.payload
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            toast.success("Order created successfully", {
+                position: "top-right"
+            })
+        }).addCase(getOrder.rejected, (state, action: PayloadAction<any>) => {
+            state.isError = false
+            state.isLoading = false
+            state.message = action.payload?.message
+            toast.error(state.message, {
+                position: "top-right"
+            })
+        })
+        builder.addCase(updateOrder.pending, (state) => {
+            state.isLoading = true
+        }).addCase(updateOrder.fulfilled, (state) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            state.updateOrder = !state.updateOrder
+            toast.success("Order Cancelled successfully", {
+                position: "top-right"
+            })
+        }).addCase(updateOrder.rejected, (state, action: PayloadAction<any>) => {
             state.isError = false
             state.isLoading = false
             state.message = action.payload?.message

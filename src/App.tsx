@@ -26,6 +26,7 @@ import Cancel from "./pages/Cancel";
 import Sucess from "./pages/Sucess";
 import { PrivateRoutes } from "./components/Error/PrivateRoutes"
 import Orders from "./components/Product/Orders";
+import SearchProd from "./pages/SearchProd";
 const App = () => {
   return (
     <>
@@ -41,6 +42,7 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/search' element={<SearchProd />} />
           <Route path='/checkout' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
           <Route path='/orders' element={<PrivateRoutes><Orders /></PrivateRoutes>} />
         </Route>

@@ -4,7 +4,7 @@ import userService from "./userService";
 
 const getUserFromLocalStorage = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token') as string) : null
 const themes = localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
-
+const address = localStorage.getItem("address") ? JSON.parse(localStorage.getItem("address") as string) : null
 export interface UserState {
     _id?: string | null;
     firstname?: string | null;
@@ -18,6 +18,13 @@ export interface UserState {
     otp?: any;
 }
 
+export interface Address {
+    name: string;
+    mobile: string;
+    address: string;
+    state: string;
+    zipcode: string;
+}
 interface AppState {
     screen: boolean,
     user: UserState | null;
@@ -26,7 +33,8 @@ interface AppState {
     isSuccess: boolean;
     message: string;
     theme: string | null;
-    address: boolean;
+    isSaved: boolean;
+    address: Address | null;
 }
 
 const initialState: AppState = {
@@ -37,7 +45,8 @@ const initialState: AppState = {
     isSuccess: false,
     message: "",
     theme: themes,
-    address: false,
+    address: address,
+    isSaved: false,
 };
 
 export const registerUser = createAsyncThunk('userSlice/registerUser', async (userData: UserState, thunkAPI) => {
@@ -100,7 +109,11 @@ const slice = createSlice({
             state.theme = action.payload
         },
         toggleAddress: (state, action: PayloadAction<any>) => {
+            state.isSaved = action.payload
+        },
+        saveAddress: (state, action: PayloadAction<any>) => {
             state.address = action.payload
+            localStorage.setItem('address', JSON.stringify(action.payload))
         }
     },
     extraReducers: (builder) => {
@@ -203,5 +216,5 @@ const slice = createSlice({
 })
 
 
-export const { toggleScroll, setTheme, toggleAddress } = slice.actions
+export const { toggleScroll, setTheme, toggleAddress, saveAddress } = slice.actions
 export default slice.reducer

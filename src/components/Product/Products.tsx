@@ -56,7 +56,6 @@ const Products = () => {
     const getProducts = () => {
         dispatch(getAllProducts(filters))
     }
-    console.log(filters);
 
     useEffect(() => {
         getProducts()
@@ -117,7 +116,6 @@ const Products = () => {
                 <div className="sm:px-5">
                     <div className="w-full flex justify-center ">
                         <div className={`w-3/12 mr-5 hidden md:block`}>
-
                             <div className="bg-white rounded-lg py-[10px] px-[15px] mb-3 shadow-lg">
                                 <h3 className="text-black  text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
                                 <div className="h-[150px] overflow-y-scroll no-scrollbar">

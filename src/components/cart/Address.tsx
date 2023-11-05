@@ -5,12 +5,12 @@ import { toggleAddress } from "../../redux/reducers/users/userSlice"
 const Address = ({ title, name, id, type, onChange, onBlur, value }: any) => {
     const dispatch: AppDispatch = useDispatch()
     const [save, setSave] = useState(false)
-    const { address } = useSelector((state: RootState) => state.user)
+    const { isSaved } = useSelector((state: RootState) => state.user)
     useEffect(() => {
-        if (address) {
+        if (isSaved) {
             setSave(true)
         }
-    }, [address])
+    }, [isSaved])
     const handleSave = () => {
         setSave(false)
         dispatch(toggleAddress(false))

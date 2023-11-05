@@ -1,11 +1,19 @@
-
+import { useEffect } from "react"
+import { toast } from "react-toastify"
 import { RxCross2 } from "react-icons/rx"
 import { compareProducts } from "../static/staticData"
 const Compare = () => {
+    useEffect(() => {
+        toast.info("this page is currently static")
+    }, [])
     return (
         <>
             <section className="m-5">
-
+                {/* <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                    role="alert">
+                    <strong className="font-bold">Failure!</strong>
+                    <span className="block sm:inline"> Form submitted successfully.</span>
+                </div> */}
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
