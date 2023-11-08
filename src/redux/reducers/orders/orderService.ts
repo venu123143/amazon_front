@@ -26,7 +26,11 @@ const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: s
             razorPayOrderId: orderId,
             razorPayPaymentId: paymentId
         },
-        orderItems: cartItems,
+        orderItems: cartItems.map((cartItem) => ({
+            product: cartItem._id,
+            quantity: cartItem.cartQuantity,
+            color: cartItem.color[0].title,
+        })),
         totalPrice: cartTotalAmount
     }
     const res = await axios.post(`${base_url}/users/cart/create`, data, { withCredentials: true });

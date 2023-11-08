@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, CSSProperties } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import { getOrders } from '../../redux/reducers/orders/orderSlice'
@@ -8,11 +8,25 @@ import { BsBook, BsCartCheck, BsCartX } from 'react-icons/bs'
 import { GrCart } from 'react-icons/gr'
 import { MdOutlineFlipCameraAndroid } from 'react-icons/md'
 import { AiFillCaretDown, AiOutlineAppstore } from 'react-icons/ai'
+import { SyncLoader } from 'react-spinners'
+
+
+const MainSpinner: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+    width: 380,
+    position: 'absolute',
+    top: "50%",
+    left: "50%",
+    transform: 'translateX(-50%, -50%)'
+};
+
 const Orders = () => {
     const [closeMenu, setCloseMenu] = useState(true)
     const dispatch: AppDispatch = useDispatch()
-    const { orders, updateOrder } = useSelector((state: RootState) => state.orders)
-
+    const { orders, updateOrder, isLoading } = useSelector((state: RootState) => state.orders)
+    // const isLoading = false
     useEffect(() => {
         dispatch(getOrders())
     }, [updateOrder])
@@ -35,6 +49,15 @@ const Orders = () => {
                 </>
             ) : (
                 <>
+                    <div className={`${isLoading === true ? "block bg-black opacity-50 fixed top-0 left-0 z-20 w-full h-screen" : "hidden"}`}>
+                        <SyncLoader
+                            color="#361AE3"
+                            loading={isLoading}
+                            cssOverride={MainSpinner}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    </div>
                     <div className="rounded-md sm:block justify-between">
                         <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full mt-5">My Orders</h3>
 

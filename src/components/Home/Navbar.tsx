@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 // react icons
 import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai"
-import { LiaTimesSolid } from "react-icons/lia"
+import { LiaRupeeSignSolid, LiaTimesSolid } from "react-icons/lia"
 import { BsSearch, BsSun } from "react-icons/bs"
 import { IoMdArrowDropdown, IoMdKeypad } from "react-icons/io"
 import { PiDotsThreeVerticalBold } from "react-icons/pi"
@@ -36,7 +36,7 @@ const Navbar = () => {
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
   const { screen, theme, user } = useSelector((state: RootState) => state.user)
-  const { cartQuantity, cartTotalAmount, cartTotalQuantity } = useSelector((state: RootState) => state.cart)
+  const { cartTotalAmount, cartTotalQuantity } = useSelector((state: RootState) => state.cart)
   const { categories } = useSelector((state: RootState) => state.filters)
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
@@ -225,11 +225,11 @@ const Navbar = () => {
                   <Link to="/cart" className="flex items-center">
                     <img src={Cart} alt="cart" className="transition-all transform group-hover:rotate-180 duration-500 ease-in-out" />
                     <div className="flex flex-col">
-                      <span className={`badge ${cartTotalQuantity >= 1 ? "bg-white" : null} text-center text-black h-6 w-6 rounded-full badge-warning flex items-center justify-center`}>
-                        {user && cartTotalQuantity < 1 ? null : cartTotalQuantity}
+                      <span className={`badge ${user && cartTotalQuantity >= 1 ? "bg-white" : null} text-center text-black h-6 w-6 rounded-full badge-warning flex items-center justify-center`}>
+                        {user && cartTotalQuantity >= 1 ? cartTotalQuantity : null}
                       </span>
                       <p className="mb-0 text-white ">
-                        {cartTotalAmount < 1 ? null : `$${cartTotalAmount}`}
+                        {user && cartTotalAmount > 1 ? <span><LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartTotalAmount}</span> : null}
                       </p>
                     </div>
                   </Link>

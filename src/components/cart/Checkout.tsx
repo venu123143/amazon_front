@@ -36,7 +36,7 @@ const Checkout = () => {
   const dispatch: AppDispatch = useDispatch();
   const { cartItems, shipping, gst, totalPrice } = useSelector((state: any) => state.cart);
   const { address } = useSelector((state: any) => state.user);
-  console.log(shipping);
+  console.log(cartItems);
 
   // const { createOrder } = useSelector((state: any) => state.orders);
 
@@ -225,8 +225,8 @@ const Checkout = () => {
         </div>
         <div className="max-w-[400px] h-auto mx-auto bg-white dark:bg-[#222e35] sm:shadow-lg p-5">
           <h3 className="font-[550] border-b-2 my-5 text-[1.5rem] text-skin-base">Checkout</h3>
-          {cartItems.map((item: any) => (
-            <div key={item._id}>
+          {cartItems?.map((item: any) => (
+            <div key={item?._id}>
               <section className="border-b space-y-6 pb-2">
                 <div className="grid gap-2 my-1 grid-cols-5 col-span-8">
                   <div className="col-span-1  m-auto">
@@ -241,13 +241,13 @@ const Checkout = () => {
                       {item?.title}{" "}
                     </span>
                     <span className="text-skin-base">
-                      {item.cartQuantity} x <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item.price}
+                      {item?.cartQuantity} x <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item?.price}
                     </span>
                   </div>
                   <div className="flex justify-center ">
                     <div className="flex items-center space-x-2 text-sm justify-between">
                       <span className="font-semibold text-skin-base">
-                        <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item.price * item.cartQuantity}
+                        <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item?.price * item?.cartQuantity}
                       </span>
                     </div>
                   </div>
