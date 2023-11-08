@@ -1,7 +1,10 @@
 import { IconType } from "react-icons";
 import { features } from "../../static/staticData"
 import { categories } from "../../static/staticData";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "../../redux/reducers/product/productSlice";
 
 const renderIcon = (icon: IconType, index: number) => {
   const Icon = icon;
@@ -12,6 +15,12 @@ const renderIcon = (icon: IconType, index: number) => {
   );
 };
 const FeatureCollection = () => {
+  const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
+  const getProducts = (filters: { category: string }) => {
+    dispatch(getAllProducts(filters))
+    navigate('/search')
+  }
   return (
     <>
       <section className="rounded-md m-[1rem] bg-[#F5F5DC]">
@@ -34,8 +43,9 @@ const FeatureCollection = () => {
       <section className=" bg-[#ffffff] dark:opacity-75 rounded-md shadow-lg px-[10px] m-[20px]">
 
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1  ">
+          {/* to={`/products?category=${item?.params}`} */}
           {categories.map((item: any, index) => (
-            <Link to={`/products?category=${item?.params}`} key={index}>
+            <div onClick={() => getProducts({ category: item?.url })} key={index}>
               <div key={index} className="flex items-center justify-between md:justify-center cursor-pointer">
                 <div>
                   <h6 className="font-medium text-[1rem]">{item.item}</h6>
@@ -45,7 +55,7 @@ const FeatureCollection = () => {
                   <img src={item.img} alt="img" className="w-[110px] h-full" />
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 

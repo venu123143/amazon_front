@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react'
+import React, { CSSProperties, useState, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import ProductCard from '../components/Cards/ProductCard'
@@ -30,6 +30,9 @@ const SearchProd = () => {
     const clearFilters = () => {
         dispatch(getAllProducts({ page: 1 }))
     }
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [Link]);
     return (
         <>
             <div className={`${isLoading === true ? "block bg-black opacity-50 fixed top-0 left-0  z-20 w-full h-screen" : "hidden"}`}>

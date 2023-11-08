@@ -34,7 +34,7 @@ import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
 // export const base_url = "http://localhost:5000/api"
-export const base_url=  "https://amazonserver-r83q.onrender.com/api"
+export const base_url = "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
@@ -168,61 +168,71 @@ export const categories = [
         item: "Music & Gaming",
         para: "20 items",
         img: game,
-        params: 'gaming'
+        params: 'gaming',
+        url: '65432957ff2dd51bb661f0d8'
     },
     {
         item: "Cameras & Videos",
         para: "10 items",
         img: camera,
-        params: 'cameras'
+        params: 'cameras',
+        url: '654328ceff2dd51bb661f0ca'
     },
     {
         item: "Smart Television",
         para: "10 items",
         img: tv,
-        params: 'tv'
+        params: 'tv',
+        url: "65432948ff2dd51bb661f0d4"
     },
     {
         item: "HeadPhones",
         para: "10 items",
         img: headphone,
-        params: 'earpods'
+        params: 'earpods',
+        url: '65432ca9ff2dd51bb661f24f'
     },
     {
         item: "Smart watches",
         para: "10 items",
         img: watch,
-        params: 'watches'
+        params: 'watches',
+        url: '65320ce635ca026efd0583cc'
     },
     {
         item: "Computers & Laptops",
         para: "10 items",
         img: laptop,
-        params: 'laptops'
+        params: 'laptops',
+        url: '65320ce235ca026efd0583c8'
     },
     {
         item: "Accesories",
         para: "10 items",
         img: earpods,
-        params: 'electronics'
+        params: 'electronics',
+        url: '65320d1d35ca026efd0583e5'
     },
     {
         item: "Portable Speakers",
         para: "10 items",
         img: speaker,
-        params: 'speakers'
+        params: 'speakers',
+        url: '654328e9ff2dd51bb661f0ce'
     },
     {
         item: "Home Appliancies",
         para: "10 items",
         img: homeappli,
-        params: 'homeAppliancies'
+        params: 'homeAppliancies',
+        url: '65432957ff2dd51bb661f0d8'
     },
     {
         item: "Mobile & Tablet",
         para: "10 items",
         img: phone,
-        params: 'mobiles'
+        params: 'mobiles',
+        url: '65320cc635ca026efd0583c0'
 
     },
 ]

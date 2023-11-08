@@ -55,7 +55,7 @@ const ProductCard:
 
         return (
             <div className={`${isHidden === true ? "inline sm:hidden" : "null"}`}>
-                <div className="sm:w-[270px]  sm:h-[400px]  h-[250px]  max-h-full relative group flex w-screen sm:block sm:rounded-lg border-b border-black sm:border-none  overflow-hidden md:cursor-pointer bg-[#ffffff]  shadow-lg">
+                <div className="sm:w-[270px]  sm:h-[400px]  h-[250px]  max-h-full relative group flex w-screen sm:block sm:rounded-lg border-b border-black sm:border-none  overflow-hidden md:cursor-pointer dark:bg-[#f5f5f5] bg-[#ffffff]  shadow-lg">
                     <div className="relative flex items-center justify-center w-[60%] sm:w-auto">
                         <Link to={`/product/${data?._id}`} >
                             <img src={data?.images![0]?.url} alt="img" className="sm:h-[240px] w-auto self-center h-auto hover:rotate-6 transition-all max-h-[80%]" />

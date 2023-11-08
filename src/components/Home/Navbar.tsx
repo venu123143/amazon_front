@@ -40,6 +40,7 @@ const Navbar = () => {
   const { categories } = useSelector((state: RootState) => state.filters)
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
+  console.log(categories);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
