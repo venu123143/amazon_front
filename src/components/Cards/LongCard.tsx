@@ -45,7 +45,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
         }
         return (
             <>
-                <div className={`w-full ${isHidden === true ? "hidden sm:block" : "false"}`}>
+                <div className={`w-full  ${isHidden === true ? "hidden sm:block" : "false"}`}>
                     <div className="group bg-white w-full h-[250px] flex px-2 rounded-lg border text-gray-700 shadow transition hover:shadow-lg">
                         <Link to={`/product/${data._id}`} className="w-[25%] relative flex justify-center items-center">
                             <span className="absolute left-3 top-3 text-black bg-yellow-500 rounded-full px-[5px]">-30%</span>
@@ -100,7 +100,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
                                     <div className="rounded-sm mr-4 bg-green-100 px-2 py-0.5 text-green-700">{data?.tags[0]}</div>
                                     <div className="rounded-sm bg-blue-100 px-2 py-0.5 text-blue-700">Top Rated</div>
                                 </div>
-                                <button onClick={handleCart} className="rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white">Add to Cart </button>
+                                <button onClick={handleCart} className=" absolute right-3 bottom-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white">Add to Cart </button>
                             </div>
                         </div>
                     </div>

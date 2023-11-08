@@ -10,6 +10,7 @@ import { MoonLoader } from "react-spinners";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/reducers/cart/cartSlice";
+import { LiaRupeeSignSolid } from "react-icons/lia";
 
 export const SampleNextArrow = (props: any) => {
     const { className, style, onClick } = props;
@@ -189,8 +190,8 @@ const SpecialProdCard: React.FC<{ data: IProductState, wishlist?: any }> = ({ da
                                 <p className="">{data?.ratings?.length} reviews</p>
                             </div>
                             <div className="flex justify-between flex-grow-0  text-skin-base">
-                                <p className=" text-[.91rem]">$ {data?.price}</p>
-                                <p className="line-through text-[.91rem]">$ {data?.price + data?.price * 0.3}</p>
+                                <p className=" text-[.91rem]"><LiaRupeeSignSolid className="inline text-[1.2rem]" /> {data?.price}</p>
+                                <p className="line-through text-[.91rem]"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{data?.price + data?.price * 0.3}</p>
                             </div>
                             <div className=" flex w-full items-center justify-between">
                                 <p className="hidden lg:block text-skin-base"><b>{formatTime(time).days + 1}</b> day</p>

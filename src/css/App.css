@@ -299,10 +299,6 @@ footer:not(:first-child) {
     color: red;
 }
 
-/* .cart-item .cart-product button:hover {
-    color: black;
-} */
-
 .cart-product-quantity {
     display: flex;
     align-items: flex-start;
@@ -340,21 +336,6 @@ footer:not(:first-child) {
     border-top: 1px solid rgb(187, 187, 187);
     padding-top: 2rem;
 }
-
-/* .cart-summery .clearcart {
-    width: 130px;
-    max-width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    font-weight: 400;
-    letter-spacing: 1.15px;
-    border-top: 0.5px solid rgb(177, 177, 177);
-    color: green;
-    background: none;
-    outline: none;
-    cursor: pointer;
-    transition: all .3s ease-in;
-} */
 
 .cart-summery .clearcart:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

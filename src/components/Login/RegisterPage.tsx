@@ -1,8 +1,8 @@
 // import React from 'react'
-import { useState, CSSProperties } from "react"
+import { useState, useEffect, CSSProperties } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsArrowLeftShort } from "react-icons/bs"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { AppDispatch, RootState } from "../../redux/store"
 import { useDispatch, useSelector } from "react-redux"
@@ -32,11 +32,10 @@ let signupSchema = object({
 });
 const SignUpPage = () => {
   const dispatch: AppDispatch = useDispatch()
-  // const navigate = useNavigate()
-  const { isLoading } = useSelector((state: RootState) => state.user)
+  const navigate = useNavigate()
+  const { isRegSuccess, isLoading } = useSelector((state: RootState) => state.user)
   const [visible, setVisible] = useState(false)
   const [visibleC, setVisibleC] = useState(false)
-  // const [loading, setLoading] = useState(false)
 
   const override: CSSProperties = {
     display: "block",
@@ -46,6 +45,11 @@ const SignUpPage = () => {
     borderRadius: "30px",
     zIndex: 20,
   };
+  useEffect(() => {
+    if (isRegSuccess) {
+      navigate('/login')
+    }
+  }, [isRegSuccess])
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -59,6 +63,7 @@ const SignUpPage = () => {
     onSubmit: values => {
       dispatch(registerUser(values))
       formik.resetForm()
+
     },
   });
 
@@ -78,7 +83,7 @@ const SignUpPage = () => {
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-                    <div className={`${isLoading === true ? "block absolute z-10 top-0 left-0 right-0 bottom-0 bg-black opacity-50 group:pointer-events-none overflow-hidden " : "hidden"}`}></div>
+            <div className={`${isLoading === true ? "block absolute z-10 top-0 left-0 right-0 bottom-0 bg-black opacity-50 group:pointer-events-none overflow-hidden " : "hidden"}`}></div>
 
             <div className="p-4 space-y-4 md:space-y-6 sm:p-8">
               <>

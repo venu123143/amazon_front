@@ -16,8 +16,9 @@ import { useFormik } from "formik"
 import { AppDispatch } from "../../redux/store";
 import { saveAddress, toggleAddress } from "../../redux/reducers/users/userSlice";
 import { Order } from "../../redux/reducers/orders/orderSlice";
-import { clearCart } from "../../redux/reducers/cart/cartSlice";
+import { calculateTaxes, clearCart } from "../../redux/reducers/cart/cartSlice";
 import { toast } from "react-toastify";
+import { LiaRupeeSignSolid } from "react-icons/lia";
 
 
 
@@ -33,9 +34,9 @@ const Checkout = () => {
   const [Razorpay, isLoaded] = useRazorpay();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const { cartItems } = useSelector((state: any) => state.cart);
+  const { cartItems, shipping, gst, totalPrice } = useSelector((state: any) => state.cart);
   const { address } = useSelector((state: any) => state.user);
-  console.log(address);
+  console.log(shipping);
 
   // const { createOrder } = useSelector((state: any) => state.orders);
 
@@ -57,8 +58,7 @@ const Checkout = () => {
   //   }
 
   // };
-  const totalPrice = cartItems.reduce((total: number, item: any) => total + item.price, 0);
-
+  let totalAmount = cartItems.reduce((total: number, item: any) => total + item.price * item.cartQuantity, 0);
   const handlePaymentSucess = async (e: any) => {
     dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount: totalPrice }))
     dispatch(clearCart())
@@ -79,7 +79,9 @@ const Checkout = () => {
       zipcode: address?.zipcode,
     })
   }, [address])
-
+  useEffect(() => {
+    dispatch(calculateTaxes())
+  }, [])
   const handlePayment = useCallback(async () => {
     try {
 
@@ -87,8 +89,8 @@ const Checkout = () => {
         toast.error("please  fill the address")
         return
       }
-      if (totalPrice > 100000) {
-        toast.info("test payment only accepts less than one Lakh rupees ")
+      if (totalPrice > 50000) {
+        toast.info("test payment only accepts less than fifty thousand rupees only.")
         return
       }
       let res = await axios.post(`${base_url}/product/create-raziropay-session`,
@@ -239,13 +241,13 @@ const Checkout = () => {
                       {item?.title}{" "}
                     </span>
                     <span className="text-skin-base">
-                      {item.cartQuantity}x $ {item.price}
+                      {item.cartQuantity} x <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item.price}
                     </span>
                   </div>
                   <div className="flex justify-center ">
                     <div className="flex items-center space-x-2 text-sm justify-between">
                       <span className="font-semibold text-skin-base">
-                        ${item.price}
+                        <LiaRupeeSignSolid className="inline text-[1.2rem]" />{item.price * item.cartQuantity}
                       </span>
                     </div>
                   </div>
@@ -257,20 +259,21 @@ const Checkout = () => {
           <div className="p-4 space-y-3 border-b">
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>Subtotal</span>
-              <span className="font-semibold text-skin-base">$ {totalPrice}</span>
+              <span className="font-semibold text-skin-base"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{totalAmount}</span>
             </div>
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>GST (5%)</span>
-              <span className="font-semibold text-skin-base">$ 300 -300</span>
+              {/* {(0.05 * totalPrice).toFixed(2)} */}
+              <span className="font-semibold text-skin-base"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{gst}</span>
             </div>
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>Shipping</span>
-              <span className="font-semibold text-skin-base">free</span>
+              <span className="font-semibold text-skin-base">{shipping === 0 ? "free" : shipping}</span>
             </div>
           </div>
           <div className="font-semibold text-skin-base text-xl px-8 flex justify-between py-8">
             <span>Total</span>
-            <span>$ {totalPrice}</span>
+            <span><LiaRupeeSignSolid className="inline text-[1.2rem]" />{totalPrice}</span>
           </div>
           <div className="sm:px-8 flex justify-between">
             <input

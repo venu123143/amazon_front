@@ -21,21 +21,25 @@ import { logout, setTheme, toggleScroll } from "../../redux/reducers/users/userS
 import { AppDispatch, RootState } from "../../redux/store"
 import { Category, getCategories } from "../../redux/reducers/filters/filterSlice"
 import { getAllProducts } from "../../redux/reducers/product/productSlice"
+import { cartTotal } from "../../redux/reducers/cart/cartSlice"
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selctedCat, setSelectedCat] = useState("")
   const [query, setQuery] = useState("")
-  const element = document.documentElement
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
-  const { screen, theme, user } = useSelector((state: RootState) => state.user)
-  const { cartQuantity, cartTotalAmount } = useSelector((state: RootState) => state.cart)
-  const { categories } = useSelector((state: RootState) => state.filters)
-  const dispatch: AppDispatch = useDispatch()
-  const navigate = useNavigate()
   const [active, setActive] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const [openCate, setOpenCat] = useState(false)
+
+  // theme
+  const element = document.documentElement
+  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
+
+  const { screen, theme, user } = useSelector((state: RootState) => state.user)
+  const { cartQuantity, cartTotalAmount, cartTotalQuantity } = useSelector((state: RootState) => state.cart)
+  const { categories } = useSelector((state: RootState) => state.filters)
+  const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -103,7 +107,9 @@ const Navbar = () => {
         break;
     }
   }, [theme])
-
+  useEffect(() => {
+    dispatch(cartTotal())
+  }, [])
   darkQuery.addEventListener("change", (e) => {
     if (!("theme" in localStorage)) {
       if (e.matches) {
@@ -219,8 +225,8 @@ const Navbar = () => {
                   <Link to="/cart" className="flex items-center">
                     <img src={Cart} alt="cart" className="transition-all transform group-hover:rotate-180 duration-500 ease-in-out" />
                     <div className="flex flex-col">
-                      <span className={`badge ${cartQuantity >= 1 ? "bg-white" : null} text-center text-black h-6 w-6 rounded-full badge-warning flex items-center justify-center`}>
-                        {cartQuantity < 1 ? null : cartQuantity}
+                      <span className={`badge ${cartTotalQuantity >= 1 ? "bg-white" : null} text-center text-black h-6 w-6 rounded-full badge-warning flex items-center justify-center`}>
+                        {user && cartTotalQuantity < 1 ? null : cartTotalQuantity}
                       </span>
                       <p className="mb-0 text-white ">
                         {cartTotalAmount < 1 ? null : `$${cartTotalAmount}`}

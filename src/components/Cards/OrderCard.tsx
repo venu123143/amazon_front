@@ -3,16 +3,16 @@ import { orderStatus } from '../../static/staticData'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { AppDispatch } from '../../redux/store'
 import { useDispatch } from 'react-redux'
-import { updateOrder } from '../../redux/reducers/orders/orderSlice'
+import { IOrder, IOrderItem, updateOrder } from '../../redux/reducers/orders/orderSlice'
 
-const OrderCard: React.FC<any> = ({ order, item }) => {
+const OrderCard: React.FC<{ order: IOrderItem, item: IOrder, index: number }> = ({ order, item, index }) => {
     const dispatch: AppDispatch = useDispatch()
     const [openOrder, setOpenOrder] = useState(false)
 
     const cancelOrder = (id: string) => {
         let answer = window.confirm("Do You Want to delete Order.?");
         if (answer === true) {
-            dispatch(updateOrder({ id, Status: "Cancelled" }))
+            dispatch(updateOrder({ id, Status: "Cancelled", index }))
         }
     }
     return (
@@ -23,19 +23,20 @@ const OrderCard: React.FC<any> = ({ order, item }) => {
                         <AiFillCaretDown title="toggle menu" className="float-right text-skin-base" />
                     </div>
                     <div className=''>
-                        <img src={order?.images[0]?.url} alt="productimage" className='max-h-[100px]' />
+                        <img src={order?.product?.images[0]?.url} alt="productimage" className='max-h-[100px]' />
                     </div>
                     <div className='space-y-1'>
-                        <h3 className='font-Rubik font-[450] text-skin-base line-clamp-1'>{order?.title}</h3>
-                        <div className='flex gap-3'>
-                            <p className='text-[#777777]'>Color: {order?.color[0]?.title}</p>
-                            <time className='text-[#777777]'>Ordered on: {new Date(item.createdAt).toLocaleDateString()} </time>
+                        <h3 className='font-Rubik font-[450] text-skin-base line-clamp-1'>{order?.product?.title}</h3>
+                        <div className='flex flex-wrap sm:gap-3 gap-x-2'>
+                            <p className='text-[#777777] text-[.91rem] sm:text-[1rem]'>Color: {order?.product?.color[0]?.title}</p>
+                            <p className='text-[#777777] text-[.91rem] sm:text-[1rem]'>Quantity: {order?.quantity}</p>
+                            <time className='text-[#777777] text-[.91rem] sm:text-[1rem]'>Ordered on: {new Date(item.createdAt).toLocaleDateString()} </time>
                         </div>
-                        <div className='gap-3 flex'>
-                            <p className='text-skin-base'>price: <span className='font-bold ml-2'>{order?.price}</span>
+                        <div className='gap-3 flex flex-auto'>
+                            <p className='text-skin-base'>price:<span className='font-bold ml-2'>{order?.product?.price}</span>
                             </p>
                             <p className='text-skin-base'>Status:
-                                <span className={`${orderStatus[item?.orderStatus]} ml-2 drop-shadow-lg font-bold py-1 px-2 rounded-sm `}>{item?.orderStatus}</span>
+                                <span className={`${orderStatus[order?.orderStatus]} ml-2 drop-shadow-lg font-bold py-1 px-2 rounded-sm `}>{order?.orderStatus}</span>
                             </p>
                         </div>
                     </div>
@@ -60,7 +61,7 @@ const OrderCard: React.FC<any> = ({ order, item }) => {
                                 </div>
                                 <div>
                                     {
-                                        item?.orderStatus !== "Cancelled" ?
+                                        order?.orderStatus !== "Cancelled" ?
                                             <button onClick={() => cancelOrder(item?._id)} className='absolute bottom-3 right-3 bg-red-500 hover:bg-red-700 hover:shadow-lg px-2 py-1 rounded-md text-white'>Cancel</button>
                                             : null
                                     }

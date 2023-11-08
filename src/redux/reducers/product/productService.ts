@@ -25,11 +25,6 @@ const getProducts = async (data: Filters) => {
             }
         }
     }
-
-    const queryString = params.toString();
-
-    console.log(queryString);
-
     const res = await axios.get(`${base_url}/product/?${params.toString()} `)
     return res.data
 }

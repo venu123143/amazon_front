@@ -12,7 +12,6 @@ const Orders = () => {
     const [closeMenu, setCloseMenu] = useState(true)
     const dispatch: AppDispatch = useDispatch()
     const { orders, updateOrder } = useSelector((state: RootState) => state.orders)
-    console.log(orders);
 
     useEffect(() => {
         dispatch(getOrders())
@@ -79,7 +78,7 @@ const Orders = () => {
                             <div className='md:w-9/12 sm:space-y-3 '>
                                 {
                                     orders?.map((item) => item?.orderItems?.map((each, idx) => (
-                                        <OrderCard key={idx} order={each} item={item} />
+                                        <OrderCard key={idx} order={each} item={item} index={idx} />
                                     )))
                                 }
                             </div>

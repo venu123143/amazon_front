@@ -19,7 +19,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
     const { user } = useSelector((state: RootState) => state.user)
     const [filters, setFilters] = useState<Filters>({
         color: [],
-        category: null,
+        category: "",
         brand: [],
         totalRating: [],
         sort: '-createdAt',
@@ -65,13 +65,13 @@ const BredCrumb: React.FC<any> = ({ title }) => {
     const clearFilters = () => {
         setFilters({
             color: [],
-            category: null,
+            category: "",
             brand: [],
             totalRating: [],
             sort: '-createdAt',
             page: 1,
-            minPrice: null,
-            maxPrice: null,
+            minPrice: "",
+            maxPrice: "",
             limit: 12
         });
     };

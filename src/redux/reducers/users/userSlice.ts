@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { toast } from "react-toastify";
+
 import userService from "./userService";
 
 const getUserFromLocalStorage = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token') as string) : null
@@ -31,6 +32,7 @@ interface AppState {
     isError: boolean;
     isLoading: boolean;
     isSuccess: boolean;
+    isRegSuccess: boolean;
     message: string;
     theme: string | null;
     isSaved: boolean;
@@ -41,6 +43,7 @@ const initialState: AppState = {
     screen: false,
     user: getUserFromLocalStorage,
     isError: false,
+    isRegSuccess: false,
     isLoading: false,
     isSuccess: false,
     message: "",
@@ -119,15 +122,16 @@ const slice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(registerUser.pending, (state) => {
             state.isLoading = true
-        }).addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
+            state.isRegSuccess = false
+        }).addCase(registerUser.fulfilled, (state) => {
             state.isLoading = false
-            state.isSuccess = true
-            state.user = action.payload
+            state.isRegSuccess = true
             toast.success("user registered sucessfully", {
                 position: 'top-right'
             })
         }).addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false
+            state.isRegSuccess = false
             state.message = action.payload?.message
             toast.error(state.message, {
                 position: 'top-right'
@@ -160,6 +164,7 @@ const slice = createSlice({
         }).addCase(logout.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false
             state.isSuccess = true
+            state.isRegSuccess = false
             state.user = null
             state.message = action.payload?.message
             toast.success(state.message, {

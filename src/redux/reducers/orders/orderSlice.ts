@@ -4,8 +4,8 @@ import orderService from "./orderService";
 import { toast } from "react-toastify"
 
 interface IShippingInfo {
-    firstName: string;
-    lastName: string;
+    name: string;
+    mobile: string;
     address: string;
     city?: string;
     state: string;
@@ -16,16 +16,18 @@ interface IShippingInfo {
 interface IPaymentInfo {
     razorPayOrderId: string;
     razorPayPaymentId: string;
+    paidWith: string;
 }
 
-interface IOrderItem {
-    product: string; // Reference to a Product
+export interface IOrderItem {
+    product: any; // Reference to a Product
     color: string;   // Reference to a Color
     quantity: number;
-    price: number;
+    orderStatus: string;
 }
 
-interface IOrder extends Document {
+export interface IOrder extends Document {
+    _id: string;
     user: UserState;
     shippingInfo: IShippingInfo;
     paymentInfo: IPaymentInfo;
@@ -33,7 +35,7 @@ interface IOrder extends Document {
     paidAt: Date;
     totalPrice: number;
     totalPriceAfterDiscount: number;
-    orderStatus: string;
+    createdAt: Date
 }
 
 export const getOrders = createAsyncThunk('orderSlice/createRazorOrder', async (_, thunkAPI) => {
@@ -60,9 +62,9 @@ export const getOrder = createAsyncThunk('orderSlice/gerOrder', async (id: strin
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const updateOrder = createAsyncThunk('orderSlice/updateOrder', async (data: { id: string, Status: string, }, thunkAPI) => {
+export const updateOrder = createAsyncThunk('orderSlice/updateOrder', async (data: { id: string, Status: string, index: number }, thunkAPI) => {
     try {
-        const order = await orderService.updateStatus(data.id, data.Status)
+        const order = await orderService.updateStatus(data.id, data.Status, data.index)
         return order
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error?.response?.data)

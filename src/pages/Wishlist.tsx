@@ -52,14 +52,14 @@ const Wishlist = () => {
                         <h3 className="text-skin-base font-[550] text-[1.5rem] pt-2 hover:underline w-fit sm:hidden m-auto">My wishlist</h3>
                         <section className="rounded-md">
                             <div className="md:flex gap-5 sm:p-5 block">
-                                <div className="md:w-3/12 relative ">
+                                <div className="md:w-3/12 ">
                                     <div onClick={() => setCloseMenu(!closeMenu)} className='sm:hidden block py-5 hover:bg-slate-400 rounded-full mb-1'>
                                         <AiFillCaretDown title="toggle menu" className="float-right w-full text-skin-base" />
                                     </div>
-                                    <div>
+                                    <div className="sticky top-32">
                                         {
                                             closeMenu === true ? (
-                                                <div className="sticky bg-white top-32 rounded-lg py-[10px] px-[15px]  mb-3">
+                                                <div className="bg-white rounded-lg py-[10px] px-[15px]  mb-3">
                                                     <Link to="/orders" className="bg-[#00BFFF] mb-5 hover:bg-[#00FFFF]  py-3 px-2 rounded-md cursor-pointer flex items-center">
                                                         <BsCartCheck size={25} className="inline mr-[1rem]" />
                                                         <span className="text-lg  font-Roboto font-semibold">My Orders</span>

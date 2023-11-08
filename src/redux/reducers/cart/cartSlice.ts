@@ -5,7 +5,10 @@ const initialState = {
     cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems") as string) : [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
-    cartQuantity: 0
+    cartQuantity: 0,
+    totalPrice: 0,
+    gst: 0,
+    shipping: 0
 }
 const cartSlice = createSlice({
     name: 'cart',
@@ -69,20 +72,29 @@ const cartSlice = createSlice({
                 const { price, cartQuantity } = cartItem;
                 const total = price * cartQuantity
                 cartAmount.totalPrice += total;
-                cartAmount.quantity += cartQuantity
+                cartAmount.quantity += cartQuantity;
                 return cartAmount
             }, {
                 totalPrice: 0,
-                quantity: 0
+                quantity: 0,
             })
             state.cartTotalAmount = totalPrice;
             state.cartTotalQuantity = quantity;
+        },
+        calculateTaxes(state) {
+            if (state.cartTotalAmount < 199) {
+                state.shipping = 40
+            } else {
+                state.shipping = 0
+            }
+            state.gst = parseFloat((0.05 * state.cartTotalAmount).toFixed(2))
+            state.totalPrice = state.cartTotalAmount + state.shipping + state.gst
         }
 
     }
 })
 
 // this is our action creator.
-export const { addToCart, removeFromCart, descreaseCart, clearCart, cartTotal } = cartSlice.actions
+export const { addToCart, removeFromCart, descreaseCart, clearCart, cartTotal, calculateTaxes } = cartSlice.actions
 
 export default cartSlice.reducer;

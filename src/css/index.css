@@ -31,6 +31,9 @@
   @apply text-[#777777]
 }
 
+.mobileCart{
+  @apply text-skin-base font-Rubik grid grid-cols-4 gap-5 my-5 sm:hidden
+}
 * {
   margin: 0;
   padding: 0;

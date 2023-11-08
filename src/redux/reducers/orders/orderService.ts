@@ -9,8 +9,8 @@ const orders = async (id: string) => {
     const res = await axios.get(`${base_url}/product/orders/${id}`)
     return res.data
 }
-const updateStatus = async (id: string, Status: string) => {
-    const res = await axios.put(`${base_url}/users/updateorder/${id}`, { Status }, { withCredentials: true })
+const updateStatus = async (id: string, Status: string, index: number) => {
+    const res = await axios.put(`${base_url}/users/updateorder/${id}`, { Status, index }, { withCredentials: true })
     return res.data
 }
 const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: string, paymentId: string, address: any) => {

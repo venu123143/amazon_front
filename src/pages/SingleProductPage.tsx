@@ -262,7 +262,7 @@ const SingleProductPage = () => {
                                     <div className="">
                                         <div className="flex gap-5 items-center my-2">
                                             <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Seller :</h3>
-                                            <p className="text-[.85rem] mb-0 col-auto">{singleProduct?.seller?.firstname}</p>
+                                            <p className="text-[.85rem] mb-0 col-auto">{singleProduct?.seller?.firstname ? singleProduct?.seller?.firstname : "ADMIN"}</p>
                                         </div>
                                         <div className="flex gap-5 items-center my-2">
                                             <h3 className="text-[.91rem] text-[#1c1c1b] dark:text-[#fffff7] mb-0 font-[450]">Category :</h3>

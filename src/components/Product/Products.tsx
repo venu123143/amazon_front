@@ -40,12 +40,12 @@ const Products = () => {
     const { user } = useSelector((state: RootState) => state.user)
     const [filters, setFilters] = useState<Filters>({
         color: [],
-        category: null,
+        category: "",
         brand: [],
         totalRating: [],
         sort: '-createdAt',
-        minPrice: null,
-        maxPrice: null,
+        minPrice: "",
+        maxPrice: "",
         page: 1,
         limit: 12
     })
@@ -87,14 +87,14 @@ const Products = () => {
     const clearFilters = () => {
         setFilters({
             color: [],
-            category: null,
+            category: "",
             brand: [],
             totalRating: [],
             sort: '-createdAt',
             page: 1,
             limit: 12,
-            minPrice: null,
-            maxPrice: null
+            minPrice: "",
+            maxPrice: ""
         });
     };
     $(document).on('click', '.griditem div', function () {
@@ -115,7 +115,7 @@ const Products = () => {
                 <BredCrumb title="Our Store" />
                 <div className="sm:px-5">
                     <div className="w-full flex justify-center ">
-                        <div className={`w-3/12 mr-5 hidden md:block`}>
+                        <div className={`w-3/12 mr-5 sticky top-32 hidden md:block`}>
                             <div className="bg-white rounded-lg py-[10px] px-[15px] mb-3 shadow-lg">
                                 <h3 className="text-black  text-[1rem] font-[600] space-x-2 mb-[20px] ">Shop By Categories</h3>
                                 <div className="h-[150px] overflow-y-scroll no-scrollbar">
@@ -136,7 +136,7 @@ const Products = () => {
                                     <h5 className="text-[14px] font-[600] my-[10px]">Avalibility</h5>
                                     <div className="mb-[0.125rem] felx items-center  min-h-[1.5rem] pl-[1.5rem]">
                                         <input
-                                            className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                            className=" bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
                                             type="checkbox"
                                             value="" id="InStock" />
                                         <label
@@ -147,7 +147,7 @@ const Products = () => {
                                     </div>
                                     <div className="mb-[0.125rem] flex items-center min-h-[1.5rem] pl-[1.5rem]">
                                         <input
-                                            className="relative bg-[#febd69] float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                            className=" bg-[#febd69] float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
                                             type="checkbox"
                                             value=""
                                             id="OutOfStock" />
@@ -183,10 +183,10 @@ const Products = () => {
                                     </div>
                                     <h3 className="text-[14px] font-[600] my-[10px] ">Rating</h3>
                                     {
-                                        stars.map((star, index) => (
+                                        stars?.map((star, index) => (
                                             <div key={index} className="mb-[0.125rem] min-h-[1.5rem] pl-[1.5rem]">
                                                 <input
-                                                    className="relative bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
+                                                    className=" bg-[#febd69] float-left rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem]  border-[0.125rem]"
                                                     type="checkbox"
                                                     onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, totalRating: [...filters.totalRating as string[], e.target.value] }) : removeTotalRating(e.target.value); }}
                                                     value={star.value} id={star?.name} />
@@ -205,7 +205,7 @@ const Products = () => {
                                 {brands && brands.map((brand) => (
                                     <div key={brand?._id} className="mb-[0.125rem]  min-h-[1.5rem] pl-[1.5rem]">
                                         <input
-                                            className="relative float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
+                                            className=" float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "
                                             type="checkbox"
                                             onChange={(e) => { e.target.checked === true ? setFilters({ ...filters, brand: [...filters.brand as string[], e.target.value] }) : removeBrand(e.target.value) }}
                                             value={brand?._id}
@@ -312,8 +312,12 @@ const Products = () => {
                                                 <BsCartX className="w-full h-screen opacity-50" />
                                             </div>
                                             <h2 className="text-skin-base" style={{ textAlign: 'center', fontSize: '50px', fontWeight: 'bold', fontFamily: 'poppins' }}>No products preset with this filter</h2>
-                                            <NavLink className="hover:shadow-lg transition-all hover:scale-110" style={{ padding: '12px 15px', margin: '20px 20px', color: 'white', textDecoration: 'none', fontStyle: 'italic', fontFamily: 'poppins', background: 'linear-gradient(93.87deg, red,gray)', borderRadius: "8px" }}
-                                                to="/">Go to Home</NavLink>
+                                            <div className="flex">
+                                                <NavLink className="hover:shadow-lg transition-all hover:scale-110" style={{ padding: '12px 15px', margin: '20px 20px', color: 'white', textDecoration: 'none', fontStyle: 'italic', fontFamily: 'poppins', background: 'linear-gradient(93.87deg, red,gray)', borderRadius: "8px" }}
+                                                    to="/">Go to Home</NavLink>
+                                                <button className="hover:shadow-lg transition-all hover:scale-110" style={{ padding: '12px 15px', margin: '20px 20px', color: 'white', textDecoration: 'none', fontStyle: 'italic', fontFamily: 'poppins', background: 'linear-gradient(93.87deg, green,gray)', borderRadius: "8px" }}
+                                                    onClick={clearFilters}>Clear Filters</button>
+                                            </div>
                                             <p className="text-skin-backgroundHover" style={{ fontStyle: 'italic', fontFamily: 'poppins', textAlign: 'center' }}>Clear Filter and Try again..!</p>
                                         </div>
                                     </div>
