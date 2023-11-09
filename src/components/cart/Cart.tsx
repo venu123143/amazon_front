@@ -19,7 +19,7 @@ const Cart = () => {
         }
     }, [user])
     useLayoutEffect(() => {
-        window.scrollTo(0, 0);
+        window?.scrollTo(0, 0);
     }, [Link]);
     useEffect(() => {
         dispatch(cartTotal())
@@ -48,7 +48,7 @@ const Cart = () => {
                     </Link>
                 </div>
                 {
-                    cartItems.length === 0 ? (
+                    cartItems?.length === 0 ? (
                         <div className="cart-empty">
                             <p className='text-skin-base'>your cart is currently empty</p>
                             <div className="start-shopping min-h-screen">
@@ -80,11 +80,11 @@ const Cart = () => {
                                             <div className="cart-product-price text-skin-base"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem?.price}</div>
                                             <div className="cart-product-quantity">
                                                 <button className='text-skin-base' onClick={() => handleDecreaseCart(cartItem)}>-</button>
-                                                <div className="count text-skin-base">{cartItem.cartQuantity}</div>
+                                                <div className="count text-skin-base">{cartItem?.cartQuantity}</div>
                                                 <button className='text-skin-base' onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                             </div>
                                             <div className=" text-skin-base cart-product-total-price">
-                                                <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem.price * cartItem.cartQuantity}
+                                                <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem?.price * cartItem?.cartQuantity}
                                             </div>
                                         </div>
                                     ))}
@@ -110,8 +110,8 @@ const Cart = () => {
                             </div>
                             {
                                 cartItems?.map((cartItem: CartItem, index: number) => (
-                                    <section key={cartItem._id}
-                                        className={`mobileCart ${index !== cartItems.length - 1 ? 'm-0 p-0  border-b border-black dark:border-white sm:hidden' : null} `}>
+                                    <section key={cartItem?._id}
+                                        className={`mobileCart ${index !== cartItems?.length - 1 ? 'm-0 p-0  border-b border-black dark:border-white sm:hidden' : null} `}>
                                         <div className='col-span-1'>
                                             <img src={cartItem?.images[0]?.url} alt="sampletitle" className='w-full p-2 my-1 mr-2 border rounded-md ' />
                                         </div>

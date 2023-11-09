@@ -39,6 +39,22 @@ const MainSpinner: CSSProperties = {
     left: "50%",
     transform: 'translateX(-50%, -50%)'
 };
+
+const responsive = [
+    {
+        breakpoint: 650,
+        settings: {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />
+        }
+    },
+
+]
 const SingleProductPage = () => {
     const dispatch: AppDispatch = useDispatch()
     const pageId = useParams()
@@ -111,21 +127,7 @@ const SingleProductPage = () => {
             dispatch(descreaseCart(singleProduct))
         }
     }
-    const responsive = [
-        {
-            breakpoint: 650,
-            settings: {
-                dots: true,
-                infinite: false,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                nextArrow: <SampleNextArrow />,
-                prevArrow: <SamplePrevArrow />
-            }
-        },
 
-    ]
 
     return (
 
@@ -168,7 +170,7 @@ const SingleProductPage = () => {
                                             <img className=" max-w-full rounded-lg h-full" src={singleProduct?.images[image]?.url} alt="Main-Image" />
                                         </div>
                                         <div className="sm:hidden block  w-full h-full ">
-                                            <Slider responsive={responsive} >
+                                            <Slider initialSlide={singleProduct?.images[0].url} responsive={responsive} >
                                                 {singleProduct?.images?.map((img: Image, idx: number) => (
                                                     <div key={idx} className=" bg-gray-300 rounded-md p-1">
                                                         <img className="h-full max-w-full rounded-lg cursor-pointer m-auto"

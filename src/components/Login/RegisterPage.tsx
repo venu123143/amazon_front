@@ -13,7 +13,7 @@ import { registerUser } from "../../redux/reducers/users/userSlice"
 
 const passwordSchema = string()
   .matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$/,
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_#])[A-Za-z\d@$!%*?&_#]{8,}$/,
     'password contain atleast {1} uppercase, lowecase, one number, one symbol and mininum 8 chars long.'
   )
   .required('Password is Required');
@@ -63,7 +63,6 @@ const SignUpPage = () => {
     onSubmit: values => {
       dispatch(registerUser(values))
       formik.resetForm()
-
     },
   });
 
