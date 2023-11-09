@@ -40,7 +40,6 @@ const Navbar = () => {
   const { categories } = useSelector((state: RootState) => state.filters)
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(categories);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -140,10 +139,10 @@ const Navbar = () => {
           <div className="w-full">
             <div className="flex justify-around">
               <div>
-                <p className="text-white mb-0">Free shipping Over $100 & Free Returns</p>
+                <p className="text-white mb-0">Free shipping Over 199 Rupees</p>
               </div>
               <div>
-                <p className="text-end text-white">Hotline: <a className="text-white" href="tel:+91 8008952100">+91 8008952100</a></p>
+                <p className="text-end text-white">Hotline: <a className="text-white" href="tel:+91 8008952100">+91 7895623781</a></p>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal } from '../../redux/reducers/cart/cartSlice';
+import { removeFromCart, descreaseCart, addToCart, clearCart, cartTotal, CartItem } from '../../redux/reducers/cart/cartSlice';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { AppDispatch, RootState } from '../../redux/store';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
@@ -24,13 +24,13 @@ const Cart = () => {
     useEffect(() => {
         dispatch(cartTotal())
     }, [cartItems, dispatch])
-    const handleRemoveFromcart = (cartItem: any) => {
+    const handleRemoveFromcart = (cartItem: CartItem) => {
         dispatch(removeFromCart(cartItem))
     }
-    const handleDecreaseCart = (cartItem: any) => {
+    const handleDecreaseCart = (cartItem: CartItem) => {
         dispatch(descreaseCart(cartItem))
     }
-    const handleIncreaseCart = (cartItem: any) => {
+    const handleIncreaseCart = (cartItem: CartItem) => {
         dispatch(addToCart(cartItem))
     }
     const clearAllCart = () => {
@@ -68,7 +68,7 @@ const Cart = () => {
                                     <h3 className="total font-[450]">total</h3>
                                 </div>
                                 <div className="sm:block hidden cart-items">
-                                    {cartItems?.map((cartItem: any) => (
+                                    {cartItems?.map((cartItem: CartItem) => (
                                         <div key={cartItem?._id} className="cart-item">
                                             <div className="cart-product">
                                                 <img src={cartItem?.images[0]?.url} alt={cartItem?.title} className='hidden sm:block' />
@@ -84,7 +84,7 @@ const Cart = () => {
                                                 <button className='text-skin-base' onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                             </div>
                                             <div className=" text-skin-base cart-product-total-price">
-                                            <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem.price * cartItem.cartQuantity}
+                                                <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem.price * cartItem.cartQuantity}
                                             </div>
                                         </div>
                                     ))}
@@ -109,17 +109,19 @@ const Cart = () => {
                                 </div>
                             </div>
                             {
-                                cartItems?.map((cartItem: any, index: number) => (
-                                    <section key={cartItem._id} className={`mobileCart ${index !== cartItems.length - 1 ? 'border-b border-black dark:border-white sm:hidden' : null} `}>
-                                        <div className='col-span-1'>
-                                            <img src={cartItem?.images[0]?.url} alt="sampletitle" className='max-w-[80px] max-h-[100px] p-2 my-1 border rounded-md ' />
+                                cartItems?.map((cartItem: CartItem, index: number) => (
+                                    <section key={cartItem._id}
+                                        className={`mobileCart ${index !== cartItems.length - 1 ? 'm-0 p-0  border-b border-black dark:border-white sm:hidden' : null} `}>
+                                        <div className='col-span-1 bg-yellow-500'>
+                                            <img src={cartItem?.images[0]?.url} alt="sampletitle" className='max-w-[80px] max-h-[100px] p-2 my-1 mr-2 border rounded-md ' />
                                         </div>
-                                        <div className=' col-span-2'>
-                                            <h3 className='line-clamp-2 text-[.91rem] font-[450]'>{cartItem?.title}</h3>
-                                            <p className='line-clamp-1 font-Rubik text-[.91rem]'>Price: {cartItem?.price}<LiaRupeeSignSolid className="inline text-[1.2rem]" /> </p>
+                                        <div className='col-span-2 bg-green-500'>
+                                            <h3 className='line-clamp-2 ml-2 text-[.91rem] font-[450]'>{cartItem?.title}</h3>
+                                            <p className='line-clamp-1 font-Rubik text-[.91rem]'>Price: <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem?.price} </p>
+                                            <button className='text-red-600 font-[450]' onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
                                         </div>
-                                        <div className='col-span-1 h-full flex justify-center items-center w-fit'>
-                                            <div className=' font-[450] bg-green-500  p-1  rounded-md flexrounded-md'>
+                                        <div className='col-span-1 bg-red-500 h-full flex items-center w-fit'>
+                                            <div className='font-[450] bg-green-500  p-1  rounded-md flexrounded-md'>
                                                 <span onClick={() => handleDecreaseCart(cartItem)} className='p-2 text-[1rem] text-skin-base'>-</span>
                                                 <span className='p-2 text-skin-base' >{cartItem?.cartQuantity}</span>
                                                 <span onClick={() => handleIncreaseCart(cartItem)} className='p-2 text-[1rem] text-skin-base'>+</span>

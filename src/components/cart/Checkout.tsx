@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useEffect, useLayoutEffect } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import Address from "./Address";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -13,10 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RaziropayKey, base_url } from "../../static/staticData";
 import { number, object, string } from "yup"
 import { useFormik } from "formik"
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { saveAddress, toggleAddress } from "../../redux/reducers/users/userSlice";
 import { Order } from "../../redux/reducers/orders/orderSlice";
-import { calculateTaxes, clearCart } from "../../redux/reducers/cart/cartSlice";
+import { CartItem, calculateTaxes, clearCart } from "../../redux/reducers/cart/cartSlice";
 import { toast } from "react-toastify";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 
@@ -34,9 +34,8 @@ const Checkout = () => {
   const [Razorpay, isLoaded] = useRazorpay();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const { cartItems, shipping, gst, totalPrice } = useSelector((state: any) => state.cart);
-  const { address } = useSelector((state: any) => state.user);
-  console.log(cartItems);
+  const { cartItems, shipping, gst, totalPrice, cartTotalAmount } = useSelector((state: RootState) => state.cart);
+  const { address } = useSelector((state: RootState) => state.user);
 
   // const { createOrder } = useSelector((state: any) => state.orders);
 
@@ -58,33 +57,34 @@ const Checkout = () => {
   //   }
 
   // };
-  let totalAmount = cartItems.reduce((total: number, item: any) => total + item.price * item.cartQuantity, 0);
-  const handlePaymentSucess = async (e: any) => {
+  useEffect(() => {
+    dispatch(calculateTaxes())
+  }, [])
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [Link]);
+  const handlePaymentSucess = async (e: { razorpay_order_id: string, razorpay_payment_id: string, razorpay_signature: string }) => {
     dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount: totalPrice }))
     dispatch(clearCart())
     navigate('/sucess')
   }
   const handlePaymentFailure = async (response: any) => {
     console.log(response);
-
     navigate('/cancel')
   }
 
   useEffect(() => {
     formik.setValues({
-      name: address?.name,
-      mobile: address?.mobile,
-      address: address?.address,
-      state: address?.state,
-      zipcode: address?.zipcode,
+      name: address?.name as string,
+      mobile: address?.mobile as string,
+      address: address?.address as string,
+      state: address?.state as string,
+      zipcode: address?.zipcode as string,
     })
   }, [address])
-  useEffect(() => {
-    dispatch(calculateTaxes())
-  }, [])
+
   const handlePayment = useCallback(async () => {
     try {
-
       if (!address) {
         toast.error("please  fill the address")
         return
@@ -128,6 +128,7 @@ const Checkout = () => {
       const rzp1 = new Razorpay(options);
 
       rzp1.on("payment.failed", function (response: any) {
+
         handlePaymentFailure(response)
       });
       rzp1.open();
@@ -135,7 +136,7 @@ const Checkout = () => {
       toast.error(error?.response?.data.message)
     }
 
-  }, [isLoaded, address])
+  }, [isLoaded, address, totalPrice])
 
 
 
@@ -155,7 +156,7 @@ const Checkout = () => {
     },
   });
   return (
-    <div className="bg-[#F0FFFF] dark:bg-skin-background relative w-full">
+    <div className="bg-skin-background relative w-full">
       <Link
         to="/cart"
         className="ml-3 pt-3 text-[#777777] flex items-center hover:text-black dark:hover:text-white">
@@ -225,7 +226,7 @@ const Checkout = () => {
         </div>
         <div className="max-w-[400px] h-auto mx-auto bg-white dark:bg-[#222e35] sm:shadow-lg p-5">
           <h3 className="font-[550] border-b-2 my-5 text-[1.5rem] text-skin-base">Checkout</h3>
-          {cartItems?.map((item: any) => (
+          {cartItems?.map((item: CartItem) => (
             <div key={item?._id}>
               <section className="border-b space-y-6 pb-2">
                 <div className="grid gap-2 my-1 grid-cols-5 col-span-8">
@@ -259,7 +260,7 @@ const Checkout = () => {
           <div className="p-4 space-y-3 border-b">
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>Subtotal</span>
-              <span className="font-semibold text-skin-base"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{totalAmount}</span>
+              <span className="font-semibold text-skin-base"><LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartTotalAmount}</span>
             </div>
             <div className="flex justify-between dark:text-skin-base text-gray-600">
               <span>GST (5%)</span>

@@ -1,7 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-const initialState = {
+export interface CartItem {
+    _id: string;
+    title: string;
+    slug: string;
+    description: string;
+    price: number;
+    category: {
+        _id: string;
+        title: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+    };
+    brand: {
+        _id: string;
+        title: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+    };
+    tags: string[];
+    quantity: number;
+    sold: number;
+    images: {
+        url: string;
+        asset_id: string;
+        public_id: string;
+    }[];
+    color: string[];
+    seller: any; // You might want to replace 'any' with a specific type if you have information about the seller
+    totalRating: number;
+    ratings: any[]; // You might want to replace 'any' with a specific type if you have information about ratings
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    cartQuantity: number;
+}
+interface CartState {
+    cartItems: CartItem[];
+    cartTotalQuantity: number;
+    cartTotalAmount: number;
+    cartQuantity: number;
+    totalPrice: number;
+    gst: number;
+    shipping: number;
+}
+
+const initialState: CartState = {
     cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems") as string) : [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0,

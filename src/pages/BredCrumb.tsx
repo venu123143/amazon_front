@@ -11,7 +11,7 @@ import { getAllProducts } from "../redux/reducers/product/productSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Category, getAllBrands, getCategories, getColors } from "../redux/reducers/filters/filterSlice"
 import { Filters, backObj, stars } from "../static/staticData"
-const BredCrumb: React.FC<any> = ({ title }) => {
+const BredCrumb: React.FC<{ title: string }> = ({ title }) => {
     const [dropdown, setDropdown] = useState(false)
     const [sort, setSort] = useState(false)
     const dispatch: AppDispatch = useDispatch()
@@ -214,7 +214,7 @@ const BredCrumb: React.FC<any> = ({ title }) => {
                         </div>
                         <div className="  py-[10px] px-[15px]">
                             <h3 className="text-skin-base text-[1rem] font-[600] space-x-2 mb-[20px] ">Brands</h3>
-                            {brands && brands.map((brand) => (
+                            {brands && brands.map((brand: Category) => (
                                 <div key={brand?._id} className="mb-[0.125rem]  min-h-[1.5rem] pl-[1.5rem]">
                                     <input
                                         className="relative float-left  rounded-sm -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] border-[0.125rem]  "

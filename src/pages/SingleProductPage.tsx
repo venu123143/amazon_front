@@ -17,12 +17,11 @@ import PopularProduct from "../components/Home/PopularProduct"
 import CreateReview from "../components/Product/CreateReview"
 import { AppDispatch, RootState } from "../redux/store"
 import { addToWishlist, getAllWishlist, getSingleProduct } from "../redux/reducers/product/productSlice"
-import { addToCart, descreaseCart, removeFromCart } from "../redux/reducers/cart/cartSlice"
+import { CartItem, addToCart, descreaseCart, removeFromCart } from "../redux/reducers/cart/cartSlice"
 import { Image } from "../redux/reducers/blogs/blogSlice"
 
 import { borderObj, colorObj, backObj, formatTime } from "../static/staticData"
 import { SampleNextArrow, SamplePrevArrow } from "../components/Home/Carousel"
-
 
 const override: CSSProperties = {
     display: "block",
@@ -52,7 +51,7 @@ const SingleProductPage = () => {
 
     const [image, setImage] = useState(0)
     const [color, setColor] = useState(singleProduct?.color[0]?.title)
-    const currItem = cartItems.find((item: any) => item._id === singleProduct!?._id);
+    const currItem = cartItems.find((item: CartItem) => item._id === singleProduct!?._id);
 
     const initialTimeInSeconds = 2 * 24 * 60 * 60;
     const [time, setTime] = useState(initialTimeInSeconds);
@@ -229,12 +228,12 @@ const SingleProductPage = () => {
                                     </div>
 
                                     <div className="flex items-center h-fit w-fit">
-                                        {currItem?.cartQuantity >= 1 ? (
+                                        {currItem!?.cartQuantity >= 1 ? (
                                             <div className="border my-5 rounded-md border-black w-fit p-1 flex items-center">
                                                 <button onClick={handleRemove} className=" p-4 rounded-md bg-gradient-to-tr from-purple-600 to-pink-400" >
                                                     <AiOutlineMinus className="" size={20} />
                                                 </button>
-                                                <span className="p-4">{currItem.cartQuantity}</span>
+                                                <span className="p-4">{currItem!.cartQuantity}</span>
                                                 <button onClick={handleCart} className="p-4  rounded-md bg-gradient-to-tr from-pink-600 to-purple-400">
                                                     <FiPlus className="" size={20} />
                                                 </button>

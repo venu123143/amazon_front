@@ -234,6 +234,11 @@ footer:not(:first-child) {
 .cart-container {
     padding: 1rem 2rem;
 }
+@media only screen and (min-width: 768px) {
+    .cart-container {
+        padding: 1rem 1rem;
+    }
+}
 
 .cart-container h2 {
     font-weight: 400;

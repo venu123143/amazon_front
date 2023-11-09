@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UserState } from "../users/userSlice";
 import orderService from "./orderService";
 import { toast } from "react-toastify"
+import { IProductState } from "../product/productSlice";
 
 interface IShippingInfo {
     name: string;
@@ -20,7 +21,7 @@ interface IPaymentInfo {
 }
 
 export interface IOrderItem {
-    product: any; // Reference to a Product
+    product: IProductState; // Reference to a Product
     color: string;   // Reference to a Color
     quantity: number;
     orderStatus: string;

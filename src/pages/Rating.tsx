@@ -1,7 +1,7 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsStarHalf } from "react-icons/bs";
 
-const RatingStar = ({ stars }: any) => {
+const RatingStar = ({ stars }: { stars: number }) => {
     return (
         <div className="flex">
             {Array.from({ length: 5 }, (_, index) => {

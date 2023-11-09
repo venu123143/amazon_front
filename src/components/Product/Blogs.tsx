@@ -43,7 +43,7 @@ const Blogs = () => {
             <h3 className="font-[550] text-[1.5rem] text-skin-base hover:underline w-fit md:hidden m-auto"> Blogs</h3>
 
             <div className="grid 800px:grid-cols-2 grid-cols-1 gap-5 place-items-center">
-              {blogs.map((each, index) => (
+              {blogs?.map((each, index) => (
                 <BigBlogCard key={index} blog={each} />
               ))}
             </div>

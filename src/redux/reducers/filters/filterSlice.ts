@@ -7,8 +7,8 @@ export interface Category {
     _id: string;
 }
 interface FilterState {
-    brands: any[];
-    colors: any[];
+    brands: Category[];
+    colors: Category[];
     categories: any[];
     isError: boolean;
     isLoading: boolean;

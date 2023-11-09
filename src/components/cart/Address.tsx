@@ -1,8 +1,17 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import { toggleAddress } from "../../redux/reducers/users/userSlice"
-const Address = ({ title, name, id, type, onChange, onBlur, value }: any) => {
+interface AddressProps {
+    title: string;
+    name: string;
+    id: string;
+    type: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+    value: any; 
+}
+const Address: React.FC<AddressProps> = ({ title, name, id, type, onChange, onBlur, value }) => {
     const dispatch: AppDispatch = useDispatch()
     const [save, setSave] = useState(false)
     const { isSaved } = useSelector((state: RootState) => state.user)
