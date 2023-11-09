@@ -64,6 +64,7 @@ const Checkout = () => {
     window.scrollTo(0, 0);
   }, [Link]);
   const handlePaymentSucess = async (e: { razorpay_order_id: string, razorpay_payment_id: string, razorpay_signature: string }) => {
+
     dispatch(Order({ address: address, orderId: e?.razorpay_order_id, paymentId: e?.razorpay_payment_id, cartItems, cartTotalAmount: totalPrice }))
     dispatch(clearCart())
     navigate('/sucess')

@@ -29,10 +29,16 @@ export interface CartItem {
         asset_id: string;
         public_id: string;
     }[];
-    color: string[];
-    seller: any; // You might want to replace 'any' with a specific type if you have information about the seller
+    color: {
+        _id: string;
+        title: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+    }[];
+    seller: any;
     totalRating: number;
-    ratings: any[]; // You might want to replace 'any' with a specific type if you have information about ratings
+    ratings: any[];
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -77,6 +83,8 @@ const cartSlice = createSlice({
                     position: 'bottom-left'
                 })
             }
+
+
 
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
         },

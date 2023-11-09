@@ -33,10 +33,10 @@ const OrderCard: React.FC<{ order: IOrderItem, item: IOrder, index: number }> = 
                             <p className='text-[#777777] text-[.91rem] sm:text-[1rem]'>Quantity: {order?.quantity}</p>
                             <time className='text-[#777777] text-[.91rem] sm:text-[1rem]'>Ordered on: {new Date(item.createdAt).toLocaleDateString()} </time>
                         </div>
-                        <div className='gap-3 flex flex-auto'>
-                            <p className='text-skin-base'>price:<span className='font-bold ml-2'><LiaRupeeSignSolid className="inline text-[1.2rem]" />{order?.product?.price}</span>
+                        <div className='gap-3 flex flex-wrap'>
+                            <p className='text-skin-base'>price:<LiaRupeeSignSolid className="inline text-[1.2rem]" /><span className='font-bold'>{order?.product?.price}</span>
                             </p>
-                            <p className='text-skin-base'>Status:
+                            <p className='text-skin-base'>status:
                                 <span className={`${orderStatus[order?.orderStatus]} ml-2 drop-shadow-lg font-bold py-1 px-2 rounded-sm `}>{order?.orderStatus}</span>
                             </p>
                         </div>

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { base_url } from "../../../static/staticData";
+import { CartItem } from "../cart/cartSlice";
 
 const getOrders = async () => {
     const res = await axios.get(`${base_url}/users/orders`, { withCredentials: true });
@@ -13,7 +14,7 @@ const updateStatus = async (id: string, Status: string, index: number) => {
     const res = await axios.put(`${base_url}/users/updateorder/${id}`, { Status, index }, { withCredentials: true })
     return res.data
 }
-const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: string, paymentId: string, address: any) => {
+const createOrder = async (cartItems: CartItem[], cartTotalAmount: number, orderId: string, paymentId: string, address: any) => {
     const data = {
         shippingInfo: {
             name: address.name,
@@ -29,10 +30,11 @@ const createOrder = async (cartItems: any[], cartTotalAmount: number, orderId: s
         orderItems: cartItems.map((cartItem) => ({
             product: cartItem._id,
             quantity: cartItem.cartQuantity,
-            color: cartItem.color[0].title,
+            color: cartItem.color[0]?.title,
         })),
         totalPrice: cartTotalAmount
     }
+
     const res = await axios.post(`${base_url}/users/cart/create`, data, { withCredentials: true });
     return res.data
 }
