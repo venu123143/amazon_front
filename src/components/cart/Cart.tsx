@@ -112,15 +112,15 @@ const Cart = () => {
                                 cartItems?.map((cartItem: CartItem, index: number) => (
                                     <section key={cartItem._id}
                                         className={`mobileCart ${index !== cartItems.length - 1 ? 'm-0 p-0  border-b border-black dark:border-white sm:hidden' : null} `}>
-                                        <div className='col-span-1 bg-yellow-500'>
-                                            <img src={cartItem?.images[0]?.url} alt="sampletitle" className='max-w-[80px] max-h-[100px] p-2 my-1 mr-2 border rounded-md ' />
+                                        <div className='col-span-1'>
+                                            <img src={cartItem?.images[0]?.url} alt="sampletitle" className='w-full p-2 my-1 mr-2 border rounded-md ' />
                                         </div>
-                                        <div className='col-span-2 bg-green-500'>
+                                        <div className='col-span-2 '>
                                             <h3 className='line-clamp-2 ml-2 text-[.91rem] font-[450]'>{cartItem?.title}</h3>
                                             <p className='line-clamp-1 font-Rubik text-[.91rem]'>Price: <LiaRupeeSignSolid className="inline text-[1.2rem]" />{cartItem?.price} </p>
                                             <button className='text-red-600 font-[450]' onClick={() => handleRemoveFromcart(cartItem)}>remove</button>
                                         </div>
-                                        <div className='col-span-1 bg-red-500 h-full flex items-center w-fit'>
+                                        <div className='col-span-1 h-full flex items-center w-fit'>
                                             <div className='font-[450] bg-green-500  p-1  rounded-md flexrounded-md'>
                                                 <span onClick={() => handleDecreaseCart(cartItem)} className='p-2 text-[1rem] text-skin-base'>-</span>
                                                 <span className='p-2 text-skin-base' >{cartItem?.cartQuantity}</span>

@@ -32,7 +32,7 @@
 }
 
 .mobileCart{
-  @apply text-skin-base font-Rubik grid grid-cols-4 gap-5 my-5 sm:hidden
+  @apply text-skin-base font-Rubik grid grid-cols-4 my-5 sm:hidden gap-2
 }
 * {
   margin: 0;
