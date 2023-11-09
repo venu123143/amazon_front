@@ -33,8 +33,8 @@ import { SlEarphonesAlt } from "react-icons/sl"
 import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
-export const base_url = "http://localhost:5000/api"
-// export const base_url = "https://amazonserver-r83q.onrender.com/api"
+// export const base_url = "http://localhost:5000/api"
+export const base_url = "https://amazonserver-r83q.onrender.com/api"
 
 // export const base_url  = "http://3.81.201.88:5000/api"
 
