@@ -185,7 +185,7 @@ const SpecialProdCard: React.FC<{ data: IProductState, wishlist?: any }> = ({ da
                             <h6 className="mt-[40px] text-[.81rem] font-[550] text-skin-base w-full h-[60px] line-clamp-3 overflow-hidden">{data?.title}</h6>
                             <div className="block xl:flex text-skin-base justify-between my-[5px] items-center">
                                 <div className="flex">
-                                    <RatingStar stars={data?.totalRating} />
+                                    <RatingStar stars={data?.totalRating as number} />
                                 </div>
                                 <p className="">{data?.ratings?.length} reviews</p>
                             </div>

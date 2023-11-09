@@ -110,7 +110,7 @@ const ProductCard:
                         {/* </div> */}
                         <h6 onClick={handleProduct} className="absolute top-10  font-[500] text-[#1c1b1b] h-[50px] overflow-hidden">{data?.title} </h6>
                         <div className="absolute bottom-0 sm:bottom-auto top-20 flex my-[10px] items-center ">
-                            <RatingStar stars={data?.totalRating} />
+                            <RatingStar stars={data?.totalRating as number} />
                             <p className="ml-[10px]">{data?.ratings?.length} reviews</p>
                         </div>
 

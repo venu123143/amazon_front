@@ -57,7 +57,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
                                 <p className="mt-3 overflow-hidden text-lg font-semibold line-clamp-1"> {data?.title} </p>
                                 <p className="line-clamp-2 text-[#777777] lowercase my-2" dangerouslySetInnerHTML={{ __html: data?.description as string }}></p>
                                 <div className=" flex items-center ">
-                                    <RatingStar stars={data?.totalRating} />
+                                    <RatingStar stars={data?.totalRating as number} />
                                     <p className="ml-[10px]">{data?.ratings?.length} reviews</p>
                                 </div>
                                 <div>
