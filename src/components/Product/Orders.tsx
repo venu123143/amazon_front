@@ -62,7 +62,7 @@ const Orders = () => {
                         <h3 className="font-[550] text-skin-base text-[1.5rem] text-center  hover:underline w-full mt-5">My Orders</h3>
 
                         <div className="md:flex gap-5 sm:p-5 block">
-                            <div className="md:w-3/12 relative ">
+                            <div className="hidden md:w-3/12 md:block relative ">
                                 <div onClick={() => setCloseMenu(!closeMenu)} className='sm:hidden block py-5 hover:bg-slate-400 rounded-full mb-1'>
                                     <AiFillCaretDown title="toggle menu" className="float-right w-full text-skin-base" />
                                 </div>
@@ -98,7 +98,7 @@ const Orders = () => {
 
                                 </div>
                             </div>
-                            <div className='md:w-9/12 sm:space-y-3 '>
+                            <div className='w-full md:w-9/12 sm:space-y-3 '>
                                 {
                                     orders?.map((item) => item?.orderItems?.map((each, idx) => (
                                         <OrderCard key={idx} order={each} item={item} index={idx} />

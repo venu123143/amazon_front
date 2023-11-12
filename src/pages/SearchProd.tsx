@@ -67,7 +67,7 @@ const SearchProd = () => {
                         </>
                     ) : (
                         <div className="block md:flex gap-5 sm:p-5 ">
-                            <div className="md:w-3/12 relative ">
+                            <div className="md:w-3/12 md:block hidden relative ">
                                 <div onClick={() => setCloseMenu(!closeMenu)} className='sm:hidden block py-5 hover:bg-slate-400 rounded-full mb-1'>
                                     <AiFillCaretDown title="toggle menu" className="float-right w-full text-skin-base" />
                                 </div>
@@ -101,7 +101,7 @@ const SearchProd = () => {
 
                                 </div>
                             </div>
-                            <div className="md:w-9/12 grid sm:gap-5">
+                            <div className="md:w-9/12 w-full grid sm:gap-5">
                                 {
                                     products?.map((item, index) => (
                                         <div className="" key={index}>

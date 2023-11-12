@@ -52,7 +52,7 @@ const Wishlist = () => {
                         <h3 className="text-skin-base font-[550] text-[1.5rem] pt-2 hover:underline w-fit sm:hidden m-auto">My wishlist</h3>
                         <section className="rounded-md">
                             <div className="md:flex gap-5 sm:p-5 block">
-                                <div className="md:w-3/12 ">
+                                <div className="md:w-3/12 md:block hidden">
                                     <div onClick={() => setCloseMenu(!closeMenu)} className='sm:hidden block py-5 hover:bg-slate-400 rounded-full mb-1'>
                                         <AiFillCaretDown title="toggle menu" className="float-right w-full text-skin-base" />
                                     </div>
@@ -86,7 +86,7 @@ const Wishlist = () => {
 
                                     </div>
                                 </div>
-                                <div className="md:w-9/12 grid sm:gap-5">
+                                <div className="md:w-9/12 w-full grid sm:gap-5">
                                     {
                                         wishlist?.map((item, index) => (
                                             <div className="" key={index}>

@@ -45,8 +45,8 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
         }
         return (
             <>
-                <div className={`w-full  ${isHidden === true ? "hidden sm:block" : "false"}`}>
-                    <div className="group gap-3 bg-white dark:bg-[#f5f5f5] w-full h-[250px] flex px-2 rounded-lg border text-gray-700 shadow transition hover:shadow-lg">
+                <div className={`  ${isHidden === true ? "hidden sm:block" : "false"}`}>
+                    <div className="group gap-3 bg-white dark:bg-[#f5f5f5] h-[250px] flex px-2 rounded-lg border text-gray-700 shadow transition hover:shadow-lg">
                         <Link to={`/product/${data._id}`} className="w-[25%] relative flex justify-center items-center">
                             <span className="absolute left-3 top-3 text-black bg-yellow-500 rounded-full px-[5px]">-30%</span>
                             <img src={data?.images![0]?.url} className=" h-[80%] group-hover:h-[100%] transition-all ease-out duration-300 cursor-pointer group-hover:scaloe-125" alt="" />
@@ -55,7 +55,7 @@ const LongCard: React.FC<{ data: IProductState, isHidden?: any, wishlist?: any, 
                         <div className="w-[75%] relative pr-8 text-left overflow-hidden">
                             <Link to={`/product/${data._id}`} >
                                 <p className="mt-3 overflow-hidden text-lg font-semibold line-clamp-1"> {data?.title} </p>
-                                <p className="line-clamp-2 text-[#777777] lowercase my-2" dangerouslySetInnerHTML={{ __html: data?.description as string }}></p>
+                                {/* <p className="line-clamp-2 w-full h-12 absolute text-[#777777] lowercase my-2" dangerouslySetInnerHTML={{ __html: data?.description as string }}></p> */}
                                 <div className=" flex items-center ">
                                     <RatingStar stars={data?.totalRating as number} />
                                     <p className="ml-[10px]">{data?.ratings?.length} reviews</p>

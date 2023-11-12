@@ -127,7 +127,7 @@ const slice = createSlice({
             state.isLoading = false
             state.isRegSuccess = true
             toast.success("user registered sucessfully", {
-                position: 'top-right'
+                position: 'top-left'
             })
         }).addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false
@@ -168,7 +168,7 @@ const slice = createSlice({
             state.user = null
             state.message = action.payload?.message
             toast.success(state.message, {
-                position: 'top-right'
+                position: 'top-left'
             })
         }).addCase(logout.rejected, (state, action: PayloadAction<any>) => {
             state.isError = true

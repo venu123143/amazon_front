@@ -72,9 +72,9 @@ const cartSlice = createSlice({
             const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id);
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1;
-                toast.success(`Item Quantity is increased`, {
-                    position: 'bottom-left'
-                })
+                // toast.success(`Item Quantity is increased`, {
+                //     position: 'bottom-left'
+                // })
             } else {
                 const tempProduct = { ...action.payload, cartQuantity: 1 }
                 state.cartItems.push(tempProduct)
@@ -93,17 +93,17 @@ const cartSlice = createSlice({
             state.cartItems = nextCartItems
             state.cartQuantity = state.cartQuantity - 1
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            toast.error(`An item removed from cart`, {
-                position: 'bottom-left'
-            })
+            // toast.error(`An item removed from cart`, {
+            //     position: 'bottom-left'
+            // })
         },
         descreaseCart(state, action) {
             const itemIndex = state.cartItems.findIndex((item: any) => item?._id === action.payload?._id)
             if (state.cartItems[itemIndex].cartQuantity > 1) {
                 state.cartItems[itemIndex].cartQuantity -= 1
-                toast.info(`An item Quantity is decreased`, {
-                    position: 'bottom-left'
-                })
+                // toast.info(`An item Quantity is decreased`, {
+                //     position: 'bottom-left'
+                // })
             } else if (state.cartItems[itemIndex].cartQuantity === 1) {
                 const nextCartItems = state.cartItems.filter((cartItem: any) => cartItem?._id !== action.payload?._id)
                 state.cartItems = nextCartItems
@@ -118,9 +118,9 @@ const cartSlice = createSlice({
             state.cartItems = []
             state.cartQuantity = 0
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            toast.error(`your cart is Empty Now`, {
-                position: 'bottom-left'
-            })
+            // toast.error(`your cart is Empty Now`, {
+            //     position: 'bottom-left'
+            // })
         },
         cartTotal(state) {
             let { totalPrice, quantity } = state.cartItems.reduce((cartAmount: any, cartItem: any) => {
