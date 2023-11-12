@@ -198,7 +198,7 @@ footer:not(:first-child) {
 /* our store - filters (colors)*/
 .colors {
     list-style-type: none;
-   
+
 }
 
 .colors li:hover {
@@ -234,6 +234,7 @@ footer:not(:first-child) {
 .cart-container {
     padding: 1rem 2rem;
 }
+
 @media only screen and (min-width: 768px) {
     .cart-container {
         padding: 1rem 1rem;
@@ -410,9 +411,10 @@ footer:not(:first-child) {
     background-color: black;
 } */
 
-.specialcard{
+.specialcard {
     gap: 5px;
 }
+
 /* custom css for dropdown countries-cites */
 
 
@@ -420,4 +422,10 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+
+.carousel-img {
+    width: 100%;
+    height: auto;
 }
