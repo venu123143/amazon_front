@@ -73,6 +73,7 @@ const Carousel = () => {
                 dots: false,
                 infinite: true,
                 speed: 500,
+                useCss: true,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 nextArrow: <SampleNextArrow />,
@@ -83,7 +84,7 @@ const Carousel = () => {
 
     return (
         <div className=" cursor-pointer">
-            <Slider responsive={responsive}>
+            <Slider adaptiveHeight={true} responsive={responsive}>
                 <div>
                     <Link to="/product/6532112c35ca026efd058444">
                         <img className=" h-full bg-no-repeat" style={{ maxWidth: '100%' }} src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/OnePlus/Flagship/115G/19Aug/D66357764_WLD_OnePlus_Salami_NewLaunch_DesktopTallHero_3000x1200._CB598553099_.jpg" alt="img1" />
