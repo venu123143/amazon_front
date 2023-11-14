@@ -20,6 +20,26 @@ Welcome to our Amazon clone project! Built with React, Vite, and TypeScript, thi
 
 Elevate your online shopping experience with our Amazon clone—your go-to destination for all your e-commerce needs!
 
+## Project GIFs
+
+### 1. Login
+
+![Login](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699951907/Login_uzpqqp.gif)
+
+Description: This GIF showcases the login process, demonstrating the user authentication flow.
+
+### 2. Home
+
+![Home](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699951905/home_swzmnt.gif)
+
+Description: Explore the vibrant and user-friendly home interface designed for an intuitive user experience.
+
+### 3. Products
+
+![Products](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699951699/product_ggucla.gif)
+
+Description: Discover the extensive range of products available through seamless navigation and interactive features.
+
 # Project Screenshots
 
 ### Home Page
@@ -53,9 +73,7 @@ Enjoy a visually comfortable experience with our dark mode feature. Switch to da
 
 **This is the home page of our application. Users can access various features and navigate through the main sections from here.**
 
-![Home page Gif](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948046/HomePagegif_z4wov9.gif)
 
-**A dynamic view of our home page in action. Watch as the elements come to life, showcasing the user interface and experience.**
 
 ## Project Dependencies
 
