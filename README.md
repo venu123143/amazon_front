@@ -9,20 +9,41 @@ Welcome to our Amazon clone project! Built with React, Vite, and TypeScript, thi
 - Explore detailed product information
 - Enjoy a responsive and user-friendly design
 - Compare the products
+- Switch between Dark Mode, Light Mode, or System Default
+- Add and manage multiple addresses for shipping
+- Search for products with an intuitive search functionality
+- Filter products based on various criteria for a personalized shopping experience
+- Ensure a responsive design that works seamlessly on all devices
+- Streamlined checkout process with Razorpay integration for secure payments
+- User authentication with options for login, register, Google login, and OTP login
+- Engage with insightful blogs to stay updated on the latest trends and product information
 
 Elevate your online shopping experience with our Amazon clone—your go-to destination for all your e-commerce needs!
 
-## project images
+# Project Screenshots
 
-![Home Page](src/assets/icons/Home.png)
+### Home Page
+Welcome to the home page of our application! Explore a clean and user-friendly interface designed to make your shopping experience enjoyable and efficient.
+![Home Page](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948044/Home_dqw9gc.png)
 
-![Category Image](src/assets/icons/Images.png)
+### Categories
+Discover a wide range of categories in our Images section. From stunning landscapes to vibrant cityscapes, find the perfect images to suit your preferences.
+![Categories](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948045/Images_arryed.png)
+
+### Wishlist
+Keep track of your favorite items in the Wishlist. Save and organize the products you love for a convenient shopping experience.
+![Wishlist](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948205/Screenshot_45_w30nch.png)
+
+### Cart
+Manage your shopping cart with ease. View and modify your selected items before proceeding to checkout for a seamless shopping process.
+![Cart](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948205/Screenshot_46_ziepnx.png)
+
+### Dark Mode
+Enjoy a visually comfortable experience with our dark mode feature. Switch to dark mode for reduced eye strain and a sleek, modern appearance.
 
 **This is the home page of our application. Users can access various features and navigate through the main sections from here.**
 
-
-
-![Home page Gif](src/assets/icons/HomePagegif.gif)
+![Home page Gif](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948046/HomePagegif_z4wov9.gif)
 
 **A dynamic view of our home page in action. Watch as the elements come to life, showcasing the user interface and experience.**
 
