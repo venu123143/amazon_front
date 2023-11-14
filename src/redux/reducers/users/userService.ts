@@ -17,7 +17,7 @@ const login = async (userData: UserState): Promise<any> => {
 }
 
 const logout = async (): Promise<any> => {
-    const res = await axios.get(`${base_url}/users/logout`, { withCredentials: true, })    
+    const res = await axios.get(`${base_url}/users/logout`, { withCredentials: true, })
     if (res.data) {
         localStorage.removeItem("token");
     }

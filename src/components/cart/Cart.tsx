@@ -104,7 +104,6 @@ const Cart = () => {
                                         <Link to="/checkout" className="button group flex items-center justify-center">
                                             <span className='text-white group-hover:text-black text-[1rem] font-[400]'>Checkout</span>
                                         </Link>
-
                                     </div>
                                 </div>
                             </div>
