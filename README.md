@@ -24,19 +24,29 @@ Elevate your online shopping experience with our Amazon clone—your go-to desti
 
 ### Home Page
 Welcome to the home page of our application! Explore a clean and user-friendly interface designed to make your shopping experience enjoyable and efficient.
+
 ![Home Page](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948044/Home_dqw9gc.png)
 
 ### Categories
 Discover a wide range of categories in our Images section. From stunning landscapes to vibrant cityscapes, find the perfect images to suit your preferences.
+
 ![Categories](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948045/Images_arryed.png)
 
 ### Wishlist
 Keep track of your favorite items in the Wishlist. Save and organize the products you love for a convenient shopping experience.
+
 ![Wishlist](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948205/Screenshot_45_w30nch.png)
 
 ### Cart
 Manage your shopping cart with ease. View and modify your selected items before proceeding to checkout for a seamless shopping process.
+
 ![Cart](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699948205/Screenshot_46_ziepnx.png)
+
+## mobile cart
+![Mobile Cart](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699949221/WhatsApp_Image_2023-11-14_at_1.36.04_PM_nt1xh0.jpg)
+
+## mobile product
+![Mobile Product](https://res.cloudinary.com/dsnq9xdwt/image/upload/v1699949221/WhatsApp_Image_2023-11-14_at_1.36.04_PM_1_uy3wcz.jpg)
 
 ### Dark Mode
 Enjoy a visually comfortable experience with our dark mode feature. Switch to dark mode for reduced eye strain and a sleek, modern appearance.
