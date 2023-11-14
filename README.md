@@ -12,6 +12,20 @@ Welcome to our Amazon clone project! Built with React, Vite, and TypeScript, thi
 
 Elevate your online shopping experience with our Amazon clone—your go-to destination for all your e-commerce needs!
 
+## project images
+
+![Home Page](src/assets/icons/Home.png)
+
+![Category Image](src/assets/icons/Images.png)
+
+**This is the home page of our application. Users can access various features and navigate through the main sections from here.**
+
+
+
+![Home page Gif](src/assets/icons/HomePagegif.gif)
+
+**A dynamic view of our home page in action. Watch as the elements come to life, showcasing the user interface and experience.**
+
 ## Project Dependencies
 
 These are the key dependencies used in the project:
@@ -87,3 +101,60 @@ These are the key dependencies used in the project:
 
 - **yup**: ^1.3.2
   - JavaScript schema builder for value parsing and validation.
+
+## Development Dependencies
+
+These are the key development dependencies used in the project:
+
+- **@types/async**: ^3.2.22
+  - Type definitions for the "async" library.
+
+- **@types/jquery**: ^3.5.17
+  - Type definitions for the jQuery library.
+
+- **@types/react**: ^18.2.15
+  - Type definitions for React.
+
+- **@types/react-dom**: ^18.2.7
+  - Type definitions for ReactDOM.
+
+- **@types/react-image-magnifiers**: ^1.3.4
+  - Type definitions for the "react-image-magnifiers" library.
+
+- **@types/react-slick**: ^0.23.10
+  - Type definitions for the "react-slick" library.
+
+- **@typescript-eslint/eslint-plugin**: ^6.0.0
+  - ESLint plugin for TypeScript.
+
+- **@typescript-eslint/parser**: ^6.0.0
+  - TypeScript parser for ESLint.
+
+- **@vitejs/plugin-react**: ^4.0.3
+  - Vite plugin for React.
+
+- **autoprefixer**: ^10.4.15
+  - Parse CSS and add vendor prefixes using values from the Can I Use website.
+
+- **eslint**: ^8.45.0
+  - Linting utility for JavaScript and TypeScript.
+
+- **eslint-plugin-react-hooks**: ^4.6.0
+  - ESLint plugin for React hooks.
+
+- **eslint-plugin-react-refresh**: ^0.4.3
+  - ESLint plugin for React Refresh.
+
+- **postcss**: ^8.4.28
+  - Tool for transforming CSS with JavaScript plugins.
+
+- **tailwindcss**: ^3.3.3
+  - A utility-first CSS framework.
+
+- **typescript**: ^5.0.2
+  - TypeScript programming language.
+
+- **vite**: ^4.4.5
+  - Next-generation front-end tooling.
+
+Feel free to customize the formatting and structure according to your README style. Providing information about your development dependencies can be helpful for developers who want to contribute to or understand the development environment of your project.
