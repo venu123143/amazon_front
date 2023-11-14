@@ -33,12 +33,23 @@ const reset = async (token: string, password: string) => {
     const res = await axios.put(`${base_url}/users/resetpassword/${token}`, { password })
     return res.data
 }
+const sendotp = async (mobile: number) => {
+    console.log(mobile);
+
+    // const res = await axios.put(`dummy`, { mobile })
+    // return res.data
+}
+const verifyOtp = async (mobile: number, otp: number[]) => {
+    console.log(mobile, otp);
+}
 const userService = {
     login,
     logout,
     register,
     forgot,
-    reset
+    reset,
+    sendotp,
+    verifyOtp
 }
 
 export default userService

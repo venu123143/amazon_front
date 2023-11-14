@@ -91,6 +91,23 @@ export const forgotPassword = createAsyncThunk('authSlice/forgotPassword', async
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
+export const sendOtp = createAsyncThunk('authSlice/sendOtp', async (mobile: number, thunkAPI) => {
+    try {
+        const res = await userService.sendotp(mobile)
+        return res
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
+export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { mobile: number, otp: number[] }, thunkAPI) => {
+    try {
+        const res = await userService.verifyOtp(data.mobile, data.otp)
+        return res
+
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error?.response?.data)
+    }
+})
 export const resetPassword = createAsyncThunk('authSlice/resetPassword', async (data: { password: string, token: string }, thunkAPI) => {
     try {
         const res = await userService.reset(data?.token, data?.password)
@@ -155,6 +172,43 @@ const slice = createSlice({
             state.message = action.payload?.message
             toast.error(state.message, {
                 position: 'top-right'
+            })
+        })
+        builder.addCase(sendOtp.pending, (state) => {
+            state.isLoading = true
+        }).addCase(sendOtp.fulfilled, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.message = action.payload?.message
+            toast.success(state.message, {
+                position: 'top-left'
+            })
+        }).addCase(sendOtp.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isError = true
+            state.isSuccess = false
+            state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-left'
+            })
+        })
+        builder.addCase(VerifyOtp.pending, (state) => {
+            state.isLoading = true
+        }).addCase(VerifyOtp.fulfilled, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.message = action.payload?.message
+            toast.success(state.message, {
+                position: 'top-left'
+            })
+        }).addCase(VerifyOtp.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false
+            state.isError = true
+            state.isSuccess = false
+            state.user = null
+            state.message = action.payload?.message
+            toast.error(state.message, {
+                position: 'top-left'
             })
         })
         builder.addCase(logout.pending, (state) => {

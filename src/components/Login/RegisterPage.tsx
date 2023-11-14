@@ -14,7 +14,7 @@ import { registerUser } from "../../redux/reducers/users/userSlice"
 const passwordSchema = string()
   .matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_#])[A-Za-z\d@$!%*?&_#]{8,}$/,
-    'password contain atleast {1} uppercase, lowecase, one number, one symbol and mininum 8 chars long.'
+    'password contain atleast {1} uppercase, lowecase, number and symbol and mininum 8 chars long.'
   )
   .required('Password is Required');
 
@@ -22,7 +22,9 @@ let signupSchema = object({
   firstname: string().min(3, 'minimum 3 characters should be there').required('firstname is required'),
   lastname: string().min(3, 'minimum 3 characters should be there').required('lastname is required'),
   mobile: string().matches(/^[0-9]{10}$/, 'Mobile should contain exactly 10 numeric digits').required('mobile is required'),
-  email: string().email('Email should be valid').required('Email is Required'),
+  email: string()
+    .matches(/\.com$|\.in$|\.org$/, 'Email should end with .com, .in, org')
+    .email('Email should be valid').required('Email is Required'),
   password: passwordSchema,
   confirmPassword: string()
     .test('passwords-match', 'Passwords do not match', function (value) {
