@@ -38,7 +38,7 @@ const sendotp = async (mobile: string) => {
     return res.data
 }
 const verifyOtp = async (mobile: string, otp: string[]) => {
-    const res = await axios.post(`${base_url}/users/verify-otp`, { mobile, otp }, { withCredentials: true })
+    const res = await axios.post(`${base_url}/users/verify-otp`, { mobile, otp })
     if (res.data) {
         localStorage.setItem("token", JSON.stringify(res.data?.user))
         return res.data
