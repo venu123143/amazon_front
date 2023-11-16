@@ -33,14 +33,16 @@ const reset = async (token: string, password: string) => {
     const res = await axios.put(`${base_url}/users/resetpassword/${token}`, { password })
     return res.data
 }
-const sendotp = async (mobile: number) => {
-    console.log(mobile);
-
-    // const res = await axios.put(`dummy`, { mobile })
-    // return res.data
+const sendotp = async (mobile: string) => {
+    const res = await axios.post(`${base_url}/users/req-otp`, { mobile })
+    return res.data
 }
-const verifyOtp = async (mobile: number, otp: number[]) => {
-    console.log(mobile, otp);
+const verifyOtp = async (mobile: string, otp: string[]) => {
+    const res = await axios.post(`${base_url}/users/verify-otp`, { mobile, otp }, { withCredentials: true })
+    if (res.data) {
+        localStorage.setItem("token", JSON.stringify(res.data?.user))
+        return res.data
+    }
 }
 const userService = {
     login,

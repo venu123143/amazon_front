@@ -91,7 +91,7 @@ export const forgotPassword = createAsyncThunk('authSlice/forgotPassword', async
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const sendOtp = createAsyncThunk('authSlice/sendOtp', async (mobile: number, thunkAPI) => {
+export const sendOtp = createAsyncThunk('authSlice/sendOtp', async (mobile: string, thunkAPI) => {
     try {
         const res = await userService.sendotp(mobile)
         return res
@@ -99,7 +99,7 @@ export const sendOtp = createAsyncThunk('authSlice/sendOtp', async (mobile: numb
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { mobile: number, otp: number[] }, thunkAPI) => {
+export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { mobile: string, otp: string[] }, thunkAPI) => {
     try {
         const res = await userService.verifyOtp(data.mobile, data.otp)
         return res
@@ -111,6 +111,8 @@ export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { 
 export const resetPassword = createAsyncThunk('authSlice/resetPassword', async (data: { password: string, token: string }, thunkAPI) => {
     try {
         const res = await userService.reset(data?.token, data?.password)
+        console.log(res);
+
         return res
 
     } catch (error: any) {
@@ -198,6 +200,7 @@ const slice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.message = action.payload?.message
+            state.user = action.payload.user
             toast.success(state.message, {
                 position: 'top-left'
             })

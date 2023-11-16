@@ -1,12 +1,13 @@
 // import React from 'react'
 import { useState, useRef, useEffect, CSSProperties } from "react"
 import { BsArrowLeftShort } from "react-icons/bs"
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
-import { RootState } from "../../redux/store"
+import { AppDispatch, RootState } from "../../redux/store"
 import { array, object, string } from "yup"
 import { useFormik } from "formik"
+import { sendOtp, VerifyOtp } from "../../redux/reducers/users/userSlice"
 
 let otpValid = object({
     otp: array().of(string().required("Please enter the otp"))
@@ -18,13 +19,17 @@ let otpSchema = object({
         .required('mobile is required'),
 })
 const LoginWithOtp = () => {
-    const [sendOtp, setSendOtp] = useState(false)
+    const [SendOtp, setSendOtp] = useState(false)
     const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
     const codesRef = useRef<any>([]);
-    const { isLoading } = useSelector((state: RootState) => state.user)
+    const { isLoading, user } = useSelector((state: RootState) => state.user)
+    const navigate = useNavigate()
+    const dispatch: AppDispatch = useDispatch()
     const [err, setErr] = useState("")
 
-
+    useEffect(() => {
+        if (user) navigate('/')
+    }, [user])
 
     const override: CSSProperties = {
         display: "block",
@@ -55,7 +60,7 @@ const LoginWithOtp = () => {
                 }
             });
         });
-    }, [otp, sendOtp]);
+    }, [otp, SendOtp]);
 
     const formik = useFormik({
         initialValues: {
@@ -63,11 +68,9 @@ const LoginWithOtp = () => {
         },
         validationSchema: otpSchema,
         onSubmit: values => {
-            //   dispatch(login(values))
+            dispatch(sendOtp(values.mobile))
             setSendOtp(true)
-            console.log(values);
-            formik.resetForm()
-
+            // formik.resetForm()
         },
     });
 
@@ -75,7 +78,7 @@ const LoginWithOtp = () => {
         e.preventDefault();
         try {
             await otpValid.validate({ otp }, { abortEarly: false });
-            console.log('OTP is valid:', otp.join(''));
+            dispatch(VerifyOtp({ mobile: formik.values.mobile, otp }))
             setErr("")
         } catch (error: any) {
             setErr(error.errors[0])
@@ -102,7 +105,7 @@ const LoginWithOtp = () => {
 
                         <div className="p-6 space-y-4  sm:p-8">
                             {
-                                sendOtp === true ? (
+                                SendOtp === true ? (
                                     <>
                                         <h1 className="text-xl font-bold leading-tight text-center tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                             Enter Your Otp
@@ -139,9 +142,11 @@ const LoginWithOtp = () => {
                                         </h1>
                                         <form onSubmit={formik.handleSubmit} className="space-y-2   md:space-y-4" action="#">
                                             <div>
-                                                <input maxLength={10}
+                                                <label htmlFor="otpmobile" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Phone No (+91)  <span className="text-red-500 text-lg">*</span></label>
+
+                                                <input maxLength={10} id="otpmobile"
                                                     onChange={formik.handleChange("mobile")} onBlur={formik.handleBlur("mobile")} value={formik.values.mobile}
-                                                    type="tel" name="mobile" id="mobile" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 "
+                                                    type="tel" name="mobile" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5 placeholder-gray-400 "
                                                     placeholder="Enter your Phone No (+91)" />
                                                 {formik.touched.mobile && formik.errors.mobile ? (
                                                     <div className="text-red-500 text-[14px] ">{formik.errors.mobile}</div>
