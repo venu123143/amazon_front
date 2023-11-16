@@ -31,9 +31,10 @@
   @apply text-[#777777]
 }
 
-.mobileCart{
+.mobileCart {
   @apply text-skin-base font-Rubik grid grid-cols-4 my-5 sm:hidden gap-2
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -50,24 +51,20 @@ a {
 }
 
 
-/* // add the code bellow */
+/* // add the code below */
 @layer utilities {
-  @variants responsive {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      /* IE and Edge */
-      scrollbar-width: none;
-      /* Firefox */
-    }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }
+
 
 @layer base {
   :root {

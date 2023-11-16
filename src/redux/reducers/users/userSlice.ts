@@ -99,7 +99,7 @@ export const sendOtp = createAsyncThunk('authSlice/sendOtp', async (mobile: stri
         return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
-export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { mobile: string, otp: string[] }, thunkAPI) => {
+export const VerifyOtp = createAsyncThunk('authSlice/Verifyotp', async (data: { mobile: string, otp: string[] }, thunkAPI) => {
     try {
         const res = await userService.verifyOtp(data.mobile, data.otp)
         return res
@@ -111,8 +111,6 @@ export const VerifyOtp = createAsyncThunk('authSlice/verifyotp', async (data: { 
 export const resetPassword = createAsyncThunk('authSlice/resetPassword', async (data: { password: string, token: string }, thunkAPI) => {
     try {
         const res = await userService.reset(data?.token, data?.password)
-        console.log(res);
-
         return res
 
     } catch (error: any) {
