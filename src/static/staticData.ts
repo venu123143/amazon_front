@@ -70,7 +70,8 @@ export const colorObj: any = {
     BLACK: "text-[#000]",
     LIGHTGREEN: "text-[#00FF00]",
     CREAM: "text-[#FFFDD0]",
-    AQUA: "text-[#00FFFF]"
+    AQUA: "text-[#00FFFF]",
+    SILVER: "text-[#C0C0C0]",
 };
 
 export const borderObj: any = {
@@ -83,9 +84,11 @@ export const borderObj: any = {
     VIOLET: "checked:border-[#7F00FF]",
     GRAY: "checked:border-[#B2BEB5]",
     BLACK: "checked:border-[#000]",
-    "LIGHT-GREEN": "checked:border-[#00FF00]",
+    LIGHTGREEN: "checked:border-[#00FF00]",
     CREAM: "checked:border-[#FFFDD0]",
-    AQUA: "checked:border-[#00FFFF]"
+    AQUA: "checked:border-[#00FFFF]",
+    SILVER: "checked:border-[#C0C0C0]",
+
 };
 export const backObj: any = {
     BLUE: "bg-[#0000FF]",
@@ -99,7 +102,9 @@ export const backObj: any = {
     BLACK: "bg-[#000]",
     LIGHTGREEN: "bg-[#00FF00]",
     CREAM: "bg-[#FFFDD0]",
-    AQUA: "bg-[#00FFFF]"
+    AQUA: "bg-[#00FFFF]",
+    SILVER: "bg-[#C0C0C0]",
+
 };
 
 export const orderStatus: any = {
