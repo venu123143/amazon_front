@@ -27,6 +27,7 @@ import Sucess from "./pages/Sucess";
 import { PrivateRoutes } from "./components/Error/PrivateRoutes"
 import Orders from "./components/Product/Orders";
 import SearchProd from "./pages/SearchProd";
+import Profile from "./components/Home/Profile";
 const App = () => {
   return (
     <>
@@ -45,6 +46,7 @@ const App = () => {
           <Route path='/search' element={<SearchProd />} />
           <Route path='/checkout' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
           <Route path='/orders' element={<PrivateRoutes><Orders /></PrivateRoutes>} />
+          <Route path='/profile' element={<PrivateRoutes><Profile /></PrivateRoutes>} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/otplogin" element={<LoginWithOtp />} />

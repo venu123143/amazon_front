@@ -326,7 +326,7 @@ const Navbar = () => {
                 dropdown && (
                   <div className="bg-white dark:bg-transparent absolute sm:block hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
                     <div className="py-1" role="none">
-                      <button onClick={() => setDropdown(false)} className="options " role="menuitem" id="menu-item-0">Profile</button>
+                      <Link to="/profile" onClick={() => setDropdown(false)} className="options " role="menuitem" id="menu-item-0">Profile</Link>
                       <button onClick={toggleDropdown} className="options" role="menuitem" id="menu-item-1">
                         <span>Theme</span>
                         <FiChevronDown className="inline font-Rubik" />
@@ -357,6 +357,8 @@ const Navbar = () => {
                   <div onClick={() => {
                     dispatch(setTheme("light"))
                     setIsDropdownOpen(false)
+                    setDropdown(false)
+
                   }} className="custom-menu-item" role="menuitem" id="menu-item-0">
                     <BsSun size={20} className="inline mr-3" />
                     <span>Light</span>
@@ -364,6 +366,7 @@ const Navbar = () => {
                   <div onClick={() => {
                     dispatch(setTheme("dark"))
                     setIsDropdownOpen(false)
+                    setDropdown(false)
                   }} className="custom-menu-item" role="menuitem" id="menu-item-1">
                     <CiDark size={20} className="inline mr-3" />
                     <span>Dark</span>
@@ -371,6 +374,7 @@ const Navbar = () => {
                   <div onClick={() => {
                     dispatch(setTheme("system"))
                     setIsDropdownOpen(false)
+                    setDropdown(false)
                   }} className="custom-menu-item" role="menuitem" id="menu-item-2">
                     <HiMiniComputerDesktop size={20} className="inline mr-3" />
                     <span>System</span>

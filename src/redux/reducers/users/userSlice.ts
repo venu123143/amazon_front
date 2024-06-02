@@ -134,6 +134,9 @@ const slice = createSlice({
         saveAddress: (state, action: PayloadAction<any>) => {
             state.address = action.payload
             localStorage.setItem('address', JSON.stringify(action.payload))
+        },
+        setGoogleLoginUser: (state, action) => {
+            state.user = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -276,5 +279,5 @@ const slice = createSlice({
 })
 
 
-export const { toggleScroll, setTheme, toggleAddress, saveAddress } = slice.actions
+export const { toggleScroll, setTheme, toggleAddress, saveAddress, setGoogleLoginUser } = slice.actions
 export default slice.reducer
