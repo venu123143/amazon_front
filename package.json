@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-block-quote": "^41.2.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/stripe-js": "^2.1.6",
     "async": "^3.2.4",
