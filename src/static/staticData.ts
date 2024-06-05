@@ -131,7 +131,7 @@ export const formatTime = (seconds: number) => {
     ).padStart(2, "0")}s`;
 };
 
-export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopal.v@ahex.co.in"]
+export const contact = ["DemoStore", "Boss Pg, Hyderabad", "Telengana", "+91 80089252100", "venugopalreddy9493@gmail.com"]
 export const information = ["Privacy Policy", "Refund Policy", "Shipping Policy", "Terms of Service", "Blogs"]
 export const account = ["Search ", "About Us", "Faq", "Contact", "Size Chart"]
 export const links = ["Accessories", "Laptops", "Headphones", "Smart Watches", "Tablets"]
