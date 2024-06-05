@@ -1,4 +1,4 @@
-import { useState, CSSProperties } from "react"
+import { useState, CSSProperties, useEffect } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsArrowLeftShort } from "react-icons/bs"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -24,7 +24,7 @@ let ResetSchema = object({
             return this.parent.password === value;
         })
         .required('Confirm Password is required'),
-}); 
+});
 const ResetPassword = () => {
     const [visible, setVisible] = useState(false)
     const dispatch: AppDispatch = useDispatch()
@@ -32,7 +32,11 @@ const ResetPassword = () => {
     const { isLoading, isSuccess } = useSelector((state: RootState) => state.user)
     // const isLoading = true
     const tokenID = useParams()
-
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/')
+        }
+    }, [isSuccess])
     const override: CSSProperties = {
         display: "block",
         margin: "0 auto",
@@ -49,11 +53,12 @@ const ResetPassword = () => {
         },
         validationSchema: ResetSchema,
         onSubmit: values => {
-            dispatch(resetPassword({ password: values.password, token: tokenID.id as string }))
-            formik.resetForm()
-            if (isSuccess === true) {
-                navigate('/')
-            }
+            dispatch(resetPassword({ password: values.password, token: tokenID.id as string })).then(() => {
+                formik.resetForm()
+                if (isSuccess) {
+                    navigate('/')
+                }
+            })
         },
     });
 

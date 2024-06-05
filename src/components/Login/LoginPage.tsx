@@ -29,7 +29,7 @@ const LoginPage = () => {
     if (user !== null) {
       navigate('/')
     }
-  }, [user, isLoading, isError, isSuccess])
+  }, [user, isLoading, isError])
   const override: CSSProperties = {
     display: "block",
     margin: "0 auto",
@@ -46,15 +46,18 @@ const LoginPage = () => {
     },
     validationSchema: loginSchema,
     onSubmit: values => {
-      dispatch(login(values))
-      formik.resetForm()
-
+      dispatch(login(values)).then(() => {
+        formik.resetForm()
+      })
     },
   });
   const handleSubmit = () => {
-    dispatch(forgotPassword(email))
-    setEmail("")
-    if (isSuccess === true) navigate('/')
+    if (email !== "") {
+      dispatch(forgotPassword(email)).then(() => {
+        setEmail("")
+        if (isSuccess === true) navigate('/')
+      })
+    }
   }
 
   const handleGoogleLogin = async () => {
