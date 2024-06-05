@@ -3,14 +3,14 @@ import { useState, CSSProperties, useEffect } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsArrowLeftShort } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { forgotPassword, login } from "../../redux/reducers/users/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import { object, string } from "yup"
 import { useFormik } from "formik"
-
+import { toast } from "react-toastify"
 
 
 let loginSchema = object({
@@ -20,11 +20,22 @@ let loginSchema = object({
 const LoginPage = () => {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const { isLoading, user, isError, isSuccess } = useSelector((state: RootState) => state.user)
   const [visible, setVisible] = useState(false)
   const [forgotpassword, setForgotPassword] = useState(false)
   const [email, setEmail] = useState("")
 
+  useEffect(() => {
+    if (user !== null) {
+      navigate('/')
+    }
+  }, [user, isLoading, isError])
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const errorMessage = urlParams.get('error');
+    toast.error(errorMessage, { position: "top-right" })
+  }, [])
   useEffect(() => {
     if (user !== null) {
       navigate('/')
