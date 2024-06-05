@@ -142,7 +142,7 @@ const Navbar = () => {
                 <p className="text-white mb-0">Free shipping Over 199 Rupees</p>
               </div>
               <div>
-                <p className="text-end text-white">Hotline: <a className="text-white" href="tel:+91 8008952100">+91 7895623781</a></p>
+                <p className="text-end text-white">Admin Email: <a className="text-white" href="venugopalreddy9493@gmail.com">venugopalreddy9493@gmail.com</a></p>
               </div>
             </div>
           </div>
