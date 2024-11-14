@@ -34,7 +34,9 @@ import { BiSolidOffer } from "react-icons/bi"
 import { MdPayment } from "react-icons/md"
 
 // export const base_url = "http://localhost:5000/api"
-export const base_url = "https://amazonserver.toystack.dev/api"
+// console.log(import.meta.env.env.VITE_API_BASE_URL);
+
+export const base_url = import.meta.env.VITE_API_BASE_URL
 // export const base_url = "https://amazonserver-r83q.onrender.com/api"
 
 
