@@ -1,4 +1,4 @@
-# [Amazon Clone with React, Vite, and TypeScript](https://amazon-clone-wtj7.onrender.com/)
+# [Amazon Clone with React, Vite, and TypeScript](https://onlinestore.nerchuko.in/)
 
 Welcome to our Amazon clone project! Built with React, Vite, and TypeScript, this e-commerce platform mirrors the functionality of Amazon, allowing users to browse a vast selection of products, add items to their cart, and seamlessly complete orders. With a clean and intuitive interface, users can enjoy a smooth shopping experience, explore product details, and leverage various e-commerce features. Dive into the world of online shopping and explore the endless possibilities with our Amazon clone.
 
